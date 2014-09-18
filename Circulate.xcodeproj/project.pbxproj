@@ -90,8 +90,7 @@
 				D830401619CAAE19009E7581 /* AnovaClient.h */,
 				D830401719CAAE19009E7581 /* AnovaClient.m */,
 			);
-			name = Library;
-			path = libCirculate;
+			path = Library;
 			sourceTree = "<group>";
 		};
 		D8E261E919CA9E1400279372 = {

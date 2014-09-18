@@ -22,7 +22,6 @@
     [super viewDidLoad];
     
     _client = [[AnovaClient alloc] initWithDelegate:self];
-
 }
 
 - (void) anovaClient:(AnovaClient*)client discoveredDevice:(AnovaDevice*)device
