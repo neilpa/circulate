@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D873B78319CAA0C700A7289D /* libCirculate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D873B78219CAA0C700A7289D /* libCirculate.h */; };
-		D873B78519CAA0C700A7289D /* libCirculate.m in Sources */ = {isa = PBXBuildFile; fileRef = D873B78419CAA0C700A7289D /* libCirculate.m */; };
 		D8E261F819CA9E1400279372 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261F719CA9E1400279372 /* main.m */; };
 		D8E261FB19CA9E1400279372 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FA19CA9E1400279372 /* AppDelegate.m */; };
 		D8E261FE19CA9E1400279372 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FD19CA9E1400279372 /* ViewController.m */; };
@@ -24,7 +22,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				D873B78319CAA0C700A7289D /* libCirculate.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,8 +29,7 @@
 
 /* Begin PBXFileReference section */
 		D873B78019CAA0C700A7289D /* liblibCirculate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibCirculate.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D873B78219CAA0C700A7289D /* libCirculate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libCirculate.h; sourceTree = "<group>"; };
-		D873B78419CAA0C700A7289D /* libCirculate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = libCirculate.m; sourceTree = "<group>"; };
+		D8786A0A19CAACA300C14BEF /* Circulate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Circulate.h; sourceTree = "<group>"; };
 		D8E261F219CA9E1400279372 /* Circulate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Circulate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E261F619CA9E1400279372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8E261F719CA9E1400279372 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -64,20 +60,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D873B78119CAA0C700A7289D /* libCirculate */ = {
+		D873B78119CAA0C700A7289D /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				D873B78219CAA0C700A7289D /* libCirculate.h */,
-				D873B78419CAA0C700A7289D /* libCirculate.m */,
+				D8786A0A19CAACA300C14BEF /* Circulate.h */,
 			);
+			name = Library;
 			path = libCirculate;
 			sourceTree = "<group>";
 		};
 		D8E261E919CA9E1400279372 = {
 			isa = PBXGroup;
 			children = (
-				D8E261F419CA9E1400279372 /* Circulate */,
-				D873B78119CAA0C700A7289D /* libCirculate */,
+				D8E261F419CA9E1400279372 /* Demo */,
+				D873B78119CAA0C700A7289D /* Library */,
 				D8E261F319CA9E1400279372 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,7 +87,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D8E261F419CA9E1400279372 /* Circulate */ = {
+		D8E261F419CA9E1400279372 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
 				D8E261F919CA9E1400279372 /* AppDelegate.h */,
@@ -103,7 +99,7 @@
 				D8E2620419CA9E1400279372 /* LaunchScreen.xib */,
 				D8E261F519CA9E1400279372 /* Supporting Files */,
 			);
-			path = Circulate;
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		D8E261F519CA9E1400279372 /* Supporting Files */ = {
@@ -206,7 +202,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D873B78519CAA0C700A7289D /* libCirculate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Circulate/Info.plist;
+				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -358,7 +353,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Circulate/Info.plist;
+				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -374,6 +369,7 @@
 				D873B79319CAA0C700A7289D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D8E261ED19CA9E1400279372 /* Build configuration list for PBXProject "Circulate" */ = {
 			isa = XCConfigurationList;
