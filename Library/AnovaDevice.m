@@ -114,7 +114,18 @@
 - (void) peripheral:(CBPeripheral*)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic*)characteristic error:(NSError*)error
 {
     // Actually establish the connection with the device
-    [self getDeviceStatus];
+//    [self getDeviceStatus];
+//    [self setTargetTemperature:65];
+//    [self getTargetTemperature];
+//    [self getCurrentTemperature];
+//    [self stopDevice];
+//    [self startDevice];
+//    [self sendCommand:@"read timer"];
+//    [self sendCommand:@"stop timer"];
+//    [self sendCommand:@"status timer"];
+//    [self sendCommand:@"status"];
+    [self sendCommand:@"read unit"];
+//    [self sendCommand:@"set unit f"];
 }
 
 
