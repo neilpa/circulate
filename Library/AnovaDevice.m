@@ -13,6 +13,7 @@
 @interface AnovaDevice()  <CBPeripheralDelegate>
 @property (nonatomic, readonly) CBCentralManager* central;
 @property (nonatomic, readonly) CBPeripheral* peripheral;
+@property (nonatomic, readonly) CBCharacteristic* characteristic;
 @end
 
 @implementation AnovaDevice
@@ -41,11 +42,46 @@
 
 // TODO implement the bluetooth protocol methods
 
+- (void) getCurrentTemperature
+{
+    [self sendCommand:@"read temp"];
+}
+
+- (void) getTargetTemperature
+{
+    [self sendCommand:@"read set temp"];
+}
+
+- (void) setTargetTemperature:(float)temp
+{
+    [self sendCommand:[NSString stringWithFormat:@"set temp %0.1f", temp]];
+}
+
+- (void) getDeviceStatus
+{
+    [self sendCommand:@"status"];
+}
+
+- (void) startDevice
+{
+    [self sendCommand:@"start"];
+}
+
+- (void) stopDevice
+{
+    [self sendCommand:@"stop"];
+}
+
+- (void) sendCommand:(NSString*)command
+{
+    NSData* data = [[command stringByAppendingString:@"\r"] dataUsingEncoding:NSASCIIStringEncoding];
+    [self.peripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithoutResponse];
+}
+
 #pragma mark Library
 
 - (void) peripheralConnected
 {
-    // TODO Enumerate characteristics
     [self.delegate anovaDeviceConnected:self];
 
     [self.peripheral discoverServices:nil];
@@ -63,13 +99,14 @@
     }
 }
 
-// Invoked when you discover the characteristics of a specified service.
 - (void) peripheral:(CBPeripheral*)peripheral didDiscoverCharacteristicsForService:(CBService*)service error:(NSError*)error
 {
     for (CBCharacteristic *characteristic in service.characteristics)
     {
         if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"ffe1"]]) {
+            _characteristic = characteristic;
             [peripheral setNotifyValue:YES forCharacteristic:characteristic];
+            break;
         }
     }
 }
@@ -77,15 +114,15 @@
 - (void) peripheral:(CBPeripheral*)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic*)characteristic error:(NSError*)error
 {
     // Actually establish the connection with the device
-    NSData* data = [@"\r" dataUsingEncoding:NSASCIIStringEncoding];
-    [peripheral writeValue:data forCharacteristic:characteristic type:CBCharacteristicWriteWithoutResponse];
+    [self getDeviceStatus];
 }
 
 
 - (void) peripheral:(CBPeripheral*)peripheral didUpdateValueForCharacteristic:(CBCharacteristic*)characteristic error:(NSError*)error
 {
-    NSLog(@"%@", characteristic.value);
-    // TODO Handle the response from the device
+    // TODO Make this not suck
+    NSString* response = [[NSString alloc] initWithData:characteristic.value encoding:NSASCIIStringEncoding];
+    [self.delegate anovaDevice:self response:response];
 }
 
 @end

@@ -18,14 +18,26 @@
 @property (nonatomic, readonly) NSString* identifier;
 
 - (void) connect;
+- (void) disconnect;
+
+- (void) getCurrentTemperature;
+- (void) getTargetTemperature;
+- (void) setTargetTemperature:(float)temp;
+
+- (void) getDeviceStatus;
+- (void) startDevice;
+- (void) stopDevice;
+
+// TODO implement more
 
 @end
 
 @protocol AnovaDeviceDelegate <NSObject>
 
-@optional
 - (void) anovaDeviceConnected:(AnovaDevice*)device;
 - (void) anovaDevice:(AnovaDevice*)device connectionFailed:(NSError*)error;
 - (void) anovaDeviceDisconnected:(AnovaDevice*)device;
+
+- (void) anovaDevice:(AnovaDevice*)device response:(NSString*)response;
 
 @end

@@ -33,7 +33,22 @@
 
 - (void) anovaDeviceConnected:(AnovaDevice *)device
 {
-    
+    NSLog(@"Connected");
+}
+
+- (void) anovaDevice:(AnovaDevice*)device connectionFailed:(NSError*)error
+{
+    NSLog(@"Failed connection");
+}
+
+- (void) anovaDeviceDisconnected:(AnovaDevice*)device
+{
+    NSLog(@"Disconnected");
+}
+
+- (void) anovaDevice:(AnovaDevice*)device response:(NSString*)response
+{
+    NSLog(@"Response: %@", response);
 }
 
 @end
