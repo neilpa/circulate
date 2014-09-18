@@ -13,18 +13,7 @@
 		D8E2620119CA9E1400279372 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8E261FF19CA9E1400279372 /* Main.storyboard */; };
 		D8E2620319CA9E1400279372 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8E2620219CA9E1400279372 /* Images.xcassets */; };
 		D8E2620619CA9E1400279372 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E2620419CA9E1400279372 /* LaunchScreen.xib */; };
-		D8E2621219CA9E1400279372 /* CirculateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E2621119CA9E1400279372 /* CirculateTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		D8E2620C19CA9E1400279372 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D8E261EA19CA9E1400279372 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D8E261F119CA9E1400279372;
-			remoteInfo = Circulate;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D8E261F219CA9E1400279372 /* Circulate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Circulate.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,20 +26,10 @@
 		D8E2620019CA9E1400279372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D8E2620219CA9E1400279372 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D8E2620519CA9E1400279372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		D8E2620B19CA9E1400279372 /* CirculateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CirculateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8E2621019CA9E1400279372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8E2621119CA9E1400279372 /* CirculateTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CirculateTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D8E261EF19CA9E1400279372 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8E2620819CA9E1400279372 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -64,7 +43,6 @@
 			isa = PBXGroup;
 			children = (
 				D8E261F419CA9E1400279372 /* Circulate */,
-				D8E2620E19CA9E1400279372 /* CirculateTests */,
 				D8E261F319CA9E1400279372 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -73,7 +51,6 @@
 			isa = PBXGroup;
 			children = (
 				D8E261F219CA9E1400279372 /* Circulate.app */,
-				D8E2620B19CA9E1400279372 /* CirculateTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -102,23 +79,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		D8E2620E19CA9E1400279372 /* CirculateTests */ = {
-			isa = PBXGroup;
-			children = (
-				D8E2621119CA9E1400279372 /* CirculateTests.m */,
-				D8E2620F19CA9E1400279372 /* Supporting Files */,
-			);
-			path = CirculateTests;
-			sourceTree = "<group>";
-		};
-		D8E2620F19CA9E1400279372 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D8E2621019CA9E1400279372 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,24 +99,6 @@
 			productReference = D8E261F219CA9E1400279372 /* Circulate.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D8E2620A19CA9E1400279372 /* CirculateTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D8E2621819CA9E1400279372 /* Build configuration list for PBXNativeTarget "CirculateTests" */;
-			buildPhases = (
-				D8E2620719CA9E1400279372 /* Sources */,
-				D8E2620819CA9E1400279372 /* Frameworks */,
-				D8E2620919CA9E1400279372 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D8E2620D19CA9E1400279372 /* PBXTargetDependency */,
-			);
-			name = CirculateTests;
-			productName = CirculateTests;
-			productReference = D8E2620B19CA9E1400279372 /* CirculateTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -168,10 +110,6 @@
 				TargetAttributes = {
 					D8E261F119CA9E1400279372 = {
 						CreatedOnToolsVersion = 6.1;
-					};
-					D8E2620A19CA9E1400279372 = {
-						CreatedOnToolsVersion = 6.1;
-						TestTargetID = D8E261F119CA9E1400279372;
 					};
 				};
 			};
@@ -189,7 +127,6 @@
 			projectRoot = "";
 			targets = (
 				D8E261F119CA9E1400279372 /* Circulate */,
-				D8E2620A19CA9E1400279372 /* CirculateTests */,
 			);
 		};
 /* End PBXProject section */
@@ -202,13 +139,6 @@
 				D8E2620119CA9E1400279372 /* Main.storyboard in Resources */,
 				D8E2620619CA9E1400279372 /* LaunchScreen.xib in Resources */,
 				D8E2620319CA9E1400279372 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8E2620919CA9E1400279372 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,23 +155,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D8E2620719CA9E1400279372 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D8E2621219CA9E1400279372 /* CirculateTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D8E2620D19CA9E1400279372 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D8E261F119CA9E1400279372 /* Circulate */;
-			targetProxy = D8E2620C19CA9E1400279372 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D8E261FF19CA9E1400279372 /* Main.storyboard */ = {
@@ -361,40 +275,6 @@
 			};
 			name = Release;
 		};
-		D8E2621919CA9E1400279372 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CirculateTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Circulate.app/Circulate";
-			};
-			name = Debug;
-		};
-		D8E2621A19CA9E1400279372 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CirculateTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Circulate.app/Circulate";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -414,14 +294,7 @@
 				D8E2621719CA9E1400279372 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		D8E2621819CA9E1400279372 /* Build configuration list for PBXNativeTarget "CirculateTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D8E2621919CA9E1400279372 /* Debug */,
-				D8E2621A19CA9E1400279372 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
