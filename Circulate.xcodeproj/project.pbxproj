@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D873B78319CAA0C700A7289D /* libCirculate.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D873B78219CAA0C700A7289D /* libCirculate.h */; };
+		D873B78519CAA0C700A7289D /* libCirculate.m in Sources */ = {isa = PBXBuildFile; fileRef = D873B78419CAA0C700A7289D /* libCirculate.m */; };
 		D8E261F819CA9E1400279372 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261F719CA9E1400279372 /* main.m */; };
 		D8E261FB19CA9E1400279372 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FA19CA9E1400279372 /* AppDelegate.m */; };
 		D8E261FE19CA9E1400279372 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FD19CA9E1400279372 /* ViewController.m */; };
@@ -15,7 +17,23 @@
 		D8E2620619CA9E1400279372 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E2620419CA9E1400279372 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		D873B77E19CAA0C700A7289D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				D873B78319CAA0C700A7289D /* libCirculate.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		D873B78019CAA0C700A7289D /* liblibCirculate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibCirculate.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D873B78219CAA0C700A7289D /* libCirculate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libCirculate.h; sourceTree = "<group>"; };
+		D873B78419CAA0C700A7289D /* libCirculate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = libCirculate.m; sourceTree = "<group>"; };
 		D8E261F219CA9E1400279372 /* Circulate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Circulate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E261F619CA9E1400279372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8E261F719CA9E1400279372 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -29,6 +47,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D873B77D19CAA0C700A7289D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8E261EF19CA9E1400279372 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -39,10 +64,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D873B78119CAA0C700A7289D /* libCirculate */ = {
+			isa = PBXGroup;
+			children = (
+				D873B78219CAA0C700A7289D /* libCirculate.h */,
+				D873B78419CAA0C700A7289D /* libCirculate.m */,
+			);
+			path = libCirculate;
+			sourceTree = "<group>";
+		};
 		D8E261E919CA9E1400279372 = {
 			isa = PBXGroup;
 			children = (
 				D8E261F419CA9E1400279372 /* Circulate */,
+				D873B78119CAA0C700A7289D /* libCirculate */,
 				D8E261F319CA9E1400279372 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				D8E261F219CA9E1400279372 /* Circulate.app */,
+				D873B78019CAA0C700A7289D /* liblibCirculate.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +118,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D873B77F19CAA0C700A7289D /* libCirculate */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D873B79119CAA0C700A7289D /* Build configuration list for PBXNativeTarget "libCirculate" */;
+			buildPhases = (
+				D873B77C19CAA0C700A7289D /* Sources */,
+				D873B77D19CAA0C700A7289D /* Frameworks */,
+				D873B77E19CAA0C700A7289D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libCirculate;
+			productName = libCirculate;
+			productReference = D873B78019CAA0C700A7289D /* liblibCirculate.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		D8E261F119CA9E1400279372 /* Circulate */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8E2621519CA9E1400279372 /* Build configuration list for PBXNativeTarget "Circulate" */;
@@ -108,6 +161,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Neil Pankey";
 				TargetAttributes = {
+					D873B77F19CAA0C700A7289D = {
+						CreatedOnToolsVersion = 6.1;
+					};
 					D8E261F119CA9E1400279372 = {
 						CreatedOnToolsVersion = 6.1;
 					};
@@ -127,6 +183,7 @@
 			projectRoot = "";
 			targets = (
 				D8E261F119CA9E1400279372 /* Circulate */,
+				D873B77F19CAA0C700A7289D /* libCirculate */,
 			);
 		};
 /* End PBXProject section */
@@ -145,6 +202,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D873B77C19CAA0C700A7289D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D873B78519CAA0C700A7289D /* libCirculate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8E261EE19CA9E1400279372 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -177,6 +242,30 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D873B79219CAA0C700A7289D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D873B79319CAA0C700A7289D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		D8E2621319CA9E1400279372 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -278,6 +367,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D873B79119CAA0C700A7289D /* Build configuration list for PBXNativeTarget "libCirculate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D873B79219CAA0C700A7289D /* Debug */,
+				D873B79319CAA0C700A7289D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D8E261ED19CA9E1400279372 /* Build configuration list for PBXProject "Circulate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
