@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D830401419CAAD8F009E7581 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
+		D830401D19CAB003009E7581 /* AnovaClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D830401719CAAE19009E7581 /* AnovaClient.m */; };
+		D830401E19CAB3DC009E7581 /* liblibCirculate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D873B78019CAA0C700A7289D /* liblibCirculate.a */; };
+		D830402119CABC98009E7581 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
+		D830402519CAC503009E7581 /* AnovaDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D830402319CAC503009E7581 /* AnovaDevice.m */; };
 		D8E261F819CA9E1400279372 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261F719CA9E1400279372 /* main.m */; };
 		D8E261FB19CA9E1400279372 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FA19CA9E1400279372 /* AppDelegate.m */; };
 		D8E261FE19CA9E1400279372 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FD19CA9E1400279372 /* ViewController.m */; };
@@ -28,8 +33,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D830401319CAAD8F009E7581 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		D830401619CAAE19009E7581 /* AnovaClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnovaClient.h; sourceTree = "<group>"; };
+		D830401719CAAE19009E7581 /* AnovaClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnovaClient.m; sourceTree = "<group>"; };
+		D830402219CAC503009E7581 /* AnovaDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnovaDevice.h; sourceTree = "<group>"; };
+		D830402319CAC503009E7581 /* AnovaDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnovaDevice.m; sourceTree = "<group>"; };
+		D830402419CAC503009E7581 /* AnovaDevice+Lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AnovaDevice+Lib.h"; sourceTree = "<group>"; };
 		D873B78019CAA0C700A7289D /* liblibCirculate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibCirculate.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8786A0A19CAACA300C14BEF /* Circulate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Circulate.h; sourceTree = "<group>"; };
 		D8E261F219CA9E1400279372 /* Circulate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Circulate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E261F619CA9E1400279372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8E261F719CA9E1400279372 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -47,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D830401419CAAD8F009E7581 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,16 +65,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D830402119CABC98009E7581 /* CoreBluetooth.framework in Frameworks */,
+				D830401E19CAB3DC009E7581 /* liblibCirculate.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D830401519CAAD9C009E7581 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D830401319CAAD8F009E7581 /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D873B78119CAA0C700A7289D /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				D8786A0A19CAACA300C14BEF /* Circulate.h */,
+				D830402219CAC503009E7581 /* AnovaDevice.h */,
+				D830402319CAC503009E7581 /* AnovaDevice.m */,
+				D830402419CAC503009E7581 /* AnovaDevice+Lib.h */,
+				D830401619CAAE19009E7581 /* AnovaClient.h */,
+				D830401719CAAE19009E7581 /* AnovaClient.m */,
 			);
 			name = Library;
 			path = libCirculate;
@@ -75,6 +100,7 @@
 				D8E261F419CA9E1400279372 /* Demo */,
 				D873B78119CAA0C700A7289D /* Library */,
 				D8E261F319CA9E1400279372 /* Products */,
+				D830401519CAAD9C009E7581 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D830401D19CAB003009E7581 /* AnovaClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +237,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8E261FE19CA9E1400279372 /* ViewController.m in Sources */,
+				D830402519CAC503009E7581 /* AnovaDevice.m in Sources */,
 				D8E261FB19CA9E1400279372 /* AppDelegate.m in Sources */,
 				D8E261F819CA9E1400279372 /* main.m in Sources */,
 			);
