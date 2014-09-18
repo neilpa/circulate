@@ -14,4 +14,6 @@
 
 - (instancetype) initWithCentral:(CBCentralManager*)central peripheral:(CBPeripheral*)peripheral;
 
+- (void) peripheralConnected;
+
 @end

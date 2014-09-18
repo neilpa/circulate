@@ -50,7 +50,7 @@
 - (void) centralManager:(CBCentralManager*)central didConnectPeripheral:(CBPeripheral*)peripheral
 {
     AnovaDevice* device = self.devices[peripheral.identifier];
-    [device.delegate anovaDeviceConnected:device];
+    [device peripheralConnected];
 }
 
 - (void) centralManager:(CBCentralManager*)central didFailToConnectPeripheral:(CBPeripheral*)peripheral error:(NSError*)error
