@@ -1,6 +1,6 @@
 ## Circulate
 
-Alternative wrapper library for controlling the the Anova2 via its Bluetooth API
+Alternative iOS wrapper library for controlling the the Anova 2 via Bluetooth
 
 **Protocol**
 
