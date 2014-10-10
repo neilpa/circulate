@@ -13,10 +13,13 @@ This single characteristic acts as a command channel to the device. Clients writ
 
     '<action>[ <argument> ...]\r'
 
+In terms of CoreBluetooth this string value encodes to an NSData object and is written to the peripheral's `-writeValue:forCharacteristic:type:` method. Response values are similar ASCII strings and always terminated with a carriage return
+
+    '<response>[...]\r'
+
+The response value is sent to the peripheral delegate's `-didUpdateValueForCharacteristic:error:` method. This method may be called multiple times if the return value is too large for a single payload. If that's the case keep appending the returned data until you see a response terminated with a carriage return.
+
 This is especially unintuitive when considering GATT characteristics are designed to represent one datum that can may be read and/or written.
-
-In terms of CoreBluetooth this translates to writing the command string to the peripheral's `-writeValue:forCharacteristic:type:` method and later getting the response or return value on your delegate's `-didUpdateValueForCharacteristic:error:` method. Response values are also ASCII strings. Fore example, reading the current temperature will return a string like '123.4'.
-
 
 #### Temperature commands
 
@@ -86,7 +89,7 @@ Resume the current program. Returns the echoed command. Needs more testing
 #### System commands
 
     set led <red> <gree> <blue>
-Change the mouse wheel color on the device. The RGB values are integers from 0-255. The return value is the echoed command if successful. One quirck though is that this happens across two characteristic update calls. The first contains only the initial 's' with the second containing the remainder of the command.
+Change the mouse wheel color on the device. The RGB values are integers from 0-255. The return value is the echoed command if successful.
 
     set name <name>
 Set the Bluetooth display name of the device.
@@ -101,69 +104,5 @@ Set the current date and time on the device. Note that this is a 24 hour clock.
 Assuming the above is the syntax for the set password command but haven't tested it yet
 
     read data
-Returns a lot of data across multiple updates. Appears to be a floating point temperature followed by a four part date/time value in the form of 'temp MM DD hh mm'.
-
-    read data  19.5 08 1
-    6 12 03 19.5 08
-    16 12 03 21.2 08 16
-    12 03 22.8 08 16 12
-    03 24.5 0
-    8 16 12 03
-     26.2 08
-     16 12 03 27.9 08 16
-     12 03 29.5 08 16 12
-     03 31
-    .2 08 16 12 03 32.8
-    08 16 12 03
-     34.4 08 16 12 03 36
-    .0 08 16 12 03 3
-    7.6 08 16 12 03
-    39.2 08 16 12 03 40.
-    8 08 16 12 03
-     42.3 08 16 12 03 43
-    .8 08 16 1
-    2 03 45.3 08 16 12 0
-    3 46.8 08 16 12 03 4
-    8.2 08 16 12 03
-     49.7 08 16 12 03 51
-    .1 08 16 12 03 52.6
-    08 16 12 03 54.0 08
-    16 12 03 55.4 08 16
-    12 03
-     56.8 08 16 12 03 58
-    .2 08 16 12 03 59.5
-    08 16
-    12 03 60.8 08 16 12
-    03 62.1 08 16 12 03
-     63.4 08 16 12 03 64
-    .6 08 16 12 03
-     65.8 08 16 12 03 67
-    .0 08 16 12 03 68.2
-    08 16 12 03
-     69.3 08 16 12 03 70
-    .6 08 16 12 0
-    3 71.5 08 16 12 03 7
-    1.6 08 16 12 03
-    71.9 08 16 12 03
-     72.1 08 16 12 03 72
-    .3 08 16 12 03 72.5
-    08
-     16 12 03 72.7 08 16
-     12 03 72.8 08 16 12
-     03
-     72.9 08 16 12 03 73
-    .1 08 16 12 03 73.2
-    08 16 1
-    2 03 73.3 08 16 12 0
-    3 73.4 08 16 12 03
-     73.5 08 16 1
-    2 03 73.6 08 16 12 0
-    3 73.7 08 16 12 03 7
-    3.7 08 1
-    6 12 03 73.3 08 16 1
-    2 03
-     72.9 08 16 12 03 72
-    .6 08 16 1
-    2 03 72.5 08 16 12 0
-    3 72.4 08 16 12 03
+Returns all the available temperature history data. This returns a list of entries, each entry containing a temperature date and time. The form is each entry is 'temp MM DD hh mm'. The temperature will be in the current units set on the device.
 
