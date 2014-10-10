@@ -95,7 +95,7 @@ Change the mouse wheel color on the device. The RGB values are integers from 0-2
 Set the Bluetooth display name of the device. This will cause the device to disconnect.
 
     read date
-Supposedly reads the date and time set on the device. Assuming the return value is of the form 'YY MM DD hh mm'. However, the clock on my device never seems to update and always returns '14 08 16 12 03'.
+Supposedly reads the date and time set on the device. The return value is of the form 'YY MM DD hh mm' with two digit values of year, month, day of month, hour and minute respectively. I also noticed that the clock didn't seem to run on the device until after calling 'set date' for the first time. Before that it was always returning the origal time value (same for the 'read data' entries).
 
     set date YY MM DD hh mm
 Set the current date and time on the device. Note that this is a 24 hour clock.
