@@ -12,6 +12,7 @@
 		D830401E19CAB3DC009E7581 /* liblibCirculate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D873B78019CAA0C700A7289D /* liblibCirculate.a */; };
 		D830402119CABC98009E7581 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
 		D830402519CAC503009E7581 /* AnovaDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D830402319CAC503009E7581 /* AnovaDevice.m */; };
+		D843548619E7968E00D15545 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D843548519E7968E00D15545 /* README.md */; };
 		D8E261F819CA9E1400279372 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261F719CA9E1400279372 /* main.m */; };
 		D8E261FB19CA9E1400279372 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FA19CA9E1400279372 /* AppDelegate.m */; };
 		D8E261FE19CA9E1400279372 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FD19CA9E1400279372 /* ViewController.m */; };
@@ -39,6 +40,7 @@
 		D830402219CAC503009E7581 /* AnovaDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnovaDevice.h; sourceTree = "<group>"; };
 		D830402319CAC503009E7581 /* AnovaDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnovaDevice.m; sourceTree = "<group>"; };
 		D830402419CAC503009E7581 /* AnovaDevice+Lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AnovaDevice+Lib.h"; sourceTree = "<group>"; };
+		D843548519E7968E00D15545 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D873B78019CAA0C700A7289D /* liblibCirculate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibCirculate.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E261F219CA9E1400279372 /* Circulate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Circulate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E261F619CA9E1400279372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				D873B78119CAA0C700A7289D /* Library */,
 				D8E261F319CA9E1400279372 /* Products */,
 				D830401519CAAD9C009E7581 /* Frameworks */,
+				D843548519E7968E00D15545 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -237,6 +240,7 @@
 			files = (
 				D8E261FE19CA9E1400279372 /* ViewController.m in Sources */,
 				D830402519CAC503009E7581 /* AnovaDevice.m in Sources */,
+				D843548619E7968E00D15545 /* README.md in Sources */,
 				D8E261FB19CA9E1400279372 /* AppDelegate.m in Sources */,
 				D8E261F819CA9E1400279372 /* main.m in Sources */,
 			);
