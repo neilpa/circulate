@@ -72,7 +72,7 @@ Stops the timer. Return value is the echoed command. Note that stopping the devi
 #### Program commands
 
     program status
-Returns the current program that is set.
+Returns the current program that is set. The return value is of the form 'program' followed by the individual time-minutes pairs.
 
     set program t1 m1 [t2 m2 [...] ]
 Set a multistep programe on the device. Seems like these need to be set in temperature and number of minutes pairs. Appears to be a max of 6 steps and any after that are ignored.
