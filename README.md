@@ -92,7 +92,7 @@ Resume the current program. Returns the echoed command. Needs more testing
 Change the mouse wheel color on the device. The RGB values are integers from 0-255. The return value is the echoed command if successful.
 
     set name <name>
-Set the Bluetooth display name of the device.
+Set the Bluetooth display name of the device. This will cause the device to disconnect.
 
     read date
 Supposedly reads the date and time set on the device. Assuming the return value is of the form 'YY MM DD hh mm'. However, the clock on my device never seems to update and always returns '14 08 16 12 03'.
