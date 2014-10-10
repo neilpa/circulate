@@ -40,7 +40,15 @@
 
 #pragma mark Protocol
 
-// TODO implement the bluetooth protocol methods
+- (void) getTemperatureUnit
+{
+    [self sendCommand:@"read unit"];
+}
+
+- (void) setTemperatureUnit:(NSString*)unit
+{
+    [self sendCommand:[NSString stringWithFormat:@"set unit %@", unit]];
+}
 
 - (void) getCurrentTemperature
 {
@@ -57,6 +65,11 @@
     [self sendCommand:[NSString stringWithFormat:@"set temp %0.1f", temp]];
 }
 
+- (void) getTemperatureHistory
+{
+    [self sendCommand:@"read data"];
+}
+
 - (void) getDeviceStatus
 {
     [self sendCommand:@"status"];
@@ -71,6 +84,53 @@
 {
     [self sendCommand:@"stop"];
 }
+
+- (void) getTimerStatus
+{
+    [self sendCommand:@"read timer"];
+}
+
+- (void) setTimer:(int)minutes
+{
+    [self sendCommand:[NSString stringWithFormat:@"set timer %i", minutes]];
+}
+
+- (void) startTimer
+{
+    [self sendCommand:@"start time"];
+}
+
+- (void) stopTimer
+{
+    [self sendCommand:@"stop time"];
+}
+
+- (void) getCalibrationFactor
+{
+    [self sendCommand:@"read cal"];
+}
+
+- (void) setCalibrationFactor:(float)factor
+{
+    [self sendCommand:[NSString stringWithFormat:@"cal %0.1f", factor]];
+}
+
+- (void) setDeviceName:(NSString*)name
+{
+    [self sendCommand:[NSString stringWithFormat:@"set name %@", name]];
+}
+
+- (void) getDate
+{
+    [self sendCommand:@"read date"];
+}
+
+- (void) setDate:(int)year month:(int)month day:(int)day hour:(int)hour minute:(int)minute
+{
+    [self sendCommand:[NSString stringWithFormat:@"set date %i %i %i %i %i", year, month, day, hour, minute]];
+}
+
+#pragma mark Raw command
 
 - (void) sendCommand:(NSString*)command
 {
@@ -114,18 +174,7 @@
 - (void) peripheral:(CBPeripheral*)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic*)characteristic error:(NSError*)error
 {
     // Actually establish the connection with the device
-//    [self getDeviceStatus];
-//    [self setTargetTemperature:65];
-//    [self getTargetTemperature];
-//    [self getCurrentTemperature];
-//    [self stopDevice];
-//    [self startDevice];
-//    [self sendCommand:@"read timer"];
-//    [self sendCommand:@"stop timer"];
-//    [self sendCommand:@"status timer"];
-//    [self sendCommand:@"status"];
-    [self sendCommand:@"read unit"];
-//    [self sendCommand:@"set unit f"];
+    // TODO Valid for sending commands now
 }
 
 

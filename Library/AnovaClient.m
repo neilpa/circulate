@@ -59,10 +59,10 @@
     [device.delegate anovaDevice:device connectionFailed:error];
 }
 
-- (void) centralManager:(CBCentralManager*)central didDisconnectPeripheral:(CBPeripheral*)peripheral error:(NSError *)error
+- (void) centralManager:(CBCentralManager*)central didDisconnectPeripheral:(CBPeripheral*)peripheral error:(NSError*)error
 {
     AnovaDevice* device = self.devices[peripheral.identifier];
-    [device.delegate anovaDeviceDisconnected:device];
+    [device.delegate anovaDeviceDisconnected:device error:error];
 }
 
 @end

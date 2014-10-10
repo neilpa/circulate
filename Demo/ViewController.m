@@ -14,6 +14,8 @@
 @interface ViewController () <AnovaClientDelegate, AnovaDeviceDelegate>
 @property (nonatomic, readonly) AnovaClient* client;
 @property (nonatomic, readonly) AnovaDevice* device;
+
+@property (weak, nonatomic) IBOutlet UITextField *command;
 @end
 
 @implementation ViewController
@@ -41,14 +43,19 @@
     NSLog(@"Failed connection");
 }
 
-- (void) anovaDeviceDisconnected:(AnovaDevice*)device
+- (void) anovaDeviceDisconnected:(AnovaDevice*)device error:(NSError*)error
 {
-    NSLog(@"Disconnected");
+    NSLog(@"Disconnected %@", error);
 }
 
 - (void) anovaDevice:(AnovaDevice*)device response:(NSString*)response
 {
     NSLog(@"Response: %@", response);
+}
+
+- (IBAction)_onClick:(id)sender
+{
+    [self.device sendCommand:self.command.text];
 }
 
 @end
