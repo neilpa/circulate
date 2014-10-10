@@ -30,3 +30,43 @@ This is especially unintuitive when considering GATT characteristics are designe
 
 TODO: Better document this
 
+**Known words from Anova's sample app**
+
+Note: No parameters are specified in this app
+Note: Stars indicate previously known commands (see above)
+
+    # Probably commands
+    read temp *
+    set temp *
+    start *
+    stop *
+    status *
+    set timer
+    read timer
+    start time
+    stop time
+    set name
+    set password
+    set date
+    read date
+    cal
+    read cal
+    set unit
+    read unit
+    read set temp *
+    set program
+    start program
+    stop program
+    resume program
+    program status
+    read data
+    set led
+
+    # Probably status codes
+    program
+    running
+    stopped
+    low water
+    heater error
+    power interrupt error
+
