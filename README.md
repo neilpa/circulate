@@ -13,7 +13,7 @@ This single characteristic acts as a command channel to the device. Clients writ
 
     '<action>[ <argument> ...]\r'
 
-In terms of CoreBluetooth this string value encodes to an NSData object and is written to the peripheral's `-writeValue:forCharacteristic:type:` method. Response values are similar ASCII strings and always terminated with a carriage return
+If the command is longer than 20 characters, it should be sent in chunks, each 20 characters long (21, counting '\r' in the end of each). In terms of CoreBluetooth this string value encodes to an NSData object and is written to the peripheral's `-writeValue:forCharacteristic:type:` method. Response values are similar ASCII strings and always terminated with a carriage return
 
     '<response>[...]\r'
 
