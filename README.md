@@ -36,13 +36,13 @@ Returns the current temperature as a floating point number. This value will be i
 Returns the target temperature as a floating point number. This value will be in the temperature units set on the device.
 
     set temp <degrees>
-Set the target temperature of the device. The degrees value should be a floating point number in the temperature units of the device. The return value is the set temperature.
+Set the target temperature of the device. The degrees value should be a floating point number in the temperature units of the device. Acceptable temperature range is 5.0 to 99.9 Celsius or 41.0 to 211.8 Farengheit. The return value is the set temperature.
 
     read cal
-Returns the current temperature calibration factor of the device. For my device the original value is 0.0. Seems to be the +/- delta of the tempature. Not sure if this is dependant on temperature units.
+Returns the current temperature calibration factor of the device. The original value is 0.0. It is temperature displayed by device minus temperature measured by device in Celsius. 
 
     cal <factor>
-Set the current temperature calibration factor of the device. Echoes the executed command.
+Set the current temperature calibration factor of the device. Accepted values range is -9.9 to 9.9. (This is Celsius, no matter what is current unit.) Echoes the executed command.
 
 #### Device operation commands
 
