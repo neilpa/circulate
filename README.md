@@ -36,7 +36,7 @@ Returns the current temperature as a floating point number. This value will be i
 Returns the target temperature as a floating point number. This value will be in the temperature units set on the device.
 
     set temp <degrees>
-Set the target temperature of the device. The degrees value should be a floating point number in the temperature units of the device. Acceptable temperature range is 5.0 to 99.9 Celsius or 41.0 to 211.8 Farengheit. The return value is the set temperature.
+Set the target temperature of the device. The degrees value should be a floating point number in the temperature units of the device. Acceptable temperature range is 5.0 to 99.9 Celsius or 41.0 to 211.8 Farenheit. The return value is the set temperature.
 
     read cal
 Returns the current temperature calibration factor of the device. The original value is 0.0. It is temperature displayed by device minus temperature measured by device in Celsius. 
