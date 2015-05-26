@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D812FF0E1B151410009D3016 /* Circulate.h in Headers */ = {isa = PBXBuildFile; fileRef = D812FF0D1B151410009D3016 /* Circulate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D812FF141B151411009D3016 /* Circulate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF091B151410009D3016 /* Circulate.framework */; };
+		D812FF1D1B151411009D3016 /* CirculateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812FF1C1B151411009D3016 /* CirculateTests.swift */; };
+		D812FF201B151411009D3016 /* Circulate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF091B151410009D3016 /* Circulate.framework */; };
+		D812FF211B151411009D3016 /* Circulate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF091B151410009D3016 /* Circulate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D830401419CAAD8F009E7581 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
 		D830401D19CAB003009E7581 /* AnovaClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D830401719CAAE19009E7581 /* AnovaClient.m */; };
 		D830401E19CAB3DC009E7581 /* liblibCirculate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D873B78019CAA0C700A7289D /* liblibCirculate.a */; };
@@ -21,7 +26,42 @@
 		D8E2620619CA9E1400279372 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E2620419CA9E1400279372 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D812FF151B151411009D3016 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8E261EA19CA9E1400279372 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D812FF081B151410009D3016;
+			remoteInfo = Circulate;
+		};
+		D812FF171B151411009D3016 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8E261EA19CA9E1400279372 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D8E261F119CA9E1400279372;
+			remoteInfo = "Circulate-Demo";
+		};
+		D812FF1E1B151411009D3016 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8E261EA19CA9E1400279372 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D812FF081B151410009D3016;
+			remoteInfo = Circulate;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		D812FF271B151411009D3016 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D812FF211B151411009D3016 /* Circulate.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D873B77E19CAA0C700A7289D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -34,6 +74,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D812FF091B151410009D3016 /* Circulate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Circulate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D812FF0C1B151410009D3016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D812FF0D1B151410009D3016 /* Circulate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Circulate.h; sourceTree = "<group>"; };
+		D812FF131B151410009D3016 /* CirculateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CirculateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D812FF1B1B151411009D3016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D812FF1C1B151411009D3016 /* CirculateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirculateTests.swift; sourceTree = "<group>"; };
 		D830401319CAAD8F009E7581 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D830401619CAAE19009E7581 /* AnovaClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnovaClient.h; sourceTree = "<group>"; };
 		D830401719CAAE19009E7581 /* AnovaClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnovaClient.m; sourceTree = "<group>"; };
@@ -42,7 +88,7 @@
 		D830402419CAC503009E7581 /* AnovaDevice+Lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AnovaDevice+Lib.h"; sourceTree = "<group>"; };
 		D843548519E7968E00D15545 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D873B78019CAA0C700A7289D /* liblibCirculate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibCirculate.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8E261F219CA9E1400279372 /* Circulate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Circulate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8E261F219CA9E1400279372 /* Circulate-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Circulate-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E261F619CA9E1400279372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8E261F719CA9E1400279372 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D8E261F919CA9E1400279372 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -55,6 +101,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D812FF051B151410009D3016 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D812FF101B151410009D3016 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D812FF141B151411009D3016 /* Circulate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D873B77D19CAA0C700A7289D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -69,12 +130,47 @@
 			files = (
 				D830402119CABC98009E7581 /* CoreBluetooth.framework in Frameworks */,
 				D830401E19CAB3DC009E7581 /* liblibCirculate.a in Frameworks */,
+				D812FF201B151411009D3016 /* Circulate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D812FF0A1B151410009D3016 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D812FF0B1B151410009D3016 /* Supporting Files */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		D812FF0B1B151410009D3016 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D812FF0D1B151410009D3016 /* Circulate.h */,
+				D812FF0C1B151410009D3016 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D812FF191B151411009D3016 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				D812FF1C1B151411009D3016 /* CirculateTests.swift */,
+				D812FF1A1B151411009D3016 /* Supporting Files */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		D812FF1A1B151411009D3016 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D812FF1B1B151411009D3016 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		D830401519CAAD9C009E7581 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +196,8 @@
 			children = (
 				D8E261F419CA9E1400279372 /* Demo */,
 				D873B78119CAA0C700A7289D /* Library */,
+				D812FF0A1B151410009D3016 /* Source */,
+				D812FF191B151411009D3016 /* Tests */,
 				D8E261F319CA9E1400279372 /* Products */,
 				D830401519CAAD9C009E7581 /* Frameworks */,
 				D843548519E7968E00D15545 /* README.md */,
@@ -109,8 +207,10 @@
 		D8E261F319CA9E1400279372 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D8E261F219CA9E1400279372 /* Circulate.app */,
+				D8E261F219CA9E1400279372 /* Circulate-Demo.app */,
 				D873B78019CAA0C700A7289D /* liblibCirculate.a */,
+				D812FF091B151410009D3016 /* Circulate.framework */,
+				D812FF131B151410009D3016 /* CirculateTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,7 +241,55 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		D812FF061B151410009D3016 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D812FF0E1B151410009D3016 /* Circulate.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		D812FF081B151410009D3016 /* Circulate */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D812FF261B151411009D3016 /* Build configuration list for PBXNativeTarget "Circulate" */;
+			buildPhases = (
+				D812FF041B151410009D3016 /* Sources */,
+				D812FF051B151410009D3016 /* Frameworks */,
+				D812FF061B151410009D3016 /* Headers */,
+				D812FF071B151410009D3016 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Circulate;
+			productName = Circulate;
+			productReference = D812FF091B151410009D3016 /* Circulate.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D812FF121B151410009D3016 /* CirculateTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D812FF281B151411009D3016 /* Build configuration list for PBXNativeTarget "CirculateTests" */;
+			buildPhases = (
+				D812FF0F1B151410009D3016 /* Sources */,
+				D812FF101B151410009D3016 /* Frameworks */,
+				D812FF111B151410009D3016 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D812FF161B151411009D3016 /* PBXTargetDependency */,
+				D812FF181B151411009D3016 /* PBXTargetDependency */,
+			);
+			name = CirculateTests;
+			productName = CirculateTests;
+			productReference = D812FF131B151410009D3016 /* CirculateTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D873B77F19CAA0C700A7289D /* libCirculate */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D873B79119CAA0C700A7289D /* Build configuration list for PBXNativeTarget "libCirculate" */;
@@ -159,21 +307,23 @@
 			productReference = D873B78019CAA0C700A7289D /* liblibCirculate.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		D8E261F119CA9E1400279372 /* Circulate */ = {
+		D8E261F119CA9E1400279372 /* Circulate-Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D8E2621519CA9E1400279372 /* Build configuration list for PBXNativeTarget "Circulate" */;
+			buildConfigurationList = D8E2621519CA9E1400279372 /* Build configuration list for PBXNativeTarget "Circulate-Demo" */;
 			buildPhases = (
 				D8E261EE19CA9E1400279372 /* Sources */,
 				D8E261EF19CA9E1400279372 /* Frameworks */,
 				D8E261F019CA9E1400279372 /* Resources */,
+				D812FF271B151411009D3016 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D812FF1F1B151411009D3016 /* PBXTargetDependency */,
 			);
-			name = Circulate;
+			name = "Circulate-Demo";
 			productName = Circulate;
-			productReference = D8E261F219CA9E1400279372 /* Circulate.app */;
+			productReference = D8E261F219CA9E1400279372 /* Circulate-Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -185,6 +335,13 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Neil Pankey";
 				TargetAttributes = {
+					D812FF081B151410009D3016 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+					D812FF121B151410009D3016 = {
+						CreatedOnToolsVersion = 6.3.2;
+						TestTargetID = D8E261F119CA9E1400279372;
+					};
 					D873B77F19CAA0C700A7289D = {
 						CreatedOnToolsVersion = 6.1;
 					};
@@ -206,13 +363,29 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D8E261F119CA9E1400279372 /* Circulate */,
+				D8E261F119CA9E1400279372 /* Circulate-Demo */,
 				D873B77F19CAA0C700A7289D /* libCirculate */,
+				D812FF081B151410009D3016 /* Circulate */,
+				D812FF121B151410009D3016 /* CirculateTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D812FF071B151410009D3016 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D812FF111B151410009D3016 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8E261F019CA9E1400279372 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -226,6 +399,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D812FF041B151410009D3016 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D812FF0F1B151410009D3016 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D812FF1D1B151411009D3016 /* CirculateTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D873B77C19CAA0C700A7289D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -248,6 +436,24 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		D812FF161B151411009D3016 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D812FF081B151410009D3016 /* Circulate */;
+			targetProxy = D812FF151B151411009D3016 /* PBXContainerItemProxy */;
+		};
+		D812FF181B151411009D3016 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D8E261F119CA9E1400279372 /* Circulate-Demo */;
+			targetProxy = D812FF171B151411009D3016 /* PBXContainerItemProxy */;
+		};
+		D812FF1F1B151411009D3016 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D812FF081B151410009D3016 /* Circulate */;
+			targetProxy = D812FF1E1B151411009D3016 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		D8E261FF19CA9E1400279372 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -268,6 +474,93 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D812FF221B151411009D3016 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Source/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D812FF231B151411009D3016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Source/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D812FF241B151411009D3016 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Circulate-Demo.app/Circulate-Demo";
+			};
+			name = Debug;
+		};
+		D812FF251B151411009D3016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Circulate-Demo.app/Circulate-Demo";
+			};
+			name = Release;
+		};
 		D873B79219CAA0C700A7289D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -393,6 +686,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D812FF261B151411009D3016 /* Build configuration list for PBXNativeTarget "Circulate" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D812FF221B151411009D3016 /* Debug */,
+				D812FF231B151411009D3016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D812FF281B151411009D3016 /* Build configuration list for PBXNativeTarget "CirculateTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D812FF241B151411009D3016 /* Debug */,
+				D812FF251B151411009D3016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D873B79119CAA0C700A7289D /* Build configuration list for PBXNativeTarget "libCirculate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -411,7 +720,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D8E2621519CA9E1400279372 /* Build configuration list for PBXNativeTarget "Circulate" */ = {
+		D8E2621519CA9E1400279372 /* Build configuration list for PBXNativeTarget "Circulate-Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8E2621619CA9E1400279372 /* Debug */,
