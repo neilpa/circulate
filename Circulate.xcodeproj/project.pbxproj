@@ -12,6 +12,11 @@
 		D812FF1D1B151411009D3016 /* CirculateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812FF1C1B151411009D3016 /* CirculateTests.swift */; };
 		D812FF201B151411009D3016 /* Circulate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF091B151410009D3016 /* Circulate.framework */; };
 		D812FF211B151411009D3016 /* Circulate.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF091B151410009D3016 /* Circulate.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D812FF2B1B151D9E009D3016 /* BluetoothClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812FF2A1B151D9E009D3016 /* BluetoothClient.swift */; };
+		D812FF2C1B152159009D3016 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
+		D812FF301B152352009D3016 /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF2D1B152352009D3016 /* Box.framework */; };
+		D812FF311B152352009D3016 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF2E1B152352009D3016 /* ReactiveCocoa.framework */; };
+		D812FF321B152352009D3016 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF2F1B152352009D3016 /* Result.framework */; };
 		D830401419CAAD8F009E7581 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
 		D830401D19CAB003009E7581 /* AnovaClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D830401719CAAE19009E7581 /* AnovaClient.m */; };
 		D830401E19CAB3DC009E7581 /* liblibCirculate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D873B78019CAA0C700A7289D /* liblibCirculate.a */; };
@@ -80,6 +85,10 @@
 		D812FF131B151410009D3016 /* CirculateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CirculateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D812FF1B1B151411009D3016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D812FF1C1B151411009D3016 /* CirculateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirculateTests.swift; sourceTree = "<group>"; };
+		D812FF2A1B151D9E009D3016 /* BluetoothClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothClient.swift; sourceTree = "<group>"; };
+		D812FF2D1B152352009D3016 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = Carthage/Build/iOS/Box.framework; sourceTree = "<group>"; };
+		D812FF2E1B152352009D3016 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = Carthage/Build/iOS/ReactiveCocoa.framework; sourceTree = "<group>"; };
+		D812FF2F1B152352009D3016 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		D830401319CAAD8F009E7581 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D830401619CAAE19009E7581 /* AnovaClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnovaClient.h; sourceTree = "<group>"; };
 		D830401719CAAE19009E7581 /* AnovaClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnovaClient.m; sourceTree = "<group>"; };
@@ -105,6 +114,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D812FF301B152352009D3016 /* Box.framework in Frameworks */,
+				D812FF311B152352009D3016 /* ReactiveCocoa.framework in Frameworks */,
+				D812FF321B152352009D3016 /* Result.framework in Frameworks */,
+				D812FF2C1B152159009D3016 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +153,7 @@
 		D812FF0A1B151410009D3016 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D812FF2A1B151D9E009D3016 /* BluetoothClient.swift */,
 				D812FF0B1B151410009D3016 /* Supporting Files */,
 			);
 			path = Source;
@@ -174,6 +188,9 @@
 		D830401519CAAD9C009E7581 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D812FF2D1B152352009D3016 /* Box.framework */,
+				D812FF2E1B152352009D3016 /* ReactiveCocoa.framework */,
+				D812FF2F1B152352009D3016 /* Result.framework */,
 				D830401319CAAD8F009E7581 /* CoreBluetooth.framework */,
 			);
 			name = Frameworks;
@@ -403,6 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D812FF2B1B151D9E009D3016 /* BluetoothClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,12 +495,17 @@
 		D812FF221B151411009D3016 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -503,6 +526,7 @@
 		D812FF231B151411009D3016 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -510,6 +534,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
