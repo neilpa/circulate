@@ -23,7 +23,8 @@
 - (instancetype) initWithDelegate:(id<AnovaClientDelegate>)delegate
 {
     if (self = [super init]) {
-        _central = [[CBCentralManager alloc] initWithDelegate:self queue:NULL];
+        _central = [[CBCentralManager alloc] initWithDelegate:nil queue:NULL];
+        self.central.delegate = self;
         _delegate = delegate;
         _devices = [NSMutableDictionary dictionary];
     }
@@ -33,6 +34,7 @@
 - (void) centralManagerDidUpdateState:(CBCentralManager*)central
 {
     if (central.state == CBCentralManagerStatePoweredOn) {
+        NSLog(@"Scanning");
         NSArray* service = @[[CBUUID UUIDWithString:@"ffe0"]];
         [central scanForPeripheralsWithServices:service options:nil];
     }
