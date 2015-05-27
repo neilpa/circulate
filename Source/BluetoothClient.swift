@@ -56,6 +56,7 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
     // Sadly all of these have to be public
 
     public func centralManagerDidUpdateState(central: CBCentralManager!) {
+        println("\(central.state)")
         _status.value = central.state
     }
 
