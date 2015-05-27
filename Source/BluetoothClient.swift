@@ -30,7 +30,7 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
     }
 
     // TODO Should be the service IDs for Input
-    public lazy var scan: Action<(), BluetoothDevice, NoError> = Action { input in
+    public private(set) lazy var scan: Action<(), BluetoothDevice, NoError> = Action { input in
         return SignalProducer { observer, disposable in
             println("Scanning")
             self.scanSignal
