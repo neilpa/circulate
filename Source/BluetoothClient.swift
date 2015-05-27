@@ -18,13 +18,19 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
     private let connectSignal: Signal<CBPeripheral, NoError>
     private let connectSink: Signal<CBPeripheral, NoError>.Observer
 
+    public let status: PropertyOf<CBCentralManagerState>
+    private let _status: MutableProperty<CBCentralManagerState>
+
     public override init() {
         (scanSignal, scanSink) = Signal<CBPeripheral, NoError>.pipe()
         (connectSignal, connectSink) = Signal<CBPeripheral, NoError>.pipe()
 
+        _status = MutableProperty(.Unknown)
+        status = PropertyOf(_status)
+
+        // This wonky initialization enables us to declare central as immutable and non-optional.
         let queue = dispatch_queue_create("me.neilpa.circulate.client", DISPATCH_QUEUE_SERIAL)
         central = CBCentralManager(delegate: nil, queue: queue)
-
         super.init()
         central.delegate = self
     }
@@ -46,8 +52,11 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
         }
     }
 
+    // MARK: CBCentralManagerDelegate
+    // Sadly all of these have to be public
+
     public func centralManagerDidUpdateState(central: CBCentralManager!) {
-        // TODO
+        _status.value = central.state
     }
 
     public func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
