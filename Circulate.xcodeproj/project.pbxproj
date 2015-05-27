@@ -29,6 +29,7 @@
 		D812FF871B154614009D3016 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF2F1B152352009D3016 /* Result.framework */; };
 		D812FF881B154614009D3016 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF2F1B152352009D3016 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D812FF8A1B15461B009D3016 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
+		D82399531B164CC90096E95C /* BluetoothDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82399511B164C7F0096E95C /* BluetoothDevice.swift */; };
 		D830401419CAAD8F009E7581 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
 		D830401D19CAB003009E7581 /* AnovaClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D830401719CAAE19009E7581 /* AnovaClient.m */; };
 		D830401E19CAB3DC009E7581 /* liblibCirculate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D873B78019CAA0C700A7289D /* liblibCirculate.a */; };
@@ -111,6 +112,7 @@
 		D812FF661B1545A8009D3016 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D812FF681B1545A8009D3016 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D812FF6B1B1545A8009D3016 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		D82399511B164C7F0096E95C /* BluetoothDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothDevice.swift; sourceTree = "<group>"; };
 		D830401319CAAD8F009E7581 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D830401619CAAE19009E7581 /* AnovaClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnovaClient.h; sourceTree = "<group>"; };
 		D830401719CAAE19009E7581 /* AnovaClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnovaClient.m; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				D812FF2A1B151D9E009D3016 /* BluetoothClient.swift */,
+				D82399511B164C7F0096E95C /* BluetoothDevice.swift */,
 				D812FF0B1B151410009D3016 /* Supporting Files */,
 			);
 			path = Source;
@@ -507,6 +510,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D82399531B164CC90096E95C /* BluetoothDevice.swift in Sources */,
 				D812FF2B1B151D9E009D3016 /* BluetoothClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -873,6 +877,7 @@
 				D812FF231B151411009D3016 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D812FF281B151411009D3016 /* Build configuration list for PBXNativeTarget "CirculateTests" */ = {
 			isa = XCConfigurationList;
@@ -881,6 +886,7 @@
 				D812FF251B151411009D3016 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D812FF791B1545A8009D3016 /* Build configuration list for PBXNativeTarget "Example" */ = {
 			isa = XCConfigurationList;
@@ -889,6 +895,7 @@
 				D812FF7B1B1545A8009D3016 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D873B79119CAA0C700A7289D /* Build configuration list for PBXNativeTarget "libCirculate" */ = {
 			isa = XCConfigurationList;

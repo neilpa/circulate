@@ -71,20 +71,3 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
 
 }
 
-public final class BluetoothDevice: NSObject, CBPeripheralDelegate {
-    private let peripheral: CBPeripheral
-    private let central: CBCentralManager
-
-    public lazy var connect: Action<(), (), NoError> = Action { _ in
-        return .never
-    }
-
-    public lazy var disconnect: Action<(), (), NoError> = Action { _ in
-        return .never
-    }
-
-    internal init(peripheral: CBPeripheral, central: CBCentralManager) {
-        self.peripheral = peripheral
-        self.central = central
-    }
-}
