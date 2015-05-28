@@ -29,6 +29,10 @@ public final class BluetoothDevice: NSObject, CBPeripheralDelegate {
         return peripheral.identifier.UUIDString
     }
 
+    public var services: [AnyObject] {
+        return peripheral.services
+    }
+
     internal init(peripheral: CBPeripheral, central: CBCentralManager) {
         self.peripheral = peripheral
         self.central = central

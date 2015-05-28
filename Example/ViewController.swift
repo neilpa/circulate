@@ -73,6 +73,10 @@ public class DeviceCell: UICollectionViewCell {
     }
 }
 
+public class DeviceScreen: UIViewController {
+    public var device: BluetoothDevice?
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -93,5 +97,16 @@ class ViewController: UIViewController {
         dataSource?.attach(collectionView)
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        println(segue.identifier)
+        if segue.identifier == "showDetail" {
+            if let cell = sender as? DeviceCell, let device = cell.device {
+                let navController = segue.destinationViewController as! UINavigationController
+                let deviceController = navController.topViewController as! DeviceScreen
+                deviceController.device = device
+                deviceController.navigationItem.title = device.name
+            }
+        }
+    }
 }
 

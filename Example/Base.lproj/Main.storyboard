@@ -52,7 +52,7 @@
                                         <connections>
                                             <outlet property="nameLabel" destination="uPS-ul-1ex" id="ocB-xV-QKS"/>
                                             <outlet property="uuidLabel" destination="2sh-cf-1DW" id="bHt-2f-T4V"/>
-                                            <segue destination="VkP-pk-2Nm" kind="showDetail" id="NbY-xX-mEN"/>
+                                            <segue destination="VkP-pk-2Nm" kind="showDetail" identifier="showDetail" id="NbY-xX-mEN"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -94,7 +94,7 @@
         <!--Device Settings-->
         <scene sceneID="0Sv-Vy-f4K">
             <objects>
-                <viewController id="pyM-dX-fXR" userLabel="Device Settings" sceneMemberID="viewController">
+                <viewController id="pyM-dX-fXR" userLabel="Device Settings" customClass="DeviceScreen" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hpU-Le-3MU"/>
                         <viewControllerLayoutGuide type="bottom" id="2iI-xc-X5r"/>
