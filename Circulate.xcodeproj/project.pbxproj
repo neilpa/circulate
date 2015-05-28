@@ -37,6 +37,7 @@
 		D830402119CABC98009E7581 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
 		D830402519CAC503009E7581 /* AnovaDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D830402319CAC503009E7581 /* AnovaDevice.m */; };
 		D843548619E7968E00D15545 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D843548519E7968E00D15545 /* README.md */; };
+		D852043F1B16D2D1007B89B3 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D852043E1B16D2D1007B89B3 /* Screen.swift */; };
 		D8E261F819CA9E1400279372 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261F719CA9E1400279372 /* main.m */; };
 		D8E261FB19CA9E1400279372 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FA19CA9E1400279372 /* AppDelegate.m */; };
 		D8E261FE19CA9E1400279372 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FD19CA9E1400279372 /* ViewController.m */; };
@@ -122,6 +123,7 @@
 		D830402319CAC503009E7581 /* AnovaDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnovaDevice.m; sourceTree = "<group>"; };
 		D830402419CAC503009E7581 /* AnovaDevice+Lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AnovaDevice+Lib.h"; sourceTree = "<group>"; };
 		D843548519E7968E00D15545 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D852043E1B16D2D1007B89B3 /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		D873B78019CAA0C700A7289D /* liblibCirculate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibCirculate.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E261F219CA9E1400279372 /* Circulate-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Circulate-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8E261F619CA9E1400279372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				D812FF611B1545A8009D3016 /* AppDelegate.swift */,
+				D852043E1B16D2D1007B89B3 /* Screen.swift */,
 				D812FF631B1545A8009D3016 /* ViewController.swift */,
 				D812FF651B1545A8009D3016 /* Main.storyboard */,
 				D812FF681B1545A8009D3016 /* Images.xcassets */,
@@ -533,6 +536,7 @@
 				D82399551B1650A80096E95C /* CBCentralManagerState.swift in Sources */,
 				D812FF641B1545A8009D3016 /* ViewController.swift in Sources */,
 				D812FF621B1545A8009D3016 /* AppDelegate.swift in Sources */,
+				D852043F1B16D2D1007B89B3 /* Screen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
