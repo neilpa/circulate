@@ -47,6 +47,7 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
 
             self.central.scanForPeripheralsWithServices(nil, options: nil)
             disposable.addDisposable {
+                println("Stopping")
                 self.central.stopScan()
             }
         }
@@ -56,7 +57,7 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
     // Sadly all of these have to be public
 
     public func centralManagerDidUpdateState(central: CBCentralManager!) {
-        println("\(central.state)")
+        println(central.state)
         _status.value = central.state
     }
 
