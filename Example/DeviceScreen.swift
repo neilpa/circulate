@@ -9,6 +9,7 @@
 import Circulate
 
 class DeviceScreen: UIViewController {
+    @IBOutlet weak var tempLabel: UILabel!
+
     var device: BluetoothDevice?
 }
-

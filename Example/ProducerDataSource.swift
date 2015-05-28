@@ -9,6 +9,7 @@
 import UIKit
 import ReactiveCocoa
 
+/// Creates a data source that appends every `next` value at the end of the list.
 public final class ProducerDataSource: NSObject, UICollectionViewDataSource {
     private let _count: () -> Int
     private let _cell: (UICollectionView, NSIndexPath) -> UICollectionViewCell
@@ -29,7 +30,8 @@ public final class ProducerDataSource: NSObject, UICollectionViewDataSource {
                     collectionView.insertItemsAtIndexPaths([path])
                 })
 
-            // HACK - avoids a compiler crash
+
+            // HACK - swiftc failed with exit code 1
             return
         }
     }

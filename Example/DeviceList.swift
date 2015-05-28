@@ -9,6 +9,7 @@
 import UIKit
 import ReactiveCocoa
 import Circulate
+import CoreBluetooth
 
 class DeviceCell: UICollectionViewCell {
 
@@ -37,8 +38,15 @@ class DeviceList: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        client = BluetoothClient()
-        let devices = client!.scan.apply(())
+        let client = BluetoothClient()
+        self.client = client
+
+        let devices = client.scan.apply(())
+            |> catch { _ in SignalProducer.empty }
+            |> flatMap(.Latest) {
+                client.connect($0)
+            }
+
         dataSource = ProducerDataSource(devices) { view, path, device in
             let cell = view.dequeueReusableCellWithReuseIdentifier("Device", forIndexPath: path) as! DeviceCell
             cell.device = device
