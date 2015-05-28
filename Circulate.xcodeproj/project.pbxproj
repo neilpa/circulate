@@ -31,18 +31,6 @@
 		D812FF8A1B15461B009D3016 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
 		D82399531B164CC90096E95C /* BluetoothDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82399511B164C7F0096E95C /* BluetoothDevice.swift */; };
 		D82399551B1650A80096E95C /* CBCentralManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82399541B1650A80096E95C /* CBCentralManagerState.swift */; };
-		D830401419CAAD8F009E7581 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
-		D830401D19CAB003009E7581 /* AnovaClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D830401719CAAE19009E7581 /* AnovaClient.m */; };
-		D830401E19CAB3DC009E7581 /* liblibCirculate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D873B78019CAA0C700A7289D /* liblibCirculate.a */; };
-		D830402119CABC98009E7581 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
-		D830402519CAC503009E7581 /* AnovaDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = D830402319CAC503009E7581 /* AnovaDevice.m */; };
-		D843548619E7968E00D15545 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D843548519E7968E00D15545 /* README.md */; };
-		D8E261F819CA9E1400279372 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261F719CA9E1400279372 /* main.m */; };
-		D8E261FB19CA9E1400279372 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FA19CA9E1400279372 /* AppDelegate.m */; };
-		D8E261FE19CA9E1400279372 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E261FD19CA9E1400279372 /* ViewController.m */; };
-		D8E2620119CA9E1400279372 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D8E261FF19CA9E1400279372 /* Main.storyboard */; };
-		D8E2620319CA9E1400279372 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D8E2620219CA9E1400279372 /* Images.xcassets */; };
-		D8E2620619CA9E1400279372 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E2620419CA9E1400279372 /* LaunchScreen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,13 +40,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = D812FF081B151410009D3016;
 			remoteInfo = Circulate;
-		};
-		D812FF171B151411009D3016 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D8E261EA19CA9E1400279372 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D8E261F119CA9E1400279372;
-			remoteInfo = "Circulate-Demo";
 		};
 		D812FF811B154614009D3016 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -84,15 +65,6 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D873B77E19CAA0C700A7289D /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -116,23 +88,7 @@
 		D82399511B164C7F0096E95C /* BluetoothDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothDevice.swift; sourceTree = "<group>"; };
 		D82399541B1650A80096E95C /* CBCentralManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBCentralManagerState.swift; sourceTree = "<group>"; };
 		D830401319CAAD8F009E7581 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
-		D830401619CAAE19009E7581 /* AnovaClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnovaClient.h; sourceTree = "<group>"; };
-		D830401719CAAE19009E7581 /* AnovaClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnovaClient.m; sourceTree = "<group>"; };
-		D830402219CAC503009E7581 /* AnovaDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnovaDevice.h; sourceTree = "<group>"; };
-		D830402319CAC503009E7581 /* AnovaDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnovaDevice.m; sourceTree = "<group>"; };
-		D830402419CAC503009E7581 /* AnovaDevice+Lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AnovaDevice+Lib.h"; sourceTree = "<group>"; };
 		D843548519E7968E00D15545 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		D873B78019CAA0C700A7289D /* liblibCirculate.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibCirculate.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8E261F219CA9E1400279372 /* Circulate-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Circulate-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8E261F619CA9E1400279372 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D8E261F719CA9E1400279372 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		D8E261F919CA9E1400279372 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		D8E261FA19CA9E1400279372 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D8E261FC19CA9E1400279372 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D8E261FD19CA9E1400279372 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		D8E2620019CA9E1400279372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D8E2620219CA9E1400279372 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D8E2620519CA9E1400279372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,23 +120,6 @@
 				D812FF851B154614009D3016 /* ReactiveCocoa.framework in Frameworks */,
 				D812FF7F1B154614009D3016 /* Circulate.framework in Frameworks */,
 				D812FF871B154614009D3016 /* Result.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D873B77D19CAA0C700A7289D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D830401419CAAD8F009E7581 /* CoreBluetooth.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8E261EF19CA9E1400279372 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D830402119CABC98009E7581 /* CoreBluetooth.framework in Frameworks */,
-				D830401E19CAB3DC009E7581 /* liblibCirculate.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,24 +195,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		D873B78119CAA0C700A7289D /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				D830402219CAC503009E7581 /* AnovaDevice.h */,
-				D830402319CAC503009E7581 /* AnovaDevice.m */,
-				D830402419CAC503009E7581 /* AnovaDevice+Lib.h */,
-				D830401619CAAE19009E7581 /* AnovaClient.h */,
-				D830401719CAAE19009E7581 /* AnovaClient.m */,
-			);
-			path = Library;
-			sourceTree = "<group>";
-		};
 		D8E261E919CA9E1400279372 = {
 			isa = PBXGroup;
 			children = (
-				D8E261F419CA9E1400279372 /* Demo */,
 				D812FF5E1B1545A8009D3016 /* Example */,
-				D873B78119CAA0C700A7289D /* Library */,
 				D812FF0A1B151410009D3016 /* Source */,
 				D812FF191B151411009D3016 /* Tests */,
 				D8E261F319CA9E1400279372 /* Products */,
@@ -285,37 +210,11 @@
 		D8E261F319CA9E1400279372 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D8E261F219CA9E1400279372 /* Circulate-Demo.app */,
-				D873B78019CAA0C700A7289D /* liblibCirculate.a */,
 				D812FF091B151410009D3016 /* Circulate.framework */,
 				D812FF131B151410009D3016 /* CirculateTests.xctest */,
 				D812FF5D1B1545A8009D3016 /* Example.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D8E261F419CA9E1400279372 /* Demo */ = {
-			isa = PBXGroup;
-			children = (
-				D8E261F919CA9E1400279372 /* AppDelegate.h */,
-				D8E261FA19CA9E1400279372 /* AppDelegate.m */,
-				D8E261FC19CA9E1400279372 /* ViewController.h */,
-				D8E261FD19CA9E1400279372 /* ViewController.m */,
-				D8E261FF19CA9E1400279372 /* Main.storyboard */,
-				D8E2620219CA9E1400279372 /* Images.xcassets */,
-				D8E2620419CA9E1400279372 /* LaunchScreen.xib */,
-				D8E261F519CA9E1400279372 /* Supporting Files */,
-			);
-			path = Demo;
-			sourceTree = "<group>";
-		};
-		D8E261F519CA9E1400279372 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				D8E261F619CA9E1400279372 /* Info.plist */,
-				D8E261F719CA9E1400279372 /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,7 +261,6 @@
 			);
 			dependencies = (
 				D812FF161B151411009D3016 /* PBXTargetDependency */,
-				D812FF181B151411009D3016 /* PBXTargetDependency */,
 			);
 			name = CirculateTests;
 			productName = CirculateTests;
@@ -388,40 +286,6 @@
 			productReference = D812FF5D1B1545A8009D3016 /* Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D873B77F19CAA0C700A7289D /* libCirculate */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D873B79119CAA0C700A7289D /* Build configuration list for PBXNativeTarget "libCirculate" */;
-			buildPhases = (
-				D873B77C19CAA0C700A7289D /* Sources */,
-				D873B77D19CAA0C700A7289D /* Frameworks */,
-				D873B77E19CAA0C700A7289D /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = libCirculate;
-			productName = libCirculate;
-			productReference = D873B78019CAA0C700A7289D /* liblibCirculate.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		D8E261F119CA9E1400279372 /* Circulate-Demo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D8E2621519CA9E1400279372 /* Build configuration list for PBXNativeTarget "Circulate-Demo" */;
-			buildPhases = (
-				D8E261EE19CA9E1400279372 /* Sources */,
-				D8E261EF19CA9E1400279372 /* Frameworks */,
-				D8E261F019CA9E1400279372 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Circulate-Demo";
-			productName = Circulate;
-			productReference = D8E261F219CA9E1400279372 /* Circulate-Demo.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -441,12 +305,6 @@
 					D812FF5C1B1545A8009D3016 = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
-					D873B77F19CAA0C700A7289D = {
-						CreatedOnToolsVersion = 6.1;
-					};
-					D8E261F119CA9E1400279372 = {
-						CreatedOnToolsVersion = 6.1;
-					};
 				};
 			};
 			buildConfigurationList = D8E261ED19CA9E1400279372 /* Build configuration list for PBXProject "Circulate" */;
@@ -462,8 +320,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D8E261F119CA9E1400279372 /* Circulate-Demo */,
-				D873B77F19CAA0C700A7289D /* libCirculate */,
 				D812FF081B151410009D3016 /* Circulate */,
 				D812FF121B151410009D3016 /* CirculateTests */,
 				D812FF5C1B1545A8009D3016 /* Example */,
@@ -493,16 +349,6 @@
 				D812FF671B1545A8009D3016 /* Main.storyboard in Resources */,
 				D812FF6C1B1545A8009D3016 /* LaunchScreen.xib in Resources */,
 				D812FF691B1545A8009D3016 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8E261F019CA9E1400279372 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D8E2620119CA9E1400279372 /* Main.storyboard in Resources */,
-				D8E2620619CA9E1400279372 /* LaunchScreen.xib in Resources */,
-				D8E2620319CA9E1400279372 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,26 +382,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D873B77C19CAA0C700A7289D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D830401D19CAB003009E7581 /* AnovaClient.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D8E261EE19CA9E1400279372 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D8E261FE19CA9E1400279372 /* ViewController.m in Sources */,
-				D830402519CAC503009E7581 /* AnovaDevice.m in Sources */,
-				D843548619E7968E00D15545 /* README.md in Sources */,
-				D8E261FB19CA9E1400279372 /* AppDelegate.m in Sources */,
-				D8E261F819CA9E1400279372 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -563,11 +389,6 @@
 			isa = PBXTargetDependency;
 			target = D812FF081B151410009D3016 /* Circulate */;
 			targetProxy = D812FF151B151411009D3016 /* PBXContainerItemProxy */;
-		};
-		D812FF181B151411009D3016 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D8E261F119CA9E1400279372 /* Circulate-Demo */;
-			targetProxy = D812FF171B151411009D3016 /* PBXContainerItemProxy */;
 		};
 		D812FF821B154614009D3016 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -589,22 +410,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				D812FF6B1B1545A8009D3016 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		D8E261FF19CA9E1400279372 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D8E2620019CA9E1400279372 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D8E2620419CA9E1400279372 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D8E2620519CA9E1400279372 /* Base */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -749,30 +554,6 @@
 			};
 			name = Release;
 		};
-		D873B79219CAA0C700A7289D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		D873B79319CAA0C700A7289D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 		D8E2621319CA9E1400279372 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -851,26 +632,6 @@
 			};
 			name = Release;
 		};
-		D8E2621619CA9E1400279372 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Demo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		D8E2621719CA9E1400279372 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Demo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -901,29 +662,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D873B79119CAA0C700A7289D /* Build configuration list for PBXNativeTarget "libCirculate" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D873B79219CAA0C700A7289D /* Debug */,
-				D873B79319CAA0C700A7289D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		D8E261ED19CA9E1400279372 /* Build configuration list for PBXProject "Circulate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D8E2621319CA9E1400279372 /* Debug */,
 				D8E2621419CA9E1400279372 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D8E2621519CA9E1400279372 /* Build configuration list for PBXNativeTarget "Circulate-Demo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D8E2621619CA9E1400279372 /* Debug */,
-				D8E2621719CA9E1400279372 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
