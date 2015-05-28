@@ -52,10 +52,12 @@ public class ProducerDataSource: NSObject, UICollectionViewDataSource {
 public class DeviceCell: UICollectionViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var uuidLabel: UILabel!
 
     public var device: BluetoothDevice? {
         didSet {
-            nameLabel.text = device?.identifier
+            nameLabel.text = device?.name
+            uuidLabel.text = device?.identifier
         }
     }
 
