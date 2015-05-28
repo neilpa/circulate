@@ -16,7 +16,7 @@
 		D812FF311B152352009D3016 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF2E1B152352009D3016 /* ReactiveCocoa.framework */; };
 		D812FF321B152352009D3016 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF2F1B152352009D3016 /* Result.framework */; };
 		D812FF621B1545A8009D3016 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812FF611B1545A8009D3016 /* AppDelegate.swift */; };
-		D812FF641B1545A8009D3016 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812FF631B1545A8009D3016 /* ViewController.swift */; };
+		D812FF641B1545A8009D3016 /* DeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812FF631B1545A8009D3016 /* DeviceList.swift */; };
 		D812FF671B1545A8009D3016 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D812FF651B1545A8009D3016 /* Main.storyboard */; };
 		D812FF691B1545A8009D3016 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D812FF681B1545A8009D3016 /* Images.xcassets */; };
 		D812FF6C1B1545A8009D3016 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D812FF6A1B1545A8009D3016 /* LaunchScreen.xib */; };
@@ -31,6 +31,8 @@
 		D812FF8A1B15461B009D3016 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
 		D82399531B164CC90096E95C /* BluetoothDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82399511B164C7F0096E95C /* BluetoothDevice.swift */; };
 		D82399551B1650A80096E95C /* CBCentralManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82399541B1650A80096E95C /* CBCentralManagerState.swift */; };
+		D8F0972C1B17AB01002E15BA /* DeviceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */; };
+		D8F097301B17AB3D002E15BA /* ProducerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0972F1B17AB3D002E15BA /* ProducerDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +83,7 @@
 		D812FF5D1B1545A8009D3016 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D812FF601B1545A8009D3016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D812FF611B1545A8009D3016 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D812FF631B1545A8009D3016 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D812FF631B1545A8009D3016 /* DeviceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceList.swift; sourceTree = "<group>"; };
 		D812FF661B1545A8009D3016 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D812FF681B1545A8009D3016 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D812FF6B1B1545A8009D3016 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -89,6 +91,8 @@
 		D82399541B1650A80096E95C /* CBCentralManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBCentralManagerState.swift; sourceTree = "<group>"; };
 		D830401319CAAD8F009E7581 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D843548519E7968E00D15545 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceScreen.swift; sourceTree = "<group>"; };
+		D8F0972F1B17AB3D002E15BA /* ProducerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProducerDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,7 +171,9 @@
 			isa = PBXGroup;
 			children = (
 				D812FF611B1545A8009D3016 /* AppDelegate.swift */,
-				D812FF631B1545A8009D3016 /* ViewController.swift */,
+				D812FF631B1545A8009D3016 /* DeviceList.swift */,
+				D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */,
+				D8F0972F1B17AB3D002E15BA /* ProducerDataSource.swift */,
 				D812FF651B1545A8009D3016 /* Main.storyboard */,
 				D812FF681B1545A8009D3016 /* Images.xcassets */,
 				D812FF6A1B1545A8009D3016 /* LaunchScreen.xib */,
@@ -377,7 +383,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D82399551B1650A80096E95C /* CBCentralManagerState.swift in Sources */,
-				D812FF641B1545A8009D3016 /* ViewController.swift in Sources */,
+				D8F0972C1B17AB01002E15BA /* DeviceScreen.swift in Sources */,
+				D812FF641B1545A8009D3016 /* DeviceList.swift in Sources */,
+				D8F097301B17AB3D002E15BA /* ProducerDataSource.swift in Sources */,
 				D812FF621B1545A8009D3016 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
