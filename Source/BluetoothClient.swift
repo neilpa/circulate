@@ -38,7 +38,6 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
     // TODO Should be the service IDs for Input
     public private(set) lazy var scan: Action<(), BluetoothDevice, NoError> = Action { input in
         return SignalProducer { observer, disposable in
-            println("Scanning")
             self.scanSignal
                 |> map {
                     return BluetoothDevice(peripheral: $0, central: self.central)
@@ -47,7 +46,6 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
 
             self.central.scanForPeripheralsWithServices(nil, options: nil)
             disposable.addDisposable {
-                println("Stopping")
                 self.central.stopScan()
             }
         }
@@ -57,14 +55,10 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
     // Sadly all of these have to be public
 
     public func centralManagerDidUpdateState(central: CBCentralManager!) {
-        println(central.state)
         _status.value = central.state
     }
 
     public func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
-        println(peripheral)
-        println(advertisementData)
-        println(RSSI)
         sendNext(scanSink, peripheral)
     }
 

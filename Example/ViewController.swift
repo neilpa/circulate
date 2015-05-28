@@ -21,10 +21,13 @@ public class ProducerDataSource: NSObject, UICollectionViewDataSource {
         _count = { _ in items.count }
         _cell = { configure($0, $1, items[$1.item]) }
         _attach = { collectionView in
+            println("attaching")
+
             producer
                 |> observeOn(UIScheduler())
                 |> start(next: { item in
                     items.append(item)
+                    println("\(NSThread.currentThread()) appending")
 
                     let path = NSIndexPath(forItem: items.count - 1, inSection: 0)
                     collectionView.insertItemsAtIndexPaths([path])
@@ -41,11 +44,15 @@ public class ProducerDataSource: NSObject, UICollectionViewDataSource {
     }
 
     public func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return _count()
+        let count = _count()
+        println("counting: \(count)")
+        return count
     }
 
     public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return _cell(collectionView, indexPath)
+        let cell = _cell(collectionView, indexPath)
+        println("cell @\(indexPath.item)")
+        return cell
     }
 }
 
