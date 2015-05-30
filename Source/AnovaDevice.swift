@@ -13,10 +13,18 @@ public enum AnovaCommand {
 }
 
 public final class AnovaDevice {
-    private let device: BluetoothDevice
+    private let peripheral: Peripheral
 
-    public init(device: BluetoothDevice) {
-        self.device = device
+    public var name: String {
+        return peripheral.name
+    }
+
+    public var identifier: String {
+        return peripheral.identifier
+    }
+    
+    public init(peripheral: Peripheral) {
+        self.peripheral = peripheral
     }
 
     public func execute(command: String) -> SignalProducer<(), NoError> {

@@ -16,7 +16,7 @@ class DeviceCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var uuidLabel: UILabel!
 
-    var device: BluetoothDevice? {
+    var device: AnovaDevice? {
         didSet {
             nameLabel.text = device?.name
             uuidLabel.text = device?.identifier
@@ -32,20 +32,20 @@ class DeviceList: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
 
-    private var client: BluetoothClient?
+    private let central = CentralManager()
     private var dataSource: ProducerDataSource?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let client = BluetoothClient()
-        self.client = client
-
-        let devices = client.scan.apply(())
-            |> catch { _ in SignalProducer.empty }
-            |> flatMap(.Latest) {
-                client.connect($0)
+        let devices: SignalProducer<AnovaDevice, NoError> = central.scan([])
+            |> flatMap(.Latest) { peripheral in
+                return self.central.connect(peripheral)
+                    |> filter { $0 == ConnectionStatus.Connected }
+                    |> map { _ in Peripheral(peripheral: peripheral) }
+                    |> take(1)
             }
+            |> map { AnovaDevice(peripheral: $0) }
 
         dataSource = ProducerDataSource(devices) { view, path, device in
             let cell = view.dequeueReusableCellWithReuseIdentifier("Device", forIndexPath: path) as! DeviceCell
@@ -60,7 +60,7 @@ class DeviceList: UIViewController {
             if let cell = sender as? DeviceCell, let device = cell.device {
                 let navController = segue.destinationViewController as! UINavigationController
                 let deviceController = navController.topViewController as! DeviceScreen
-                deviceController.device = AnovaDevice(device: device)
+                deviceController.device = device
                 deviceController.navigationItem.title = device.name
             }
         }

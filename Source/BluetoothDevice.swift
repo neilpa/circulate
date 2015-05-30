@@ -24,7 +24,7 @@ public final class BluetoothDevice: NSObject, CBPeripheralDelegate {
         return peripheral.services
     }
 
-    internal init(peripheral: CBPeripheral) {
+    public init(peripheral: CBPeripheral) {
         self.peripheral = peripheral
 
         super.init()

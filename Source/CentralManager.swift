@@ -8,6 +8,7 @@
 
 import CoreBluetooth
 import ReactiveCocoa
+import Rex
 
 // Wraps a `CBCentralManager` exposing signals for the `CBCentralManagerDelegate` methods.
 public final class CentralManager: NSObject, CBCentralManagerDelegate {
@@ -52,10 +53,11 @@ public final class CentralManager: NSObject, CBCentralManagerDelegate {
             self.central.scanForPeripheralsWithServices(services, options: nil)
 
             disposable.addDisposable {
-                println("stopping")
                 self.central.stopScan()
             }
         }
+        // TODO There are some lifetime issues somehwere I need to track down that this "fixes"
+        |> on(started: { println("STARTED") }, event: println, disposed: { println("DISPOSED") })
     }
 
     public func connect(peripheral: CBPeripheral) -> SignalProducer<ConnectionStatus, NoError> {
@@ -66,7 +68,6 @@ public final class CentralManager: NSObject, CBCentralManagerDelegate {
                 |> observe(observer)
 
             self.central.connectPeripheral(peripheral, options: nil)
-
             disposable.addDisposable {
                 self.central.cancelPeripheralConnection(peripheral)
             }

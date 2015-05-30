@@ -36,6 +36,7 @@
 		D812FF8A1B15461B009D3016 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D830401319CAAD8F009E7581 /* CoreBluetooth.framework */; };
 		D82399531B164CC90096E95C /* BluetoothDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82399511B164C7F0096E95C /* BluetoothDevice.swift */; };
 		D82399551B1650A80096E95C /* CBCentralManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82399541B1650A80096E95C /* CBCentralManagerState.swift */; };
+		D8696D3F1B1A3D3600AC1804 /* AnovaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8696D3E1B1A3D3600AC1804 /* AnovaClient.swift */; };
 		D8F0972C1B17AB01002E15BA /* DeviceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */; };
 		D8F097301B17AB3D002E15BA /* ProducerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0972F1B17AB3D002E15BA /* ProducerDataSource.swift */; };
 		D8F097351B17C9CD002E15BA /* AnovaDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F097331B17C95B002E15BA /* AnovaDevice.swift */; };
@@ -102,6 +103,7 @@
 		D82399541B1650A80096E95C /* CBCentralManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBCentralManagerState.swift; sourceTree = "<group>"; };
 		D830401319CAAD8F009E7581 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D843548519E7968E00D15545 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D8696D3E1B1A3D3600AC1804 /* AnovaClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnovaClient.swift; sourceTree = "<group>"; };
 		D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceScreen.swift; sourceTree = "<group>"; };
 		D8F0972F1B17AB3D002E15BA /* ProducerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProducerDataSource.swift; sourceTree = "<group>"; };
 		D8F097331B17C95B002E15BA /* AnovaDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnovaDevice.swift; sourceTree = "<group>"; };
@@ -149,12 +151,13 @@
 			isa = PBXGroup;
 			children = (
 				D80525781B193F18000BD258 /* CentralManager.swift */,
+				D8F097361B17CEBE002E15BA /* ConnectionStatus.swift */,
 				D80525761B193EBF000BD258 /* Peripheral.swift */,
+				D8696D3E1B1A3D3600AC1804 /* AnovaClient.swift */,
 				D8F097331B17C95B002E15BA /* AnovaDevice.swift */,
 				D812FF2A1B151D9E009D3016 /* BluetoothClient.swift */,
 				D82399511B164C7F0096E95C /* BluetoothDevice.swift */,
 				D82399541B1650A80096E95C /* CBCentralManagerState.swift */,
-				D8F097361B17CEBE002E15BA /* ConnectionStatus.swift */,
 				D812FF0B1B151410009D3016 /* Supporting Files */,
 			);
 			path = Source;
@@ -388,6 +391,7 @@
 				D80525771B193EBF000BD258 /* Peripheral.swift in Sources */,
 				D82399531B164CC90096E95C /* BluetoothDevice.swift in Sources */,
 				D8F097381B17CEE3002E15BA /* ConnectionStatus.swift in Sources */,
+				D8696D3F1B1A3D3600AC1804 /* AnovaClient.swift in Sources */,
 				D8F097351B17C9CD002E15BA /* AnovaDevice.swift in Sources */,
 				D812FF2B1B151D9E009D3016 /* BluetoothClient.swift in Sources */,
 				D80525791B193F18000BD258 /* CentralManager.swift in Sources */,

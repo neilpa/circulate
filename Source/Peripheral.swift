@@ -8,6 +8,7 @@
 
 import CoreBluetooth
 import ReactiveCocoa
+import Rex
 
 // Wraps a `CBPeripheral` exposing signals for the `CBPeripheralDelegate` methods.
 public final class Peripheral: NSObject, CBPeripheralDelegate {
@@ -16,8 +17,8 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
     public let nameSignal: Signal<String, NoError>
     private let _nameSink: Signal<String, NoError>.Observer
 
-    public let serviceSignal: Signal<[CBService], NoError>
-    private let _serivceSink: Signal<[CBService], NoError>.Observer
+    public let serviceSignal: Signal<[CBService], NSError>
+    private let _serivceSink: Signal<[CBService], NSError>.Observer
 
     public let characteristicSignal: Signal<CBService, NoError>
     private let _characteristicSink: Signal<CBService, NoError>.Observer
@@ -35,7 +36,7 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
         self.peripheral = peripheral
 
         (nameSignal, _nameSink) = Signal<String, NoError>.pipe()
-        (serviceSignal, _serivceSink) = Signal<[CBService], NoError>.pipe()
+        (serviceSignal, _serivceSink) = Signal<[CBService], NSError>.pipe()
         (characteristicSignal, _characteristicSink) = Signal<CBService, NoError>.pipe()
 
         (readSignal, _readSink) = Signal<CBCharacteristic, NoError>.pipe()
@@ -44,6 +45,29 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
 
         super.init()
         peripheral.delegate = self
+    }
+
+    public var identifier: String {
+        return peripheral.identifier.UUIDString
+    }
+
+    public var name: String {
+        return peripheral.name ?? ""
+    }
+
+    public func discoverServices(services: [CBUUID]) -> SignalProducer<CBService, NSError> {
+        let services: [AnyObject]? = services.isEmpty ? nil : services
+        return SignalProducer { observer, disposable in
+            self.serviceSignal
+                |> take(1)
+                |> uncollect
+                |> observe(observer)
+
+            // TODO Do we need to do something similar to scanning and only allow
+            //      one in-flight discover call at a time.
+            self.peripheral.discoverServices(services)
+        }
+        |> on(started: { println("STARTED") }, event: println, disposed: { println("DISPOSED") })
     }
 
     public func peripheralDidUpdateName(peripheral: CBPeripheral!) {
@@ -61,6 +85,7 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
     *
     */
     public func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
+        println("\(peripheral) \(error)")
         sendNext(_serivceSink, peripheral.services.map { $0 as! CBService })
     }
 

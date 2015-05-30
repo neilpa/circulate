@@ -8,21 +8,21 @@
 
 import CoreBluetooth
 
-public enum ConnectionStatus {
-    case Connecting
+public enum ConnectionStatus: Equatable {
     case Connected
     case Disconnected(NSError?) // Permanent
     case Error(NSError) // Potentially transient
-
-    public init(state: CBPeripheralState) {
-        switch state {
-        case .Disconnected:
-            self = .Disconnected(nil)
-        case .Connecting:
-            self = .Connecting
-        case .Connected:
-            self = .Connected
-        }
-    }
 }
 
+public func == (lhs: ConnectionStatus, rhs: ConnectionStatus) -> Bool {
+    switch (lhs, rhs) {
+    case (.Connected, .Connected):
+        return true
+    case let (.Disconnected(left), .Disconnected(right)):
+        return left == right
+    case let (.Error(left), .Error(right)):
+        return left == right
+    default:
+        return false
+    }
+}
