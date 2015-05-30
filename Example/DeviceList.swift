@@ -42,7 +42,7 @@ class DeviceList: UIViewController {
             |> flatMap(.Latest) { peripheral in
                 return self.central.connect(peripheral)
                     |> filter { $0 == ConnectionStatus.Connected }
-                    |> map { _ in Peripheral(peripheral: peripheral) }
+                    |> map { _ in Peripheral(peripheral) }
                     |> take(1)
             }
             |> map { AnovaDevice(peripheral: $0) }

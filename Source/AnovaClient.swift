@@ -22,10 +22,10 @@ public final class AnovaClient {
         return self.central.scan([])
     }
 
-    public func connect(peripheral: CBPeripheral) -> SignalProducer<BluetoothDevice, NoError> {
+    public func connect(peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NoError> {
         // TODO
         return self.central.connect(peripheral)
-            |> map { _ in BluetoothDevice(peripheral: peripheral) }
+            |> map { _ in AnovaDevice(peripheral: Peripheral(peripheral)) }
             |> on(next: println)
     }
 }

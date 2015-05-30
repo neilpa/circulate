@@ -32,7 +32,7 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
     public let updateSignal: Signal<CBCharacteristic, NoError>
     private let _updateSink: Signal<CBCharacteristic, NoError>.Observer
 
-    public init(peripheral: CBPeripheral) {
+    public init(_ peripheral: CBPeripheral) {
         self.peripheral = peripheral
 
         (nameSignal, _nameSink) = Signal<String, NoError>.pipe()
