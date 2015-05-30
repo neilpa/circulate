@@ -37,6 +37,8 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
 
     // TODO Should be the service IDs for Input, and probable a timeout
     public private(set) lazy var scan: Action<(), CBPeripheral, NoError> = Action { input in
+        println("") // WTF why does this magically fix scanning?
+
         return SignalProducer { observer, disposable in
             self.scanSignal.observe(observer)
 
@@ -66,18 +68,9 @@ public final class BluetoothClient: NSObject, CBCentralManagerDelegate {
         _status.value = central.state
     }
 
-    private var dyn: DynamicProperty?
-
     public func centralManager(central: CBCentralManager!, didDiscoverPeripheral peripheral: CBPeripheral!, advertisementData: [NSObject : AnyObject]!, RSSI: NSNumber!) {
-        println(peripheral)
         println("scanned \(peripheral)")
         sendNext(scanSink, peripheral)
-
-        dyn = DynamicProperty(object: peripheral, keyPath: "state")
-        dyn?.producer.start(next: {
-            println("dyn: \($0)")
-        })
-//        sendNext(connectSink, (peripheral, ConnectionStatus(state: peripheral.state)))
     }
 
     public func centralManager(central: CBCentralManager!, didConnectPeripheral peripheral: CBPeripheral!) {

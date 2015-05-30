@@ -25,26 +25,9 @@ public final class BluetoothDevice: NSObject, CBPeripheralDelegate {
         return peripheral.services
     }
 
-//    public let state: PropertyOf<ConnectionStatus>
-//    private let _state: MutableProperty<ConnectionStatus>
-
-    internal init(peripheral: CBPeripheral, central: CBCentralManager) { //, connection: Signal<ConnectionStatus, NoError>) {
+    internal init(peripheral: CBPeripheral, central: CBCentralManager) {
         self.peripheral = peripheral
         self.central = central
-
-//        _state = MutableProperty(ConnectionStatus(state: peripheral.state))
-//        _state <~ connection
-//        state = PropertyOf(_state)
-//
-//        let disconnected = MutableProperty(peripheral.state == .Disconnected)
-//        disconnected <~ connection |> map {
-//            switch $0 {
-//            case .Disconnected:
-//                return true
-//            default:
-//                return false
-//            }
-//        }
 
         super.init()
         peripheral.delegate = self
