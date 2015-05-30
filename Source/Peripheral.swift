@@ -10,29 +10,62 @@ import CoreBluetooth
 import ReactiveCocoa
 import Rex
 
-// Wraps a `CBPeripheral` exposing signals for the `CBPeripheralDelegate` methods.
+// Wraps a `CBPeripheral` exposing a RAC-compatible interface.
 public final class Peripheral: NSObject, CBPeripheralDelegate {
-    private let peripheral: CBPeripheral
+    private let proxy: PeripheralProxy
 
-    public let nameSignal: Signal<String, NoError>
-    private let _nameSink: Signal<String, NoError>.Observer
+    public var identifier: String {
+        return proxy.identifier
+    }
 
-    public let serviceSignal: Signal<[CBService], NSError>
-    private let _serivceSink: Signal<[CBService], NSError>.Observer
-
-    public let characteristicSignal: Signal<CBService, NoError>
-    private let _characteristicSink: Signal<CBService, NoError>.Observer
-
-    public let readSignal: Signal<CBCharacteristic, NoError>
-    private let _readSink: Signal<CBCharacteristic, NoError>.Observer
-
-    public let writeSignal: Signal<CBCharacteristic, NoError>
-    private let _writeSink: Signal<CBCharacteristic, NoError>.Observer
-
-    public let updateSignal: Signal<CBCharacteristic, NoError>
-    private let _updateSink: Signal<CBCharacteristic, NoError>.Observer
+    public var name: String {
+        return proxy.name
+    }
 
     public init(_ peripheral: CBPeripheral) {
+        proxy = PeripheralProxy(peripheral)
+    }
+
+    public func discoverServices(services: [CBUUID]) -> SignalProducer<CBService, NSError> {
+        let services: [CBUUID]? = services.isEmpty ? nil : services
+        return SignalProducer { observer, disposable in
+            self.proxy.serviceSignal
+                |> take(1)
+                |> uncollect
+                |> observe(observer)
+
+            // TODO Do we need to do something similar to scanning and only allow
+            //      one in-flight discover call at a time.
+            self.proxy.discoverServices(services)
+        }
+        |> on(started: { println("STARTED") }, event: println, disposed: { println("DISPOSED") })
+    }
+}
+
+// Proxy and delegate for `CBPeripheral` exposing signals for the `CBPeripheralDelegate` methods.
+internal final class PeripheralProxy: NSObject, CBPeripheralDelegate {
+    private let peripheral: CBPeripheral
+
+    // TODO Make this a property?
+    let nameSignal: Signal<String, NoError>
+    private let _nameSink: Signal<String, NoError>.Observer
+
+    let serviceSignal: Signal<[CBService], NSError>
+    private let _serivceSink: Signal<[CBService], NSError>.Observer
+
+    let characteristicSignal: Signal<CBService, NoError>
+    private let _characteristicSink: Signal<CBService, NoError>.Observer
+
+    let readSignal: Signal<CBCharacteristic, NoError>
+    private let _readSink: Signal<CBCharacteristic, NoError>.Observer
+
+    let writeSignal: Signal<CBCharacteristic, NoError>
+    private let _writeSink: Signal<CBCharacteristic, NoError>.Observer
+
+    let updateSignal: Signal<CBCharacteristic, NoError>
+    private let _updateSink: Signal<CBCharacteristic, NoError>.Observer
+
+    init(_ peripheral: CBPeripheral) {
         self.peripheral = peripheral
 
         (nameSignal, _nameSink) = Signal<String, NoError>.pipe()
@@ -47,30 +80,24 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
         peripheral.delegate = self
     }
 
-    public var identifier: String {
+    var identifier: String {
         return peripheral.identifier.UUIDString
     }
 
-    public var name: String {
+    var name: String {
+        // Names are incorrectly declared as implicitly-unwrapped optionals
         return peripheral.name ?? ""
     }
 
-    public func discoverServices(services: [CBUUID]) -> SignalProducer<CBService, NSError> {
-        let services: [AnyObject]? = services.isEmpty ? nil : services
-        return SignalProducer { observer, disposable in
-            self.serviceSignal
-                |> take(1)
-                |> uncollect
-                |> observe(observer)
-
-            // TODO Do we need to do something similar to scanning and only allow
-            //      one in-flight discover call at a time.
-            self.peripheral.discoverServices(services)
-        }
-        |> on(started: { println("STARTED") }, event: println, disposed: { println("DISPOSED") })
+    func discoverServices(services: [CBUUID]?) {
+        peripheral.discoverServices(services)
     }
 
-    public func peripheralDidUpdateName(peripheral: CBPeripheral!) {
+    func discoverCharacteristics(service: CBService) {
+        peripheral.discoverCharacteristics(nil, forService: service)
+    }
+
+    func peripheralDidUpdateName(peripheral: CBPeripheral!) {
         sendNext(_nameSink, peripheral.name ?? "")
     }
 
@@ -84,7 +111,7 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
     *						<i>peripheral</i>'s @link services @/link property.
     *
     */
-    public func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
+    func peripheral(peripheral: CBPeripheral!, didDiscoverServices error: NSError!) {
         println("\(peripheral) \(error)")
         sendNext(_serivceSink, peripheral.services.map { $0 as! CBService })
     }
@@ -99,7 +126,7 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
     *  @discussion			This method returns the result of a @link discoverCharacteristics:forService: @/link call. If the characteristic(s) were read successfully,
     *						they can be retrieved via <i>service</i>'s <code>characteristics</code> property.
     */
-    public func peripheral(peripheral: CBPeripheral!, didDiscoverCharacteristicsForService service: CBService!, error: NSError!) {
+    func peripheral(peripheral: CBPeripheral!, didDiscoverCharacteristicsForService service: CBService!, error: NSError!) {
         sendNext(_characteristicSink, service)
     }
 
@@ -112,7 +139,7 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
     *
     *  @discussion				This method is invoked after a @link readValueForCharacteristic: @/link call, or upon receipt of a notification/indication.
     */
-    public func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
+    func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
         sendNext(_readSink, characteristic)
     }
 
@@ -125,7 +152,7 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
     *
     *  @discussion				This method returns the result of a {@link writeValue:forCharacteristic:type:} call, when the <code>CBCharacteristicWriteWithResponse</code> type is used.
     */
-    public func peripheral(peripheral: CBPeripheral!, didWriteValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
+    func peripheral(peripheral: CBPeripheral!, didWriteValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
         sendNext(_writeSink, characteristic)
     }
 
@@ -138,7 +165,7 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
     *
     *  @discussion				This method returns the result of a @link setNotifyValue:forCharacteristic: @/link call.
     */
-    public func peripheral(peripheral: CBPeripheral!, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
+    func peripheral(peripheral: CBPeripheral!, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
         sendNext(_updateSink, characteristic)
     }
 
@@ -152,7 +179,7 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
     *  @discussion				This method returns the result of a @link discoverDescriptorsForCharacteristic: @/link call. If the descriptors were read successfully,
     *							they can be retrieved via <i>characteristic</i>'s <code>descriptors</code> property.
     */
-    public func peripheral(peripheral: CBPeripheral!, didDiscoverDescriptorsForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
+    func peripheral(peripheral: CBPeripheral!, didDiscoverDescriptorsForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
 
     }
 
@@ -165,7 +192,7 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
     *
     *  @discussion				This method returns the result of a @link readValueForDescriptor: @/link call.
     */
-    public func peripheral(peripheral: CBPeripheral!, didUpdateValueForDescriptor descriptor: CBDescriptor!, error: NSError!) {
+    func peripheral(peripheral: CBPeripheral!, didUpdateValueForDescriptor descriptor: CBDescriptor!, error: NSError!) {
 
     }
 
@@ -178,7 +205,7 @@ public final class Peripheral: NSObject, CBPeripheralDelegate {
     *
     *  @discussion				This method returns the result of a @link writeValue:forDescriptor: @/link call.
     */
-    public func peripheral(peripheral: CBPeripheral!, didWriteValueForDescriptor descriptor: CBDescriptor!, error: NSError!) {
-
+    func peripheral(peripheral: CBPeripheral!, didWriteValueForDescriptor descriptor: CBDescriptor!, error: NSError!) {
+        
     }
 }
