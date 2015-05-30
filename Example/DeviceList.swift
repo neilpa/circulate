@@ -60,7 +60,7 @@ class DeviceList: UIViewController {
             if let cell = sender as? DeviceCell, let device = cell.device {
                 let navController = segue.destinationViewController as! UINavigationController
                 let deviceController = navController.topViewController as! DeviceScreen
-                deviceController.device = device
+                deviceController.device = AnovaDevice(device: device)
                 deviceController.navigationItem.title = device.name
             }
         }

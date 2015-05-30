@@ -7,9 +7,18 @@
 //
 
 import Circulate
+import ReactiveCocoa
 
 class DeviceScreen: UIViewController {
     @IBOutlet weak var tempLabel: UILabel!
 
-    var device: BluetoothDevice?
+    var device: AnovaDevice?
+
+    override func viewDidLoad() {
+        if let device = self.device {
+            device.execute("")
+                |> start()
+        }
+
+    }
 }

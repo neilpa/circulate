@@ -10,6 +10,8 @@
 		D80525731B193858000BD258 /* Rex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80525721B193858000BD258 /* Rex.framework */; };
 		D80525741B193861000BD258 /* Rex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80525721B193858000BD258 /* Rex.framework */; };
 		D80525751B193861000BD258 /* Rex.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D80525721B193858000BD258 /* Rex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D80525771B193EBF000BD258 /* Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80525761B193EBF000BD258 /* Peripheral.swift */; };
+		D80525791B193F18000BD258 /* CentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80525781B193F18000BD258 /* CentralManager.swift */; };
 		D812FF0E1B151410009D3016 /* Circulate.h in Headers */ = {isa = PBXBuildFile; fileRef = D812FF0D1B151410009D3016 /* Circulate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D812FF141B151411009D3016 /* Circulate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF091B151410009D3016 /* Circulate.framework */; };
 		D812FF1D1B151411009D3016 /* CirculateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812FF1C1B151411009D3016 /* CirculateTests.swift */; };
@@ -77,6 +79,8 @@
 
 /* Begin PBXFileReference section */
 		D80525721B193858000BD258 /* Rex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rex.framework; path = Carthage/Build/iOS/Rex.framework; sourceTree = "<group>"; };
+		D80525761B193EBF000BD258 /* Peripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peripheral.swift; sourceTree = "<group>"; };
+		D80525781B193F18000BD258 /* CentralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralManager.swift; sourceTree = "<group>"; };
 		D812FF091B151410009D3016 /* Circulate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Circulate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D812FF0C1B151410009D3016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D812FF0D1B151410009D3016 /* Circulate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Circulate.h; sourceTree = "<group>"; };
@@ -144,6 +148,8 @@
 		D812FF0A1B151410009D3016 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D80525781B193F18000BD258 /* CentralManager.swift */,
+				D80525761B193EBF000BD258 /* Peripheral.swift */,
 				D8F097331B17C95B002E15BA /* AnovaDevice.swift */,
 				D812FF2A1B151D9E009D3016 /* BluetoothClient.swift */,
 				D82399511B164C7F0096E95C /* BluetoothDevice.swift */,
@@ -379,10 +385,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D80525771B193EBF000BD258 /* Peripheral.swift in Sources */,
 				D82399531B164CC90096E95C /* BluetoothDevice.swift in Sources */,
 				D8F097381B17CEE3002E15BA /* ConnectionStatus.swift in Sources */,
 				D8F097351B17C9CD002E15BA /* AnovaDevice.swift in Sources */,
 				D812FF2B1B151D9E009D3016 /* BluetoothClient.swift in Sources */,
+				D80525791B193F18000BD258 /* CentralManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
