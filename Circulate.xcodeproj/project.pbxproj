@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D80525731B193858000BD258 /* Rex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80525721B193858000BD258 /* Rex.framework */; };
+		D80525741B193861000BD258 /* Rex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80525721B193858000BD258 /* Rex.framework */; };
+		D80525751B193861000BD258 /* Rex.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D80525721B193858000BD258 /* Rex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D812FF0E1B151410009D3016 /* Circulate.h in Headers */ = {isa = PBXBuildFile; fileRef = D812FF0D1B151410009D3016 /* Circulate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D812FF141B151411009D3016 /* Circulate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D812FF091B151410009D3016 /* Circulate.framework */; };
 		D812FF1D1B151411009D3016 /* CirculateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D812FF1C1B151411009D3016 /* CirculateTests.swift */; };
@@ -64,6 +67,7 @@
 				D812FF841B154614009D3016 /* Box.framework in Embed Frameworks */,
 				D812FF861B154614009D3016 /* ReactiveCocoa.framework in Embed Frameworks */,
 				D812FF801B154614009D3016 /* Circulate.framework in Embed Frameworks */,
+				D80525751B193861000BD258 /* Rex.framework in Embed Frameworks */,
 				D812FF881B154614009D3016 /* Result.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -72,6 +76,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D80525721B193858000BD258 /* Rex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rex.framework; path = Carthage/Build/iOS/Rex.framework; sourceTree = "<group>"; };
 		D812FF091B151410009D3016 /* Circulate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Circulate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D812FF0C1B151410009D3016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D812FF0D1B151410009D3016 /* Circulate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Circulate.h; sourceTree = "<group>"; };
@@ -104,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D80525731B193858000BD258 /* Rex.framework in Frameworks */,
 				D812FF301B152352009D3016 /* Box.framework in Frameworks */,
 				D812FF311B152352009D3016 /* ReactiveCocoa.framework in Frameworks */,
 				D812FF321B152352009D3016 /* Result.framework in Frameworks */,
@@ -127,6 +133,7 @@
 				D812FF831B154614009D3016 /* Box.framework in Frameworks */,
 				D812FF851B154614009D3016 /* ReactiveCocoa.framework in Frameworks */,
 				D812FF7F1B154614009D3016 /* Circulate.framework in Frameworks */,
+				D80525741B193861000BD258 /* Rex.framework in Frameworks */,
 				D812FF871B154614009D3016 /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -199,6 +206,7 @@
 		D830401519CAAD9C009E7581 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D80525721B193858000BD258 /* Rex.framework */,
 				D812FF2D1B152352009D3016 /* Box.framework */,
 				D812FF2E1B152352009D3016 /* ReactiveCocoa.framework */,
 				D812FF2F1B152352009D3016 /* Result.framework */,

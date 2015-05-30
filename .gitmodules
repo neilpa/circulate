@@ -7,3 +7,6 @@
 [submodule "Carthage/Checkouts/ReactiveCocoa"]
 	path = Carthage/Checkouts/ReactiveCocoa
 	url = https://github.com/ReactiveCocoa/ReactiveCocoa.git
+[submodule "Carthage/Checkouts/Rex"]
+	path = Carthage/Checkouts/Rex
+	url = https://github.com/neilpa/Rex.git
