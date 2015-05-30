@@ -15,6 +15,7 @@ public final class CentralManager: NSObject, CBCentralManagerDelegate {
 
     public let scanSignal: Signal<CBPeripheral, NoError>
     private let _scanSink: Signal<CBPeripheral, NoError>.Observer
+    private let _scanDisposable = SerialDisposable()
 
     public let connectionSignal: Signal<(CBPeripheral, ConnectionStatus), NoError>
     private let _connectionSink: Signal<(CBPeripheral, ConnectionStatus), NoError>.Observer
@@ -39,13 +40,22 @@ public final class CentralManager: NSObject, CBCentralManagerDelegate {
         self.init(central: CBCentralManager(delegate: nil, queue: queue))
     }
 
-    // TODO Return a signal producer?
-    public func scan() {
-        central.scanForPeripheralsWithServices(nil, options: nil)
-    }
+    public func scan(services: [CBUUID]) -> SignalProducer<CBPeripheral, NoError> {
+        return SignalProducer { observer, disposable in
+            // Interrupt any previous scan call since we can only have one oustanding. This
+            // is a limitation of CBCentralManager since it updates it scan parameters in-place.
+            self._scanDisposable.innerDisposable = disposable
 
-    public func stopScan() {
-        central.stopScan()
+            self.scanSignal.observe(observer)
+
+            let services: [AnyObject]? = services.isEmpty ? nil : services
+            self.central.scanForPeripheralsWithServices(services, options: nil)
+
+            disposable.addDisposable {
+                println("stopping")
+                self.central.stopScan()
+            }
+        }
     }
 
     public func connect(peripheral: CBPeripheral) {

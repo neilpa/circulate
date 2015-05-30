@@ -20,15 +20,7 @@ public final class BluetoothClient {
     // TODO Should be the service IDs for Input, and probable a timeout
     public private(set) lazy var scan: Action<(), CBPeripheral, NoError> = Action { input in
         println("") // WTF why does this magically fix scanning?
-
-        return SignalProducer { observer, disposable in
-            self.central.scanSignal.observe(observer)
-            self.central.scan()
-
-            disposable.addDisposable {
-                self.central.stopScan()
-            }
-        }
+        return self.central.scan([])
     }
 
     public func connect(peripheral: CBPeripheral) -> SignalProducer<BluetoothDevice, NoError> {
