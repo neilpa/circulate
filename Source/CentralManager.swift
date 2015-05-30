@@ -58,8 +58,19 @@ public final class CentralManager: NSObject, CBCentralManagerDelegate {
         }
     }
 
-    public func connect(peripheral: CBPeripheral) {
-        central.connectPeripheral(peripheral, options: nil)
+    public func connect(peripheral: CBPeripheral) -> SignalProducer<ConnectionStatus, NoError> {
+        return SignalProducer { observer, disposable in
+            self.connectionSignal
+                |> filter { $0.0 == peripheral }
+                |> map { $0.1 }
+                |> observe(observer)
+
+            self.central.connectPeripheral(peripheral, options: nil)
+
+            disposable.addDisposable {
+                self.central.cancelPeripheralConnection(peripheral)
+            }
+        }
     }
 
     // MARK: CBCentralManagerDelegate
