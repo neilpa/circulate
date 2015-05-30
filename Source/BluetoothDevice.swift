@@ -11,7 +11,6 @@ import ReactiveCocoa
 
 public final class BluetoothDevice: NSObject, CBPeripheralDelegate {
     private let peripheral: CBPeripheral
-    private let central: CBCentralManager
 
     public var name: String {
         return peripheral.name ?? ""
@@ -25,9 +24,8 @@ public final class BluetoothDevice: NSObject, CBPeripheralDelegate {
         return peripheral.services
     }
 
-    internal init(peripheral: CBPeripheral, central: CBCentralManager) {
+    internal init(peripheral: CBPeripheral) {
         self.peripheral = peripheral
-        self.central = central
 
         super.init()
         peripheral.delegate = self

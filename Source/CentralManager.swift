@@ -22,19 +22,34 @@ public final class CentralManager: NSObject, CBCentralManagerDelegate {
     public let status: PropertyOf<CBCentralManagerState>
     private let _status: MutableProperty<CBCentralManagerState>
 
-    public override init() {
+    public required init(central: CBCentralManager) {
         (scanSignal, _scanSink) = Signal<CBPeripheral, NoError>.pipe()
         (connectionSignal, _connectionSink) = Signal<(CBPeripheral, ConnectionStatus), NoError>.pipe()
-
-        // This wonky initialization enables us to declare central as immutable and non-optional.
-        let queue = dispatch_queue_create("me.neilpa.circulate.client", DISPATCH_QUEUE_SERIAL)
-        central = CBCentralManager(delegate: nil, queue: queue)
 
         _status = MutableProperty(central.state)
         status = PropertyOf(_status)
 
+        self.central = central
         super.init()
         central.delegate = self
+    }
+
+    public convenience override init() {
+        let queue = dispatch_queue_create("me.neilpa.circulate.CentralManager", DISPATCH_QUEUE_SERIAL)
+        self.init(central: CBCentralManager(delegate: nil, queue: queue))
+    }
+
+    // TODO Return a signal producer?
+    public func scan() {
+        central.scanForPeripheralsWithServices(nil, options: nil)
+    }
+
+    public func stopScan() {
+        central.stopScan()
+    }
+
+    public func connect(peripheral: CBPeripheral) {
+        central.connectPeripheral(peripheral, options: nil)
     }
 
     // MARK: CBCentralManagerDelegate
