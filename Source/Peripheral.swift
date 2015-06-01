@@ -11,34 +11,36 @@ import ReactiveCocoa
 import Rex
 
 // Wraps a `CBPeripheral` exposing a RAC-compatible interface.
-public final class Peripheral: NSObject, CBPeripheralDelegate {
-    private let proxy: PeripheralProxy
+public final class Peripheral {
+    private let peripheral: CBPeripheral
+    private let delegate: PeripheralDelegate
 
     public var identifier: String {
-        return proxy.identifier
+        return peripheral.identifier.UUIDString
     }
 
     public var name: String {
-        return proxy.name
+        return peripheral.name ?? ""
     }
 
     public init(_ peripheral: CBPeripheral) {
-        proxy = PeripheralProxy(peripheral)
+        self.peripheral = peripheral
+        delegate = PeripheralDelegate(peripheral)
     }
 
     public func discoverServices(services: [CBUUID]) -> SignalProducer<CBService, NSError> {
         let services: [CBUUID]? = services.isEmpty ? nil : services
         return SignalProducer { observer, disposable in
-            self.proxy.serviceSignal
+            self.delegate.serviceSignal
                 |> take(1)
                 |> uncollect
                 |> observe(observer)
 
             // TODO Do we need to do something similar to scanning and only allow
             //      one in-flight discover call at a time.
-            self.proxy.discoverServices(services)
+            self.peripheral.discoverServices(services)
         }
-        |> on(started: { println("STARTED") }, event: println, disposed: { println("DISPOSED") })
+        |> logEvents("discoverServices:")
     }
 }
 

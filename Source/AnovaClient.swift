@@ -19,13 +19,13 @@ public final class AnovaClient {
 
     // TODO Should be the service IDs for Input, and probable a timeout
     public private(set) lazy var scan: Action<(), CBPeripheral, NoError> = Action { input in
-        return self.central.scan([])
+        return self.central.scan([]) |> map { $0.0 }
     }
 
-    public func connect(peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NoError> {
-        // TODO
-        return self.central.connect(peripheral)
-            |> map { _ in AnovaDevice(peripheral: Peripheral(peripheral)) }
-            |> on(next: println)
-    }
+//    public func connect(peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NoError> {
+//        // TODO
+//        return self.central.connect(peripheral)
+//            |> map { _ in AnovaDevice(peripheral: Peripheral(peripheral)) }
+//            |> on(next: println)
+//    }
 }

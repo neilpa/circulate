@@ -1,5 +1,5 @@
 //
-//  PeripheralProxy.swift
+//  PeripheralDelegate.swift
 //  Circulate
 //
 //  Created by Neil Pankey on 5/30/15.
@@ -9,10 +9,8 @@
 import CoreBluetooth
 import ReactiveCocoa
 
-// Proxy and delegate for `CBPeripheral` exposing signals for the `CBPeripheralDelegate` methods.
-internal final class PeripheralProxy: NSObject, CBPeripheralDelegate {
-    private let peripheral: CBPeripheral
-
+// Delegate for `CBPeripheral` exposing signals for the `CBPeripheralDelegate` methods.
+internal final class PeripheralDelegate: NSObject, CBPeripheralDelegate {
     // TODO Make this a property?
     let nameSignal: Signal<String, NoError>
     private let _nameSink: Signal<String, NoError>.Observer
@@ -33,8 +31,6 @@ internal final class PeripheralProxy: NSObject, CBPeripheralDelegate {
     private let _updateSink: Signal<CBCharacteristic, NoError>.Observer
 
     init(_ peripheral: CBPeripheral) {
-        self.peripheral = peripheral
-
         (nameSignal, _nameSink) = Signal<String, NoError>.pipe()
         (serviceSignal, _serivceSink) = Signal<[CBService], NSError>.pipe()
         (characteristicSignal, _characteristicSink) = Signal<CBService, NoError>.pipe()
@@ -45,23 +41,6 @@ internal final class PeripheralProxy: NSObject, CBPeripheralDelegate {
 
         super.init()
         peripheral.delegate = self
-    }
-
-    var identifier: String {
-        return peripheral.identifier.UUIDString
-    }
-
-    var name: String {
-        // Names are incorrectly declared as implicitly-unwrapped optionals
-        return peripheral.name ?? ""
-    }
-
-    func discoverServices(services: [CBUUID]?) {
-        peripheral.discoverServices(services)
-    }
-
-    func discoverCharacteristics(service: CBService) {
-        peripheral.discoverCharacteristics(nil, forService: service)
     }
 
     func peripheralDidUpdateName(peripheral: CBPeripheral!) {

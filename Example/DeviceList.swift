@@ -1,4 +1,4 @@
-//
+    //
 //  ViewController.swift
 //  Example
 //
@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import ReactiveCocoa
 import Circulate
 import CoreBluetooth
+import ReactiveCocoa
+import Rex
 
 class DeviceCell: UICollectionViewCell {
 
@@ -38,18 +39,17 @@ class DeviceList: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let devices: SignalProducer<AnovaDevice, NoError> = central.scan([])
-            |> flatMap(.Latest) { peripheral in
+        let devices: SignalProducer<CBPeripheral, NSError> = central.scan(nil)
+            |> promoteErrors(NSError.self)
+            |> flatMap(.Merge) { peripheral, _, _ in
                 return self.central.connect(peripheral)
-                    |> filter { $0 == ConnectionStatus.Connected }
-                    |> map { _ in Peripheral(peripheral) }
-                    |> take(1)
             }
-            |> map { AnovaDevice(peripheral: $0) }
+            |> timeoutAfter(2, withEvent: .Completed, onScheduler: QueueScheduler.mainQueueScheduler)
+            |> logEvents("devices:")
 
-        dataSource = ProducerDataSource(devices) { view, path, device in
+        dataSource = ProducerDataSource(devices) { view, path, peripheral in
             let cell = view.dequeueReusableCellWithReuseIdentifier("Device", forIndexPath: path) as! DeviceCell
-            cell.device = device
+            cell.device = AnovaDevice(peripheral: peripheral)
             return cell
         }
         dataSource?.attach(collectionView)
