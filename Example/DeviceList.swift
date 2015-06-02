@@ -39,7 +39,7 @@ class DeviceList: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let devices: SignalProducer<CBPeripheral, NSError> = central.scan(nil)
+        let devices: SignalProducer<Peripheral, NSError> = central.scan(nil)
             |> promoteErrors(NSError.self)
             |> flatMap(.Merge) { peripheral, _, _ in
                 return self.central.connect(peripheral)

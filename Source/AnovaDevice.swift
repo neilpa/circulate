@@ -24,14 +24,14 @@ public final class AnovaDevice {
         return peripheral.identifier
     }
     
-    public init(peripheral: CBPeripheral) {
-        self.peripheral = Peripheral(peripheral)
+    public init(peripheral: Peripheral) {
+        self.peripheral = peripheral
     }
 
     public func execute(command: String) -> SignalProducer<(), NoError> {
         // TODO Using this inline breaks type-inference somewhere
         let writer: CBCharacteristic -> SignalProducer<CBCharacteristic, NoError> = {
-            let string = "read temp\r" as NSString
+            let string = "\(command)\r" as NSString
             let data = string.dataUsingEncoding(NSASCIIStringEncoding)!
             return self.peripheral.write(data, characteristic: $0)
         }

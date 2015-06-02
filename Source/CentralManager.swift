@@ -40,7 +40,7 @@ public final class CentralManager {
         |> logEvents("scan:")
     }
 
-    public func connect(peripheral: CBPeripheral) -> SignalProducer<CBPeripheral, NSError> {
+    public func connect(peripheral: CBPeripheral) -> SignalProducer<Peripheral, NSError> {
         return SignalProducer { observer, disposable in
             self.delegate.connectSignal
                 |> promoteErrors(NSError.self)
@@ -49,14 +49,13 @@ public final class CentralManager {
                     if let error = err {
                         return .failure(error)
                     } else {
-                        return .success(periph)
+                        return .success(Peripheral(central: self.central, peripheral: periph))
                     }
                 }
                 |> take(1)
                 |> observe(observer)
 
             self.central.connectPeripheral(peripheral, options: nil)
-            // TODO How to manage disconnect
         }
         |> logEvents("connect:")
     }

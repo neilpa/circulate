@@ -12,6 +12,7 @@ import Rex
 
 // Wraps a `CBPeripheral` exposing a RAC-compatible interface.
 public final class Peripheral {
+    private let central: CBCentralManager
     private let peripheral: CBPeripheral
     private let delegate: PeripheralDelegate
 
@@ -23,9 +24,14 @@ public final class Peripheral {
         return peripheral.name ?? ""
     }
 
-    public init(_ peripheral: CBPeripheral) {
+    internal init(central: CBCentralManager, peripheral: CBPeripheral) {
+        self.central = central
         self.peripheral = peripheral
         delegate = PeripheralDelegate(peripheral)
+    }
+
+    deinit {
+        central.cancelPeripheralConnection(peripheral)
     }
 
     // TODO Errors
