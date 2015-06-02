@@ -15,8 +15,8 @@ internal final class PeripheralDelegate: NSObject, CBPeripheralDelegate {
     let nameSignal: Signal<String, NoError>
     private let _nameSink: Signal<String, NoError>.Observer
 
-    let serviceSignal: Signal<[CBService], NSError>
-    private let _serivceSink: Signal<[CBService], NSError>.Observer
+    let serviceSignal: Signal<[CBService], NoError>
+    private let _serivceSink: Signal<[CBService], NoError>.Observer
 
     let characteristicSignal: Signal<CBService, NoError>
     private let _characteristicSink: Signal<CBService, NoError>.Observer
@@ -27,17 +27,17 @@ internal final class PeripheralDelegate: NSObject, CBPeripheralDelegate {
     let writeSignal: Signal<CBCharacteristic, NoError>
     private let _writeSink: Signal<CBCharacteristic, NoError>.Observer
 
-    let updateSignal: Signal<CBCharacteristic, NoError>
-    private let _updateSink: Signal<CBCharacteristic, NoError>.Observer
+    let notifySignal: Signal<CBCharacteristic, NoError>
+    private let _notifySink: Signal<CBCharacteristic, NoError>.Observer
 
     init(_ peripheral: CBPeripheral) {
         (nameSignal, _nameSink) = Signal<String, NoError>.pipe()
-        (serviceSignal, _serivceSink) = Signal<[CBService], NSError>.pipe()
+        (serviceSignal, _serivceSink) = Signal<[CBService], NoError>.pipe()
         (characteristicSignal, _characteristicSink) = Signal<CBService, NoError>.pipe()
 
         (readSignal, _readSink) = Signal<CBCharacteristic, NoError>.pipe()
         (writeSignal, _writeSink) = Signal<CBCharacteristic, NoError>.pipe()
-        (updateSignal, _updateSink) = Signal<CBCharacteristic, NoError>.pipe()
+        (notifySignal, _notifySink) = Signal<CBCharacteristic, NoError>.pipe()
 
         super.init()
         peripheral.delegate = self
@@ -57,15 +57,18 @@ internal final class PeripheralDelegate: NSObject, CBPeripheralDelegate {
     }
 
     func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
+        println("update - \(characteristic)")
         sendNext(_readSink, characteristic)
     }
 
     func peripheral(peripheral: CBPeripheral!, didWriteValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
+        println("write - \(characteristic)")
         sendNext(_writeSink, characteristic)
     }
 
     func peripheral(peripheral: CBPeripheral!, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
-        sendNext(_updateSink, characteristic)
+        println("notify - \(characteristic)")
+        sendNext(_notifySink, characteristic)
     }
 
     func peripheral(peripheral: CBPeripheral!, didDiscoverDescriptorsForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {

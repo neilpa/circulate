@@ -14,21 +14,42 @@ public enum AnovaCommand {
 }
 
 public final class AnovaDevice {
-    private let peripheral: CBPeripheral
+    private let peripheral: Peripheral
 
     public var name: String {
-        return peripheral.name ?? ""
+        return peripheral.name
     }
 
     public var identifier: String {
-        return peripheral.identifier.UUIDString
+        return peripheral.identifier
     }
     
     public init(peripheral: CBPeripheral) {
-        self.peripheral = peripheral
+        self.peripheral = Peripheral(peripheral)
     }
 
     public func execute(command: String) -> SignalProducer<(), NoError> {
-        return .never
+        // TODO Using this inline breaks type-inference somewhere
+        let writer: CBCharacteristic -> SignalProducer<CBCharacteristic, NoError> = {
+            let string = "read temp\r" as NSString
+            let data = string.dataUsingEncoding(NSASCIIStringEncoding)!
+            return self.peripheral.write(data, characteristic: $0)
+        }
+
+        return peripheral.discoverServices(nil)
+            |> flatMap(.Merge) {
+                return self.peripheral.discoverCharacteristics($0)
+            }
+            |> flatMap(.Merge) {
+                return self.peripheral.notify($0)
+            }
+            |> flatMap(.Merge) {
+//                return self.peripheral.read($0)
+                writer($0)
+            }
+            |> map {
+                println(NSString(data: $0.value, encoding: NSASCIIStringEncoding)!)
+                return ()
+            }
     }
 }

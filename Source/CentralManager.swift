@@ -56,9 +56,7 @@ public final class CentralManager {
                 |> observe(observer)
 
             self.central.connectPeripheral(peripheral, options: nil)
-            disposable.addDisposable {
-                self.central.cancelPeripheralConnection(peripheral)
-            }
+            // TODO How to manage disconnect
         }
         |> logEvents("connect:")
     }
