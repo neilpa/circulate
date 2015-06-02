@@ -68,40 +68,37 @@ public final class Peripheral {
     public func notify(characteristic: CBCharacteristic) -> SignalProducer<CBCharacteristic, NoError> {
         return SignalProducer { observer, disposable in
             self.delegate.notifySignal
+                |> filter { $0 == characteristic }
                 |> take(1)
                 |> observe(observer)
 
-            // TODO Do we need to do something similar to scanning and only allow
-            //      one in-flight call at a time.
             self.peripheral.setNotifyValue(true, forCharacteristic: characteristic)
         }
-//        |> logEvents("notify:")
+        |> logEvents("notify:")
     }
 
     public func read(characteristic: CBCharacteristic) -> SignalProducer<CBCharacteristic, NoError> {
         return SignalProducer { observer, disposable in
             self.delegate.readSignal
+                |> filter { $0 == characteristic }
                 |> take(1)
                 |> observe(observer)
 
-            // TODO Do we need to do something similar to scanning and only allow
-            //      one in-flight call at a time.
             self.peripheral.readValueForCharacteristic(characteristic)
         }
-//        |> logEvents("read:")
+        |> logEvents("read:")
     }
 
-    public func write(data: NSData, characteristic: CBCharacteristic) -> SignalProducer<CBCharacteristic, NoError> {
+    public func write(data: NSData, characteristic: CBCharacteristic, type: CBCharacteristicWriteType) -> SignalProducer<CBCharacteristic, NoError> {
         return SignalProducer { observer, disposable in
-            self.delegate.readSignal
+            self.delegate.writeSignal
+                |> filter { $0 == characteristic }
                 |> take(1)
                 |> observe(observer)
 
-            // TODO Do we need to do something similar to scanning and only allow
-            //      one in-flight call at a time.
-            self.peripheral.writeValue(data, forCharacteristic: characteristic, type: .WithoutResponse)
+            self.peripheral.writeValue(data, forCharacteristic: characteristic, type: type)
         }
-//        |> logEvents("write:")
+        |> logEvents("write:")
     }
 }
 

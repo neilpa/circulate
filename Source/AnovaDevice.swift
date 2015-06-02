@@ -33,7 +33,7 @@ public final class AnovaDevice {
         let writer: CBCharacteristic -> SignalProducer<CBCharacteristic, NoError> = {
             let string = "\(command)\r" as NSString
             let data = string.dataUsingEncoding(NSASCIIStringEncoding)!
-            return self.peripheral.write(data, characteristic: $0)
+            return self.peripheral.write(data, characteristic: $0, type: .WithResponse)
         }
 
         return peripheral.discoverServices(nil)
@@ -44,11 +44,10 @@ public final class AnovaDevice {
                 return self.peripheral.notify($0)
             }
             |> flatMap(.Merge) {
-//                return self.peripheral.read($0)
                 writer($0)
             }
             |> map {
-                println(NSString(data: $0.value, encoding: NSASCIIStringEncoding)!)
+                println(NSString(data: $0.value, encoding: NSASCIIStringEncoding))
                 return ()
             }
     }

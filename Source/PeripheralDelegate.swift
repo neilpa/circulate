@@ -57,17 +57,14 @@ internal final class PeripheralDelegate: NSObject, CBPeripheralDelegate {
     }
 
     func peripheral(peripheral: CBPeripheral!, didUpdateValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
-        println("update - \(characteristic)")
         sendNext(_readSink, characteristic)
     }
 
     func peripheral(peripheral: CBPeripheral!, didWriteValueForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
-        println("write - \(characteristic)")
         sendNext(_writeSink, characteristic)
     }
 
     func peripheral(peripheral: CBPeripheral!, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic!, error: NSError!) {
-        println("notify - \(characteristic)")
         sendNext(_notifySink, characteristic)
     }
 
