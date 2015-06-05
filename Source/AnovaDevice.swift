@@ -18,6 +18,11 @@ public final class AnovaDevice {
     private let peripheral: Peripheral
     private let characteristic: CBCharacteristic
 
+    private lazy var commands: Action<String, String, NSError> = Action { self.executeCommand($0) }
+
+//    private let queue: SignalProducer<(SignalProducer<String, NSError>, Signal<String, NSError>.Observer), NSError>
+//    private let sink: Signal<(SignalProducer<String, NSError>, Signal<String, NSError>.Observer), NSError>.Observer
+
     public var name: String {
         return peripheral.name
     }
@@ -29,6 +34,16 @@ public final class AnovaDevice {
     public init(peripheral: Peripheral, characteristic: CBCharacteristic) {
         self.peripheral = peripheral
         self.characteristic = characteristic
+
+        commands = Action { command in
+            return self.executeCommand(command)
+        }
+
+//        (queue, sink) = SignalProducer<(SignalProducer<String, NSError>, Signal<String, NSError>.Observer), NSError>.buffer(0)
+//        queue |> flatMap(.Concat) { producer, observer in
+//            return producer
+//        }
+//        |> start()
     }
 
     public static func connect(central: CentralManager, peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NSError> {
@@ -58,7 +73,7 @@ public final class AnovaDevice {
     }
 
     private func readTemperature(command: String) -> SignalProducer<Temperature, NSError> {
-        return executeCommand("read unit")
+        return queueCommand("read unit")
             |> concat(executeCommand(command))
             |> collect
             |> tryMap { response in
@@ -71,6 +86,23 @@ public final class AnovaDevice {
                 default:
                     // TODO Proper error
                     return .failure(NSError())
+                }
+            }
+    }
+
+    private func queueCommand(command: String) -> SignalProducer<String, NSError> {
+        return commands.apply(command)
+            |> catch {
+                switch $0 {
+                case .NotEnabled:
+                    println("Queuing")
+                    return self.commands.enabled.producer
+                        |> filter { $0 }
+                        |> take(1)
+                        |> promoteErrors(NSError.self)
+                        |> then(self.queueCommand(command))
+                case let .ProducerError(error):
+                    return SignalProducer(error: error)
                 }
             }
     }
@@ -88,6 +120,5 @@ public final class AnovaDevice {
                 // TODO Proper error
                 return .failure(NSError())
             }
-            |> logEvents("executeCommand")
     }
 }

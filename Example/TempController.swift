@@ -16,11 +16,10 @@ class TempController: UIViewController {
     var device: AnovaDevice!
 
     override func viewDidLoad() {
-        device.readCurrentTemperature()
-            |> concat(device.readTargetTemperature())
+        zip(device.readCurrentTemperature(), device.readTargetTemperature())
             |> observeOn(UIScheduler())
             |> start(next: {
-                println("Some temp reading \($0.degrees)")
+                println("Current \($0.degrees) Target \($1.degrees)")
                 self.tempLabel.text = toString($0.degrees)
             })
     }
