@@ -17,7 +17,10 @@ class TempController: UIViewController {
 
     override func viewDidLoad() {
         device.readCurrentTemperature()
+            |> concat(device.readTargetTemperature())
+            |> observeOn(UIScheduler())
             |> start(next: {
+                println("Some temp reading \($0.degrees)")
                 self.tempLabel.text = toString($0.degrees)
             })
     }

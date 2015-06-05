@@ -31,13 +31,6 @@ public final class AnovaDevice {
         self.characteristic = characteristic
     }
 
-    public func readCurrentTemperature() -> SignalProducer<Temperature, NSError> {
-        let command = "read unit\r".dataUsingEncoding(NSASCIIStringEncoding)!
-        return peripheral.execute(command, characteristic: characteristic)
-            |> logEvents("temperature")
-            |> map { _ in .Celcius(23) }
-    }
-
     public static func connect(central: CentralManager, peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NSError> {
         return central.connect(peripheral)
             |> flatMap(.Latest) { (periph: Peripheral) in
@@ -52,5 +45,49 @@ public final class AnovaDevice {
                         return AnovaDevice(peripheral: periph, characteristic: $0)
                     }
             }
+    }
+
+    public func readCurrentTemperature() -> SignalProducer<Temperature, NSError> {
+        return readTemperature("read temp")
+            |> logEvents("current temperature")
+    }
+
+    public func readTargetTemperature() -> SignalProducer<Temperature, NSError> {
+        return readTemperature("read set temp")
+            |> logEvents("target temperature")
+    }
+
+    private func readTemperature(command: String) -> SignalProducer<Temperature, NSError> {
+        return executeCommand("read unit")
+            |> concat(executeCommand(command))
+            |> collect
+            |> tryMap { response in
+                // TODO proper response parsing
+                switch (response[0], (response[1] as NSString).floatValue) {
+                case let ("c", degrees):
+                    return .success(.Celcius(degrees))
+                case let ("f", degrees):
+                    return .success(.Farenheit(degrees))
+                default:
+                    // TODO Proper error
+                    return .failure(NSError())
+                }
+            }
+    }
+
+    private func executeCommand(command: String) -> SignalProducer<String, NSError> {
+        let data = "\(command)\r".dataUsingEncoding(NSASCIIStringEncoding)!
+        return peripheral.execute(data, characteristic: characteristic)
+            |> tryMap {
+                if let string = NSString(data: $0.value, encoding: NSASCIIStringEncoding) as? String {
+                    // strip the trailing \r
+                    // TODO some responses span multiple lines
+                    let response = string.substringToIndex(string.endIndex.predecessor())
+                    return .success(response)
+                }
+                // TODO Proper error
+                return .failure(NSError())
+            }
+            |> logEvents("executeCommand")
     }
 }

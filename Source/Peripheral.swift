@@ -111,16 +111,6 @@ public final class Peripheral {
 
     /// This is a write/read hybrid to support devices that treat characteristics as a command pipe. That is,
     /// commands are written to the characteristic with results returned as updates rather than write responses.
-    public func execute(command: String, characteristic: CBCharacteristic) -> SignalProducer<CBCharacteristic, NSError> {
-        if let data = command.dataUsingEncoding(NSASCIIStringEncoding) {
-            return execute(data, characteristic: characteristic)
-        }
-        // TODO
-        return .empty
-    }
-
-    /// This is a write/read hybrid to support devices that treat characteristics as a command pipe. That is,
-    /// commands are written to the characteristic with results returned as updates rather than write responses.
     public func execute(data: NSData, characteristic: CBCharacteristic) -> SignalProducer<CBCharacteristic, NSError> {
         return SignalProducer { observer, disposable in
             self.delegate.readSignal
