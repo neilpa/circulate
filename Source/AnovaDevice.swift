@@ -43,7 +43,7 @@ public final class AnovaDevice {
             |> flatMap(.Latest) { (periph: Peripheral) in
                 return periph.discoverServices([CBUUID(string: "FFE0")])
                     |> flatMap(.Latest) {
-                        periph.discoverCharacteristics([CBUUID(string: "FFE1")], service: $0)
+                        periph.discoverCharacteristics(nil, service: $0)
                     }
                     |> flatMap(.Latest) {
                         periph.setNotifyValue(true, characteristic: $0)

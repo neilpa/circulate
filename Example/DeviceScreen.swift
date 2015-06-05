@@ -10,15 +10,28 @@ import Circulate
 import CoreBluetooth
 import ReactiveCocoa
 
-class DeviceScreen: UIViewController {
-    @IBOutlet weak var tempLabel: UILabel!
+func loadViewController<T: UIViewController>(storyboardId: String, viewControllerId: String) -> T {
+    let storyboard = UIStoryboard(name: storyboardId, bundle: nil)
+    return storyboard.instantiateViewControllerWithIdentifier(viewControllerId) as! T
+}
 
-    var central: CentralManager?
-    var peripheral: CBPeripheral?
+class DeviceScreen: UIViewController {
+    var central: CentralManager!
+    var peripheral: CBPeripheral!
 
     override func viewDidLoad() {
-        if let central = self.central, peripheral = self.peripheral {
-            AnovaDevice.connect(central, peripheral: peripheral) |> start()
-        }
+    }
+
+    @IBAction func onConnect(sender: AnyObject) {
+        AnovaDevice.connect(self.central, peripheral: peripheral)
+            |> observeOn(UIScheduler())
+            |> start(next: { device in
+                let tempController: TempController = loadViewController("Main", "TempController")
+                tempController.device = device
+
+                tempController.view.frame = CGRect(x: 0, y: 100, width: self.view.frame.width, height: self.view.frame.height - 100)
+                self.addChildViewController(tempController)
+                self.view.addSubview(tempController.view)
+            })
     }
 }
