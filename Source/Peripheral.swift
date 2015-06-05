@@ -53,7 +53,7 @@ public final class Peripheral {
     public func discoverCharacteristics(uuids: [CBUUID]?, service: CBService) -> SignalProducer<CBCharacteristic, NSError> {
         return SignalProducer { observer, disposable in
             self.delegate.characteristicDiscovery
-                |> filter { $0.value != service }
+                |> filter { $0.value == service }
                 |> take(1)
                 |> map { return $0.event }
                 |> dematerialize
