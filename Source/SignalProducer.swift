@@ -14,7 +14,5 @@ public func logEvents<T, E>(prefix: String)(producer: SignalProducer<T, E>) -> S
             println("\(prefix) STARTED")
         }, event: { event in
             println("\(prefix) \(event)")
-//        }, disposed: {
-//            println("\(prefix) DISPOSED")
         })
 }

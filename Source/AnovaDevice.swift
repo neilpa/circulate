@@ -8,6 +8,7 @@
 
 import CoreBluetooth
 import ReactiveCocoa
+import Rex
 
 public enum AnovaCommand {
     // TODO
@@ -15,6 +16,7 @@ public enum AnovaCommand {
 
 public final class AnovaDevice {
     private let peripheral: Peripheral
+    private let characteristic: CBCharacteristic
 
     public var name: String {
         return peripheral.name
@@ -23,32 +25,32 @@ public final class AnovaDevice {
     public var identifier: String {
         return peripheral.identifier
     }
-    
-    public init(peripheral: Peripheral) {
+
+    public init(peripheral: Peripheral, characteristic: CBCharacteristic) {
         self.peripheral = peripheral
+        self.characteristic = characteristic
     }
 
-    public func execute(command: String) -> SignalProducer<(), NoError> {
-        // TODO Using this inline breaks type-inference somewhere
-        let writer: CBCharacteristic -> SignalProducer<CBCharacteristic, NoError> = {
-            let string = "\(command)\r" as NSString
-            let data = string.dataUsingEncoding(NSASCIIStringEncoding)!
-            return self.peripheral.write(data, characteristic: $0, type: .WithResponse)
-        }
+    public func readCurrentTemperature() -> SignalProducer<Temperature, NSError> {
+        let command = "read unit\r".dataUsingEncoding(NSASCIIStringEncoding)!
+        return peripheral.execute(command, characteristic: characteristic)
+            |> logEvents("temperature")
+            |> map { _ in .Celcius(23) }
+    }
 
-        return peripheral.discoverServices(nil)
-            |> flatMap(.Merge) {
-                return self.peripheral.discoverCharacteristics($0)
-            }
-            |> flatMap(.Merge) {
-                return self.peripheral.notify($0)
-            }
-            |> flatMap(.Merge) {
-                writer($0)
-            }
-            |> map {
-                println(NSString(data: $0.value, encoding: NSASCIIStringEncoding))
-                return ()
+    public static func connect(central: CentralManager, peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NSError> {
+        return central.connect(peripheral)
+            |> flatMap(.Latest) { (periph: Peripheral) in
+                return periph.discoverServices([CBUUID(string: "FFE0")])
+                    |> flatMap(.Latest) {
+                        periph.discoverCharacteristics([CBUUID(string: "FFE1")], service: $0)
+                    }
+                    |> flatMap(.Latest) {
+                        periph.setNotifyValue(true, characteristic: $0)
+                    }
+                    |> map {
+                        return AnovaDevice(peripheral: periph, characteristic: $0)
+                    }
             }
     }
 }

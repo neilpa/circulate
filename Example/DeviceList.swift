@@ -17,10 +17,10 @@ class DeviceCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var uuidLabel: UILabel!
 
-    var device: AnovaDevice? {
+    var device: CBPeripheral? {
         didSet {
             nameLabel.text = device?.name
-            uuidLabel.text = device?.identifier
+            uuidLabel.text = device?.identifier.UUIDString
         }
     }
 
@@ -39,17 +39,25 @@ class DeviceList: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let devices: SignalProducer<Peripheral, NSError> = central.scan(nil)
-            |> promoteErrors(NSError.self)
-            |> flatMap(.Merge) { peripheral, _, _ in
-                return self.central.connect(peripheral)
-            }
-            |> timeoutAfter(2, withEvent: .Completed, onScheduler: QueueScheduler.mainQueueScheduler)
-            |> logEvents("devices:")
+        let scan: SignalProducer<CBPeripheral, NoError> = central.scan(nil)
+            |> map { peripheral, _, _ in peripheral }
 
-        dataSource = ProducerDataSource(devices) { view, path, peripheral in
+//        let devices: SignalProducer<AnovaDevice, NSError> = central.scan(nil)
+//            |> promoteErrors(NSError.self)
+//            |> map {
+//                return self.central.connect($0)
+//            }
+//            |> flatten(.Merge)
+//            |> map {
+//                subscribe($0)
+//            }
+//            |> flatten(.Merge)
+////            |> timeoutAfter(2, withEvent: .Completed, onScheduler: QueueScheduler.mainQueueScheduler)
+////            |> logEvents("devices:")
+
+        dataSource = ProducerDataSource(scan) { view, path, peripheral in
             let cell = view.dequeueReusableCellWithReuseIdentifier("Device", forIndexPath: path) as! DeviceCell
-            cell.device = AnovaDevice(peripheral: peripheral)
+            cell.device = peripheral
             return cell
         }
         dataSource?.attach(collectionView)
@@ -60,7 +68,8 @@ class DeviceList: UIViewController {
             if let cell = sender as? DeviceCell, let device = cell.device {
                 let navController = segue.destinationViewController as! UINavigationController
                 let deviceController = navController.topViewController as! DeviceScreen
-                deviceController.device = device
+                deviceController.peripheral = device
+                deviceController.central = central
                 deviceController.navigationItem.title = device.name
             }
         }

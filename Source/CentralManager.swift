@@ -40,11 +40,13 @@ public final class CentralManager {
         |> logEvents("scan:")
     }
 
+    // TODO Connect and disconnec that checks current state
     public func connect(peripheral: CBPeripheral) -> SignalProducer<Peripheral, NSError> {
         return SignalProducer { observer, disposable in
             self.delegate.connectSignal
                 |> promoteErrors(NSError.self)
                 |> filter { $0.0 == peripheral }
+                |> take(1)
                 |> tryMap { periph, err in
                     if let error = err {
                         return .failure(error)
@@ -52,7 +54,6 @@ public final class CentralManager {
                         return .success(Peripheral(central: self.central, peripheral: periph))
                     }
                 }
-                |> take(1)
                 |> observe(observer)
 
             self.central.connectPeripheral(peripheral, options: nil)
