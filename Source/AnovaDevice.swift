@@ -29,9 +29,13 @@ public final class AnovaDevice {
         self.characteristic = characteristic
 
         // Commands are pushed to this producer to serialize writes to the underlying peripheral
-        let (producer, sink) = SignalProducer<(String, Signal<String, NSError>.Observer), NSError>.buffer()
+        let (sink, disposable) = serialize { (command: String) -> SignalProducer<String, NSError> in
+            return peripheral.execute("\(command)\r", characteristic: characteristic)
+                // strip the trailing \r
+                // TODO some responses span multiple lines
+                |> map { $0.substringToIndex($0.endIndex.predecessor()) }
+        }
         queue = sink
-        producer |> flatMap(.Concat, self.executeCommand) |> start()
     }
 
     public static func connect(central: CentralManager, peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NSError> {
@@ -81,25 +85,7 @@ public final class AnovaDevice {
             println("queueing \(command)")
             sendNext(self.queue, (command, observer))
 
-            // TODO Deque commands on cancel
+            // TODO deque commands on disposal
         }
-    }
-
-    private func executeCommand(command: String, observer: Signal<String, NSError>.Observer) -> SignalProducer<String, NSError> {
-        let data = "\(command)\r".dataUsingEncoding(NSASCIIStringEncoding)!
-        return peripheral.execute(data, characteristic: characteristic)
-            |> tryMap {
-                println("executing \(command)")
-                if let string = NSString(data: $0.value, encoding: NSASCIIStringEncoding) as? String {
-                    // strip the trailing \r
-                    // TODO some responses span multiple lines
-                    let response = string.substringToIndex(string.endIndex.predecessor())
-                    return .success(response)
-                }
-                // TODO Proper error
-                return .failure(NSError())
-            }
-            // Forward to the real observer
-            |> on(event: { observer.put($0) })
     }
 }

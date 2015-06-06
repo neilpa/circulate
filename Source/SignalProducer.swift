@@ -16,3 +16,12 @@ public func logEvents<T, E>(prefix: String)(producer: SignalProducer<T, E>) -> S
             println("\(prefix) \(event)")
         })
 }
+
+public func serialize<T, U, E>(transform: T -> SignalProducer<U, E>) -> (Signal<(T, Signal<U, E>.Observer), E>.Observer, Disposable) {
+    let (producer, sink) = SignalProducer<(T, Signal<U, E>.Observer), E>.buffer()
+    let queue = producer
+        |> flatMap(.Concat) { input, observer in
+            return transform(input) |> on(event: { observer.put($0) })
+        }
+    return (sink, queue |> start())
+}
