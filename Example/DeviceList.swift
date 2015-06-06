@@ -42,19 +42,6 @@ class DeviceList: UIViewController {
         let scan: SignalProducer<CBPeripheral, NoError> = central.scan(nil)
             |> map { peripheral, _, _ in peripheral }
 
-//        let devices: SignalProducer<AnovaDevice, NSError> = central.scan(nil)
-//            |> promoteErrors(NSError.self)
-//            |> map {
-//                return self.central.connect($0)
-//            }
-//            |> flatten(.Merge)
-//            |> map {
-//                subscribe($0)
-//            }
-//            |> flatten(.Merge)
-////            |> timeoutAfter(2, withEvent: .Completed, onScheduler: QueueScheduler.mainQueueScheduler)
-////            |> logEvents("devices:")
-
         dataSource = ProducerDataSource(scan) { view, path, peripheral in
             let cell = view.dequeueReusableCellWithReuseIdentifier("Device", forIndexPath: path) as! DeviceCell
             cell.device = peripheral
