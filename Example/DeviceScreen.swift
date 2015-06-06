@@ -15,23 +15,35 @@ func loadViewController<T: UIViewController>(storyboardId: String, viewControlle
     return storyboard.instantiateViewControllerWithIdentifier(viewControllerId) as! T
 }
 
+extension CocoaAction {
+    public convenience init<Output, Error>(_ action: Action<(), Output, Error>) {
+        self.init(action, { _ in })
+    }
+}
+
 class DeviceScreen: UIViewController {
     var central: CentralManager!
     var peripheral: CBPeripheral!
 
+    @IBOutlet weak var connectButton: UIButton!
+    var connectAction: CocoaAction!
+
     override func viewDidLoad() {
-    }
+        let connect: Action<(), AnovaDevice, NSError> = Action { _ in
+            return AnovaDevice.connect(self.central, peripheral: self.peripheral)
+                |> observeOn(UIScheduler())
+        }
 
-    @IBAction func onConnect(sender: AnyObject) {
-        AnovaDevice.connect(self.central, peripheral: peripheral)
-            |> observeOn(UIScheduler())
-            |> start(next: { device in
-                let tempController: TempController = loadViewController("Main", "TempController")
-                tempController.device = device
+        connectAction = CocoaAction(connect)
+        connectButton.addTarget(connectAction, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
 
-                tempController.view.frame = CGRect(x: 0, y: 100, width: self.view.frame.width, height: self.view.frame.height - 100)
-                self.addChildViewController(tempController)
-                self.view.addSubview(tempController.view)
-            })
+        connect.values.observe(next: { device in
+            let tempController: TempController = loadViewController("Main", "TempController")
+            tempController.device = device
+
+            tempController.view.frame = CGRect(x: 0, y: 100, width: self.view.frame.width, height: self.view.frame.height - 100)
+            self.addChildViewController(tempController)
+            self.view.addSubview(tempController.view)
+        })
     }
 }
