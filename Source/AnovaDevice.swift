@@ -10,18 +10,11 @@ import CoreBluetooth
 import ReactiveCocoa
 import Rex
 
-public enum AnovaCommand {
-    // TODO
-}
-
 public final class AnovaDevice {
     private let peripheral: Peripheral
     private let characteristic: CBCharacteristic
 
-    private lazy var commands: Action<String, String, NSError> = Action { self.executeCommand($0) }
-
-//    private let queue: SignalProducer<(SignalProducer<String, NSError>, Signal<String, NSError>.Observer), NSError>
-//    private let sink: Signal<(SignalProducer<String, NSError>, Signal<String, NSError>.Observer), NSError>.Observer
+    private let queue: Signal<(String, Signal<String, NSError>.Observer), NSError>.Observer
 
     public var name: String {
         return peripheral.name
@@ -35,15 +28,29 @@ public final class AnovaDevice {
         self.peripheral = peripheral
         self.characteristic = characteristic
 
-        commands = Action { command in
-            return self.executeCommand(command)
-        }
+        let (producer, sink) = SignalProducer<(String, Signal<String, NSError>.Observer), NSError>.buffer()
+        queue = sink
 
-//        (queue, sink) = SignalProducer<(SignalProducer<String, NSError>, Signal<String, NSError>.Observer), NSError>.buffer(0)
-//        queue |> flatMap(.Concat) { producer, observer in
-//            return producer
-//        }
-//        |> start()
+        producer
+            |> flatMap(.Concat) { (command: String, observer: Signal<String, NSError>.Observer) -> SignalProducer<String, NSError> in
+            // TODO Push more of this into Peripheral (or somewhere)
+            let data = "\(command)\r".dataUsingEncoding(NSASCIIStringEncoding)!
+            return peripheral.execute(data, characteristic: characteristic)
+                |> tryMap {
+                    println("executing \(command)")
+                    if let string = NSString(data: $0.value, encoding: NSASCIIStringEncoding) as? String {
+                        // strip the trailing \r
+                        // TODO some responses span multiple lines
+                        let response = string.substringToIndex(string.endIndex.predecessor())
+                        return .success(response)
+                    }
+                    // TODO Proper error
+                    return .failure(NSError())
+                }
+                // Forward to the real observer
+                |> on(event: { observer.put($0) })
+            }
+            |> start()
     }
 
     public static func connect(central: CentralManager, peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NSError> {
@@ -74,7 +81,7 @@ public final class AnovaDevice {
 
     private func readTemperature(command: String) -> SignalProducer<Temperature, NSError> {
         return queueCommand("read unit")
-            |> concat(executeCommand(command))
+            |> concat(queueCommand(command))
             |> collect
             |> tryMap { response in
                 // TODO proper response parsing
@@ -91,34 +98,10 @@ public final class AnovaDevice {
     }
 
     private func queueCommand(command: String) -> SignalProducer<String, NSError> {
-        return commands.apply(command)
-            |> catch {
-                switch $0 {
-                case .NotEnabled:
-                    println("Queuing")
-                    return self.commands.enabled.producer
-                        |> filter { $0 }
-                        |> take(1)
-                        |> promoteErrors(NSError.self)
-                        |> then(self.queueCommand(command))
-                case let .ProducerError(error):
-                    return SignalProducer(error: error)
-                }
-            }
-    }
-
-    private func executeCommand(command: String) -> SignalProducer<String, NSError> {
-        let data = "\(command)\r".dataUsingEncoding(NSASCIIStringEncoding)!
-        return peripheral.execute(data, characteristic: characteristic)
-            |> tryMap {
-                if let string = NSString(data: $0.value, encoding: NSASCIIStringEncoding) as? String {
-                    // strip the trailing \r
-                    // TODO some responses span multiple lines
-                    let response = string.substringToIndex(string.endIndex.predecessor())
-                    return .success(response)
-                }
-                // TODO Proper error
-                return .failure(NSError())
-            }
+        return SignalProducer { observer, _ in
+            println("queueing \(command)")
+            sendNext(self.queue, (command, observer))
+            // TODO Deque commands
+        }
     }
 }
