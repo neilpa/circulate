@@ -22,6 +22,11 @@ public struct Temperature {
         return self(scale: .Celsius, degrees: degrees)
     }
 
+    public init(scale: TemperatureScale, degrees: Float) {
+        self.scale = scale
+        self.degrees = degrees
+    }
+
     public func analysis<T>(#ifFarenheit: Float -> T, ifCelsius: Float -> T) -> T {
         switch scale {
         case .Farenheit:
@@ -32,8 +37,17 @@ public struct Temperature {
     }
 }
 
+extension TemperatureScale: Printable {
+    public var description: String {
+        switch self {
+        case .Farenheit: return "F"
+        case .Celsius: return "C"
+        }
+    }
+}
+
 extension Temperature: Printable {
     public var description: String {
-        return analysis(ifFarenheit: { "\($0) F" }, ifCelsius: { "\($0) C" })
+        return "\(degrees)˚ \(scale)"
     }
 }
