@@ -24,3 +24,9 @@ public enum Temperature {
         return analysis(ifFarenheit: { $0 }, ifCelcius: { $0 })
     }
 }
+
+extension Temperature: Printable {
+    public var description: String {
+        return analysis(ifFarenheit: { "\($0) F" }, ifCelcius: { "\($0) C" })
+    }
+}

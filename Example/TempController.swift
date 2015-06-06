@@ -11,16 +11,17 @@ import CoreBluetooth
 import ReactiveCocoa
 
 class TempController: UIViewController {
-    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var targetTemperature: UILabel!
+    @IBOutlet weak var currentTemperature: UILabel!
 
     var device: AnovaDevice!
 
     override func viewDidLoad() {
         zip(device.readCurrentTemperature(), device.readTargetTemperature())
             |> observeOn(UIScheduler())
-            |> start(next: {
-                println("Current \($0.degrees) Target \($1.degrees)")
-                self.tempLabel.text = toString($0.degrees)
+            |> start(next: { current, target in
+                self.currentTemperature.text = current.description
+                self.targetTemperature.text = target.description
             })
     }
 }
