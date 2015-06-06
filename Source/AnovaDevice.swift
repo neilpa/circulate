@@ -54,15 +54,13 @@ public final class AnovaDevice {
             }
     }
 
-    public func readCurrentTemperature() -> SignalProducer<Temperature, NSError> {
-        return readTemperature("read temp")
-            |> logEvents("current temperature")
-    }
+    public private(set) lazy var currentTemperature: SignalProducer<Temperature, NSError> = {
+        return self.readTemperature("read temp")
+    }()
 
-    public func readTargetTemperature() -> SignalProducer<Temperature, NSError> {
-        return readTemperature("read set temp")
-            |> logEvents("target temperature")
-    }
+    public private(set) lazy var targetTemperature: SignalProducer<Temperature, NSError> = {
+        return self.readTemperature("read set temp")
+    }()
 
     private func readTemperature(command: String) -> SignalProducer<Temperature, NSError> {
         return zip(queueCommand("read unit"), queueCommand(command))

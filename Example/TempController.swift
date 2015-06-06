@@ -18,8 +18,8 @@ class TempController: UIViewController {
     var deviceProperty: MutableProperty<AnovaDevice?> = MutableProperty(nil)
 
     override func viewDidLoad() {
-        bindTemperature(currentTemperature) { $0.readCurrentTemperature() }
-        bindTemperature(targetTemperature) { $0.readTargetTemperature() }
+        bindTemperature(currentTemperature) { $0.currentTemperature }
+        bindTemperature(targetTemperature) { $0.targetTemperature }
     }
 
     private func bindTemperature(label: UILabel, transform: AnovaDevice -> SignalProducer<Temperature, NSError>) {
