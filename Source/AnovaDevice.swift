@@ -28,29 +28,10 @@ public final class AnovaDevice {
         self.peripheral = peripheral
         self.characteristic = characteristic
 
+        // Commands are pushed to this producer to serialize writes to the underlying peripheral
         let (producer, sink) = SignalProducer<(String, Signal<String, NSError>.Observer), NSError>.buffer()
         queue = sink
-
-        producer
-            |> flatMap(.Concat) { (command: String, observer: Signal<String, NSError>.Observer) -> SignalProducer<String, NSError> in
-            // TODO Push more of this into Peripheral (or somewhere)
-            let data = "\(command)\r".dataUsingEncoding(NSASCIIStringEncoding)!
-            return peripheral.execute(data, characteristic: characteristic)
-                |> tryMap {
-                    println("executing \(command)")
-                    if let string = NSString(data: $0.value, encoding: NSASCIIStringEncoding) as? String {
-                        // strip the trailing \r
-                        // TODO some responses span multiple lines
-                        let response = string.substringToIndex(string.endIndex.predecessor())
-                        return .success(response)
-                    }
-                    // TODO Proper error
-                    return .failure(NSError())
-                }
-                // Forward to the real observer
-                |> on(event: { observer.put($0) })
-            }
-            |> start()
+        producer |> flatMap(.Concat, self.executeCommand) |> start()
     }
 
     public static func connect(central: CentralManager, peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NSError> {
@@ -80,12 +61,10 @@ public final class AnovaDevice {
     }
 
     private func readTemperature(command: String) -> SignalProducer<Temperature, NSError> {
-        return queueCommand("read unit")
-            |> concat(queueCommand(command))
-            |> collect
-            |> tryMap { response in
+        return zip(queueCommand("read unit"), queueCommand(command))
+            |> tryMap { unit, temp in
                 // TODO proper response parsing
-                switch (response[0], (response[1] as NSString).floatValue) {
+                switch (unit, (temp as NSString).floatValue) {
                 case let ("c", degrees):
                     return .success(.Celcius(degrees))
                 case let ("f", degrees):
@@ -101,7 +80,26 @@ public final class AnovaDevice {
         return SignalProducer { observer, _ in
             println("queueing \(command)")
             sendNext(self.queue, (command, observer))
-            // TODO Deque commands
+
+            // TODO Deque commands on cancel
         }
+    }
+
+    private func executeCommand(command: String, observer: Signal<String, NSError>.Observer) -> SignalProducer<String, NSError> {
+        let data = "\(command)\r".dataUsingEncoding(NSASCIIStringEncoding)!
+        return peripheral.execute(data, characteristic: characteristic)
+            |> tryMap {
+                println("executing \(command)")
+                if let string = NSString(data: $0.value, encoding: NSASCIIStringEncoding) as? String {
+                    // strip the trailing \r
+                    // TODO some responses span multiple lines
+                    let response = string.substringToIndex(string.endIndex.predecessor())
+                    return .success(response)
+                }
+                // TODO Proper error
+                return .failure(NSError())
+            }
+            // Forward to the real observer
+            |> on(event: { observer.put($0) })
     }
 }
