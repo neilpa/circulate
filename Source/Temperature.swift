@@ -6,27 +6,34 @@
 //  Copyright (c) 2015 Neil Pankey. All rights reserved.
 //
 
-public enum Temperature {
-    case Farenheit(Float)
-    case Celcius(Float)
+public enum TemperatureScale {
+    case Farenheit, Celsius
+}
 
-    public func analysis<T>(#ifFarenheit: Float -> T, ifCelcius: Float -> T) -> T {
-        switch self {
-        case let .Farenheit(degrees):
-            return ifFarenheit(degrees)
-        case let .Celcius(degrees):
-            return ifCelcius(degrees)
-        }
+public struct Temperature {
+    public let scale: TemperatureScale
+    public let degrees: Float
+
+    public static func farenheit(degrees: Float) -> Temperature {
+        return self(scale: .Farenheit, degrees: degrees)
     }
 
-    /// The raw degrees value ignoring temperature scale.
-    public var degrees: Float {
-        return analysis(ifFarenheit: { $0 }, ifCelcius: { $0 })
+    public static func celsius(degrees: Float) -> Temperature {
+        return self(scale: .Celsius, degrees: degrees)
+    }
+
+    public func analysis<T>(#ifFarenheit: Float -> T, ifCelsius: Float -> T) -> T {
+        switch scale {
+        case .Farenheit:
+            return ifFarenheit(degrees)
+        case .Celsius:
+            return ifCelsius(degrees)
+        }
     }
 }
 
 extension Temperature: Printable {
     public var description: String {
-        return analysis(ifFarenheit: { "\($0) F" }, ifCelcius: { "\($0) C" })
+        return analysis(ifFarenheit: { "\($0) F" }, ifCelsius: { "\($0) C" })
     }
 }

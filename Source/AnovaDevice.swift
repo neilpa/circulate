@@ -70,9 +70,9 @@ public final class AnovaDevice {
                 // TODO proper response parsing
                 switch (unit, (temp as NSString).floatValue) {
                 case let ("c", degrees):
-                    return .success(.Celcius(degrees))
+                    return .success(.celsius(degrees))
                 case let ("f", degrees):
-                    return .success(.Farenheit(degrees))
+                    return .success(.farenheit(degrees))
                 default:
                     // TODO Proper error
                     return .failure(NSError())
