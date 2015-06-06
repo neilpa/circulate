@@ -92,7 +92,6 @@ public final class Peripheral {
 
             self.peripheral.readValueForCharacteristic(characteristic)
         }
-        |> logEvents("read:")
     }
 
     public func write(data: NSData, characteristic: CBCharacteristic, type: CBCharacteristicWriteType) -> SignalProducer<CBCharacteristic, NSError> {
@@ -106,7 +105,6 @@ public final class Peripheral {
 
             self.peripheral.writeValue(data, forCharacteristic: characteristic, type: type)
         }
-        |> logEvents("write:")
     }
 
     public func execute(command: String, characteristic: CBCharacteristic) -> SignalProducer<String, NSError> {
@@ -137,7 +135,6 @@ public final class Peripheral {
 
             self.peripheral.writeValue(data, forCharacteristic: characteristic, type: .WithoutResponse)
         }
-        |> logEvents("execute:")
     }
 }
 

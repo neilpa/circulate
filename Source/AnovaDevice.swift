@@ -80,7 +80,6 @@ public final class AnovaDevice {
 
     private func queueCommand(command: String) -> SignalProducer<String, NSError> {
         return SignalProducer { observer, _ in
-            println("queueing \(command)")
             sendNext(self.queue, (command, observer))
 
             // TODO deque commands on disposal

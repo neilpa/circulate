@@ -36,11 +36,9 @@ public final class CentralManager {
                 self.central.stopScan()
             }
         }
-        // TODO There are some lifetime issues somehwere I need to track down that this "fixes"
-        |> logEvents("scan:")
     }
 
-    // TODO Connect and disconnec that checks current state
+    // TODO Connect and disconnect that checks current state
     public func connect(peripheral: CBPeripheral) -> SignalProducer<Peripheral, NSError> {
         return SignalProducer { observer, disposable in
             self.delegate.connectSignal
@@ -58,6 +56,5 @@ public final class CentralManager {
 
             self.central.connectPeripheral(peripheral, options: nil)
         }
-        |> logEvents("connect:")
     }
 }
