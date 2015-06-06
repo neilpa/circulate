@@ -18,33 +18,22 @@ class TempController: UIViewController {
     var deviceProperty: MutableProperty<AnovaDevice?> = MutableProperty(nil)
 
     override func viewDidLoad() {
-        let current: SignalProducer<String, NoError> = deviceProperty.producer
+        bindTemperature(currentTemperature) { $0.readCurrentTemperature() }
+        bindTemperature(targetTemperature) { $0.readTargetTemperature() }
+    }
+
+    private func bindTemperature(label: UILabel, transform: AnovaDevice -> SignalProducer<Temperature, NSError>) {
+        DynamicProperty(object: label, keyPath: "text") <~ deviceProperty.producer
             |> flatMap(.Latest) {
                 if let device = $0 {
-                    return device.readCurrentTemperature()
+                    return transform(device)
                         |> ignoreError
-                        |> map(toString)
+                        // DynamicProperty requires AnyObject
+                        |> map { toString($0) as AnyObject }
                 } else {
-                    println("Empty current")
                     return SignalProducer(value: "??")
                 }
             }
             |> observeOn(UIScheduler())
-
-        let target: SignalProducer<String, NoError> = deviceProperty.producer
-            |> flatMap(.Latest) {
-                if let device = $0 {
-                    return device.readTargetTemperature()
-                        |> ignoreError
-                        |> map(toString)
-                } else {
-                    println("Empty target")
-                    return SignalProducer(value: "??")
-                }
-            }
-            |> observeOn(UIScheduler())
-
-        DynamicProperty(object: targetTemperature, keyPath: "text") <~ current |> map { $0 }
-        DynamicProperty(object: currentTemperature, keyPath: "text") <~ target |> map { $0 }
     }
 }
