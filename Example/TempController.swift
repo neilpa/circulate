@@ -9,19 +9,42 @@
 import Circulate
 import CoreBluetooth
 import ReactiveCocoa
+import Rex
 
 class TempController: UIViewController {
     @IBOutlet weak var targetTemperature: UILabel!
     @IBOutlet weak var currentTemperature: UILabel!
 
-    var device: AnovaDevice!
+    var deviceProperty: MutableProperty<AnovaDevice?> = MutableProperty(nil)
 
     override func viewDidLoad() {
-        zip(device.readCurrentTemperature(), device.readTargetTemperature())
+        let current: SignalProducer<String, NoError> = deviceProperty.producer
+            |> flatMap(.Latest) {
+                if let device = $0 {
+                    return device.readCurrentTemperature()
+                        |> ignoreError
+                        |> map(toString)
+                } else {
+                    println("Empty current")
+                    return SignalProducer(value: "??")
+                }
+            }
             |> observeOn(UIScheduler())
-            |> start(next: { current, target in
-                self.currentTemperature.text = current.description
-                self.targetTemperature.text = target.description
-            })
+
+        let target: SignalProducer<String, NoError> = deviceProperty.producer
+            |> flatMap(.Latest) {
+                if let device = $0 {
+                    return device.readTargetTemperature()
+                        |> ignoreError
+                        |> map(toString)
+                } else {
+                    println("Empty target")
+                    return SignalProducer(value: "??")
+                }
+            }
+            |> observeOn(UIScheduler())
+
+        DynamicProperty(object: targetTemperature, keyPath: "text") <~ current |> map { $0 }
+        DynamicProperty(object: currentTemperature, keyPath: "text") <~ target |> map { $0 }
     }
 }

@@ -39,7 +39,7 @@ class DeviceScreen: UIViewController {
 
         connect.values.observe(next: { device in
             let tempController: TempController = loadViewController("Main", "TempController")
-            tempController.device = device
+            tempController.deviceProperty.value = device
 
             tempController.view.frame = CGRect(x: 0, y: 100, width: self.view.frame.width, height: self.view.frame.height - 100)
             self.addChildViewController(tempController)
