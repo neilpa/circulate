@@ -39,7 +39,6 @@
 		D8696D411B1A536100AC1804 /* CentralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8696D401B1A536100AC1804 /* CentralManagerDelegate.swift */; };
 		D8696D431B1A536C00AC1804 /* PeripheralDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8696D421B1A536C00AC1804 /* PeripheralDelegate.swift */; };
 		D88C44A11B1FCA0100A82E69 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88C44A01B1FCA0100A82E69 /* Temperature.swift */; };
-		D8A6D7561B224B7F008D4489 /* TempController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A6D7551B224B7F008D4489 /* TempController.swift */; };
 		D8F0972C1B17AB01002E15BA /* DeviceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */; };
 		D8F097301B17AB3D002E15BA /* ProducerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0972F1B17AB3D002E15BA /* ProducerDataSource.swift */; };
 		D8F097351B17C9CD002E15BA /* AnovaDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F097331B17C95B002E15BA /* AnovaDevice.swift */; };
@@ -108,7 +107,6 @@
 		D8696D401B1A536100AC1804 /* CentralManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralManagerDelegate.swift; sourceTree = "<group>"; };
 		D8696D421B1A536C00AC1804 /* PeripheralDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralDelegate.swift; sourceTree = "<group>"; };
 		D88C44A01B1FCA0100A82E69 /* Temperature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
-		D8A6D7551B224B7F008D4489 /* TempController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TempController.swift; sourceTree = "<group>"; };
 		D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceScreen.swift; sourceTree = "<group>"; };
 		D8F0972F1B17AB3D002E15BA /* ProducerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProducerDataSource.swift; sourceTree = "<group>"; };
 		D8F097331B17C95B002E15BA /* AnovaDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnovaDevice.swift; sourceTree = "<group>"; };
@@ -200,7 +198,6 @@
 				D812FF611B1545A8009D3016 /* AppDelegate.swift */,
 				D812FF631B1545A8009D3016 /* DeviceList.swift */,
 				D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */,
-				D8A6D7551B224B7F008D4489 /* TempController.swift */,
 				D8F0972F1B17AB3D002E15BA /* ProducerDataSource.swift */,
 				D812FF651B1545A8009D3016 /* Main.storyboard */,
 				D812FF681B1545A8009D3016 /* Images.xcassets */,
@@ -422,7 +419,6 @@
 				D812FF641B1545A8009D3016 /* DeviceList.swift in Sources */,
 				D8F097301B17AB3D002E15BA /* ProducerDataSource.swift in Sources */,
 				D812FF621B1545A8009D3016 /* AppDelegate.swift in Sources */,
-				D8A6D7561B224B7F008D4489 /* TempController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

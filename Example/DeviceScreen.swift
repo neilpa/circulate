@@ -9,6 +9,7 @@
 import Circulate
 import CoreBluetooth
 import ReactiveCocoa
+import Rex
 
 func loadViewController<T: UIViewController>(storyboardId: String, viewControllerId: String) -> T {
     let storyboard = UIStoryboard(name: storyboardId, bundle: nil)
@@ -25,25 +26,46 @@ class DeviceScreen: UIViewController {
     var central: CentralManager!
     var peripheral: CBPeripheral!
 
-    @IBOutlet weak var connectButton: UIButton!
-    var connectAction: CocoaAction!
+    @IBOutlet weak var connectingIndicator: UIActivityIndicatorView!
+
+    @IBOutlet weak var targetTemp: UILabel!
+    @IBOutlet weak var currentTemp: UILabel!
+
+    lazy var connectAction: Action<Any?, AnovaDevice, NSError> = Action { _ in
+        return AnovaDevice.connect(self.central, peripheral: self.peripheral)
+            |> observeOn(UIScheduler())
+    }
+
+    var device: MutableProperty<AnovaDevice?> = MutableProperty(nil)
 
     override func viewDidLoad() {
-        let connect: Action<(), AnovaDevice, NSError> = Action { _ in
-            return AnovaDevice.connect(self.central, peripheral: self.peripheral)
-                |> observeOn(UIScheduler())
-        }
-
-        connectAction = CocoaAction(connect)
-        connectButton.addTarget(connectAction, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
-
-        connect.values.observe(next: { device in
-            let tempController: TempController = loadViewController("Main", "TempController")
-            tempController.deviceProperty.value = device
-
-            tempController.view.frame = CGRect(x: 0, y: 100, width: self.view.frame.width, height: self.view.frame.height - 100)
-            self.addChildViewController(tempController)
-            self.view.addSubview(tempController.view)
+        connectAction.executing.producer.start(next: {
+            $0 ? self.connectingIndicator.startAnimating() : self.connectingIndicator.stopAnimating()
         })
+
+        device <~ connectAction.values |> scan(nil) { $1 }
+
+        bindLabel(targetTemp) { $0.targetTemperature }
+        bindLabel(currentTemp) { $0.currentTemperature }
+
+        connectAction.apply(nil).start()
     }
+
+    private func bindLabel<T>(label: UILabel, transform: AnovaDevice -> SignalProducer<T, NSError>) {
+        DynamicProperty(object: label, keyPath: "text") <~ device.producer
+            |> flatMap(.Latest) {
+                if let device = $0 {
+                    return transform(device)
+                        |> ignoreError // TODO Handle failures
+                        // DynamicProperty requires AnyObject
+                        |> map {
+                            return toString($0) as AnyObject
+                        }
+                } else {
+                    return SignalProducer(value: "--")
+                }
+            }
+            |> observeOn(UIScheduler())
+    }
+
 }

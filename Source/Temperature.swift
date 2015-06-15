@@ -8,6 +8,17 @@
 
 public enum TemperatureScale {
     case Farenheit, Celsius
+
+    public init?(scale: String) {
+        switch scale {
+        case "f", "F":
+            self = .Farenheit
+        case "c", "C":
+            self = .Celsius
+        default:
+            return nil
+        }
+    }
 }
 
 public struct Temperature {

@@ -33,19 +33,22 @@ public final class AnovaDevice {
             return peripheral.execute("\(command)\r", characteristic: characteristic)
                 // strip the trailing \r
                 // TODO some responses span multiple lines
-                |> map { $0.substringToIndex($0.endIndex.predecessor()) }
+                |> map {
+                    let res = $0.substringToIndex($0.endIndex.predecessor())
+                    return res
+            }
         }
         queue = sink
     }
 
     public static func connect(central: CentralManager, peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NSError> {
         return central.connect(peripheral)
-            |> flatMap(.Latest) { (periph: Peripheral) in
+            |> flatMap(.Merge) { (periph: Peripheral) in
                 return periph.discoverServices([CBUUID(string: "FFE0")])
-                    |> flatMap(.Latest) {
+                    |> flatMap(.Merge) {
                         periph.discoverCharacteristics(nil, service: $0)
                     }
-                    |> flatMap(.Latest) {
+                    |> flatMap(.Merge) {
                         periph.setNotifyValue(true, characteristic: $0)
                     }
                     |> map {
@@ -53,6 +56,15 @@ public final class AnovaDevice {
                     }
             }
     }
+
+    public private(set) lazy var temperatureScale: SignalProducer<TemperatureScale, NSError> = {
+        return self.queueCommand("read unit") |> tryMap {
+            if let scale = TemperatureScale(scale: $0) {
+                return .success(scale)
+            }
+            return .failure(NSError())
+        }
+    }()
 
     public private(set) lazy var currentTemperature: SignalProducer<Temperature, NSError> = {
         return self.readTemperature("read temp")
@@ -63,19 +75,13 @@ public final class AnovaDevice {
     }()
 
     private func readTemperature(command: String) -> SignalProducer<Temperature, NSError> {
-        return zip(queueCommand("read unit"), queueCommand(command))
-            |> tryMap { unit, temp in
-                // TODO proper response parsing
-                switch (unit, (temp as NSString).floatValue) {
-                case let ("c", degrees):
-                    return .success(.celsius(degrees))
-                case let ("f", degrees):
-                    return .success(.farenheit(degrees))
-                default:
-                    // TODO Proper error
-                    return .failure(NSError())
-                }
-            }
+        return zip(temperatureScale, rawTemperature(command))
+            |> map { return Temperature(scale: $0, degrees: $1) }
+    }
+
+    private func rawTemperature(command: String) -> SignalProducer<Float, NSError> {
+        // TODO Better number parsing
+        return queueCommand(command) |> map { ($0 as NSString).floatValue }
     }
 
     private func queueCommand(command: String) -> SignalProducer<String, NSError> {
