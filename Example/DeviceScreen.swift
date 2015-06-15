@@ -31,6 +31,10 @@ class DeviceScreen: UIViewController {
     @IBOutlet weak var targetTemp: UILabel!
     @IBOutlet weak var currentTemp: UILabel!
 
+    @IBOutlet weak var timerStatus: UILabel!
+
+    @IBOutlet weak var deviceStatus: UILabel!
+
     lazy var connectAction: Action<Any?, AnovaDevice, NSError> = Action { _ in
         return AnovaDevice.connect(self.central, peripheral: self.peripheral)
             |> observeOn(UIScheduler())
@@ -47,6 +51,8 @@ class DeviceScreen: UIViewController {
 
         bindLabel(targetTemp) { $0.targetTemperature }
         bindLabel(currentTemp) { $0.currentTemperature }
+        bindLabel(deviceStatus) { $0.status }
+        bindLabel(timerStatus) { $0.readTimer }
 
         connectAction.apply(nil).start()
     }

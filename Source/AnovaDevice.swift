@@ -8,7 +8,27 @@
 
 import CoreBluetooth
 import ReactiveCocoa
+import Result
 import Rex
+
+public enum AnovaStatus: String {
+    case Running = "running"
+    case Stopped = "stopped"
+    case LowWater = "low water"
+    case HeaterError = "heater error"
+    case PowerInterrupt = "power interrupt error"
+}
+
+extension AnovaStatus: Printable {
+    public var description: String {
+        return self.rawValue
+    }
+}
+
+public enum TimerStatus: String {
+    case Running = "running"
+    case Stopped = "stopped"
+}
 
 public final class AnovaDevice {
     private let peripheral: Peripheral
@@ -74,6 +94,31 @@ public final class AnovaDevice {
         return self.readTemperature("read set temp")
     }()
 
+    public private(set) lazy var status: SignalProducer<AnovaStatus, NSError> = {
+        return self.queueCommand("status") |> tryMap {
+            if let status = AnovaStatus(rawValue: $0) {
+                return .success(status)
+            }
+            return .failure(NSError())
+        }
+    }()
+
+    public private(set) lazy var readTimer: SignalProducer<String, NSError> = {
+        return self.queueCommand("read timer")
+    }()
+
+    public private(set) lazy var startTimer: SignalProducer<String, NSError> = {
+        return self.queueCommand("start time")
+    }()
+
+    public private(set) lazy var stopTimer: SignalProducer<String, NSError> = {
+        return self.queueCommand("stop time")
+    }()
+
+    public func setTimer(minutes: Int) -> SignalProducer<String, NSError> {
+        return self.queueCommand("set timer \(minutes)")
+    }
+
     private func readTemperature(command: String) -> SignalProducer<Temperature, NSError> {
         return zip(temperatureScale, rawTemperature(command))
             |> map { return Temperature(scale: $0, degrees: $1) }
@@ -90,5 +135,13 @@ public final class AnovaDevice {
 
             // TODO deque commands on disposal
         }
+        |> logEvents("COMMAND: \(command)")
+    }
+
+    private func parse<T>(parser: String -> T?)(string: String) -> Result<T, NSError> {
+        if let value = parser(string) {
+            return .success(value)
+        }
+        return .failure(NSError())
     }
 }
