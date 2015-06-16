@@ -1,4 +1,5 @@
 github "robrix/Box" "1.2.2"
 github "antitypical/Result" "0.4.4"
-github "ReactiveCocoa/ReactiveCocoa" "fca7e280b17f9e3a9edec8d925945dfb4bffe699"
+github "ReactiveCocoa/ReactiveCocoa" "v3.0-beta.8"
+github "ReactiveCocoa/EditableProperty" "61c13278f23dee6d21f60e499c31763d18efad32"
 github "neilpa/Rex" "628fd2df09145e43a448018f9eab295788f4e8e2"
