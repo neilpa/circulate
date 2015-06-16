@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Neil Pankey. All rights reserved.
 //
 
+import Box
 import CoreBluetooth
 import ReactiveCocoa
 import Result
@@ -94,6 +95,18 @@ public final class AnovaDevice {
         return self.readTemperature("read set temp")
     }()
 
+    public func setTemperatureScale(scale: TemperatureScale) -> SignalProducer<String, NSError> {
+        return self.queueCommand("set unit \(scale.description.lowercaseString)")
+    }
+
+    public func setTemperatureDegrees(degrees: Float) -> SignalProducer<String, NSError> {
+        return self.queueCommand("set temp \(degrees)")
+    }
+
+    public func setTemperature(temperature: Temperature) -> SignalProducer<String, NSError> {
+        return setTemperatureScale(temperature.scale) |> concat(setTemperatureDegrees(temperature.degrees))
+    }
+
     public private(set) lazy var status: SignalProducer<AnovaStatus, NSError> = {
         return self.queueCommand("status") |> tryMap {
             if let status = AnovaStatus(rawValue: $0) {
@@ -101,6 +114,28 @@ public final class AnovaDevice {
             }
             return .failure(NSError())
         }
+    }()
+
+    public private(set) lazy var startStop: ActionProperty<Bool, String, NSError> = { _ in
+        ActionProperty(action: Action {
+            return $0 ? self.startDevice : self.stopDevice
+        })
+    }()
+
+    public private(set) lazy var start: Action<(), String, NSError> = Action {
+        return self.startDevice
+    }
+
+    public private(set) lazy var stop: Action<(), String, NSError> = Action {
+        return self.stopDevice
+    }
+
+    public private(set) lazy var startDevice: SignalProducer<String, NSError> = {
+        return self.queueCommand("start")
+    }()
+
+    public private(set) lazy var stopDevice: SignalProducer<String, NSError> = {
+        return self.queueCommand("stop")
     }()
 
     public private(set) lazy var readTimer: SignalProducer<String, NSError> = {

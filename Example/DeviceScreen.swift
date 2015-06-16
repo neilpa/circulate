@@ -35,6 +35,8 @@ class DeviceScreen: UIViewController {
 
     @IBOutlet weak var deviceStatus: UILabel!
 
+    @IBOutlet weak var startStop: UIButton!
+
     lazy var connectAction: Action<Any?, AnovaDevice, NSError> = Action { _ in
         return AnovaDevice.connect(self.central, peripheral: self.peripheral)
             |> observeOn(UIScheduler())

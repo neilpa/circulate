@@ -39,6 +39,7 @@
 		D8696D411B1A536100AC1804 /* CentralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8696D401B1A536100AC1804 /* CentralManagerDelegate.swift */; };
 		D8696D431B1A536C00AC1804 /* PeripheralDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8696D421B1A536C00AC1804 /* PeripheralDelegate.swift */; };
 		D88C44A11B1FCA0100A82E69 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88C44A01B1FCA0100A82E69 /* Temperature.swift */; };
+		D8D608881B2F98BD0068D35B /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D608871B2F98BD0068D35B /* Property.swift */; };
 		D8F0972C1B17AB01002E15BA /* DeviceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */; };
 		D8F097301B17AB3D002E15BA /* ProducerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0972F1B17AB3D002E15BA /* ProducerDataSource.swift */; };
 		D8F097351B17C9CD002E15BA /* AnovaDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F097331B17C95B002E15BA /* AnovaDevice.swift */; };
@@ -107,6 +108,7 @@
 		D8696D401B1A536100AC1804 /* CentralManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralManagerDelegate.swift; sourceTree = "<group>"; };
 		D8696D421B1A536C00AC1804 /* PeripheralDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralDelegate.swift; sourceTree = "<group>"; };
 		D88C44A01B1FCA0100A82E69 /* Temperature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
+		D8D608871B2F98BD0068D35B /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceScreen.swift; sourceTree = "<group>"; };
 		D8F0972F1B17AB3D002E15BA /* ProducerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProducerDataSource.swift; sourceTree = "<group>"; };
 		D8F097331B17C95B002E15BA /* AnovaDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnovaDevice.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				D8696D401B1A536100AC1804 /* CentralManagerDelegate.swift */,
 				D80525761B193EBF000BD258 /* Peripheral.swift */,
 				D8696D421B1A536C00AC1804 /* PeripheralDelegate.swift */,
+				D8D608871B2F98BD0068D35B /* Property.swift */,
 				D84A49CF1B1D1CD2002C8206 /* SignalProducer.swift */,
 				D88C44A01B1FCA0100A82E69 /* Temperature.swift */,
 				D812FF0B1B151410009D3016 /* Supporting Files */,
@@ -391,6 +394,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D608881B2F98BD0068D35B /* Property.swift in Sources */,
 				D8696D431B1A536C00AC1804 /* PeripheralDelegate.swift in Sources */,
 				D84A49D01B1D1CD2002C8206 /* SignalProducer.swift in Sources */,
 				D88C44A11B1FCA0100A82E69 /* Temperature.swift in Sources */,

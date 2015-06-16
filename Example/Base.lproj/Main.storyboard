@@ -146,6 +146,12 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9y-rq-zxt">
+                                <rect key="frame" x="137" y="430" width="71" height="30"/>
+                                <state key="normal" title="Start/Stop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Device Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRr-XB-8MG">
                                 <rect key="frame" x="0.0" y="296" width="320" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -160,6 +166,7 @@
                         <outlet property="connectingIndicator" destination="3cF-1d-u6r" id="M8j-QA-8gf"/>
                         <outlet property="currentTemp" destination="LVc-k4-RtB" id="KNs-XQ-S1Z"/>
                         <outlet property="deviceStatus" destination="ZRr-XB-8MG" id="WI0-Vu-S1k"/>
+                        <outlet property="startStop" destination="R9y-rq-zxt" id="gMZ-hq-cUs"/>
                         <outlet property="targetTemp" destination="euj-jW-gXK" id="enL-3n-gdl"/>
                         <outlet property="timerStatus" destination="o4H-5c-CCl" id="O29-1n-xuO"/>
                     </connections>
