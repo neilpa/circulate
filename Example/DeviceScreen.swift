@@ -76,4 +76,11 @@ class DeviceScreen: UIViewController {
             |> observeOn(UIScheduler())
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "temp" {
+            if let picker = segue.destinationViewController as? TemperaturePicker {
+                picker.device = self.device.value
+            }
+        }
+    }
 }

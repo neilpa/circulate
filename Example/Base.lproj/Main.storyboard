@@ -103,6 +103,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3cF-1d-u6r">
+                                <rect key="frame" x="142" y="90" width="37" height="37"/>
+                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4H-5c-CCl">
                                 <rect key="frame" x="0.0" y="238" width="320" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -110,21 +114,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Target" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euj-jW-gXK">
-                                <rect key="frame" x="0.0" y="176" width="163" height="21"/>
+                                <rect key="frame" x="79" y="174" width="163" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVc-k4-RtB">
-                                <rect key="frame" x="159" y="176" width="161" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Device Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRr-XB-8MG">
+                                <rect key="frame" x="0.0" y="298" width="320" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3cF-1d-u6r">
-                                <rect key="frame" x="142" y="90" width="37" height="37"/>
-                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEMPERATURE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMn-xr-mm6">
                                 <rect key="frame" x="0.0" y="147" width="320" height="21"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -140,7 +140,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="STATUS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMf-1Z-Vdx">
-                                <rect key="frame" x="0.0" y="267" width="320" height="21"/>
+                                <rect key="frame" x="0.0" y="269" width="320" height="21"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -152,9 +152,19 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Device Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZRr-XB-8MG">
-                                <rect key="frame" x="0.0" y="296" width="320" height="21"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b17-lF-Qh5">
+                                <rect key="frame" x="277" y="143" width="30" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Edit">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="GBt-Sg-aG7" kind="presentation" identifier="temp" id="NQf-TO-qde"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVc-k4-RtB">
+                                <rect key="frame" x="16" y="79" width="291" height="56"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -174,6 +184,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iC4-XE-8eK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2937" y="40"/>
+        </scene>
+        <!--Temperature Picker-->
+        <scene sceneID="085-Jl-yHl">
+            <objects>
+                <viewController id="GBt-Sg-aG7" customClass="TemperaturePicker" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QQE-NC-T2L"/>
+                        <viewControllerLayoutGuide type="bottom" id="Kdc-PV-fxy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KOl-VW-mWC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1r-Ta-H25" customClass="IntPicker" customModule="Example" customModuleProvider="target">
+                                <rect key="frame" x="123" y="112" width="72" height="176"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="min">
+                                        <integer key="value" value="32"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="max">
+                                        <integer key="value" value="100"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pm3-DQ-cUH">
+                                <rect key="frame" x="231" y="341" width="37" height="30"/>
+                                <state key="normal" title="Done">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9J9-Vo-n91">
+                                <rect key="frame" x="69" y="341" width="48" height="30"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Kdc-PV-fxy" firstAttribute="top" secondItem="9J9-Vo-n91" secondAttribute="bottom" constant="109" id="8lm-d2-YHj"/>
+                            <constraint firstItem="Kdc-PV-fxy" firstAttribute="top" secondItem="Pm3-DQ-cUH" secondAttribute="bottom" constant="109" id="Qic-uq-rao"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Pm3-DQ-cUH" secondAttribute="trailing" constant="36" id="i9P-uk-14u"/>
+                            <constraint firstItem="9J9-Vo-n91" firstAttribute="leading" secondItem="KOl-VW-mWC" secondAttribute="leadingMargin" constant="53" id="iDu-P5-l2S"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="9J9-Vo-n91" id="Alq-PV-aID"/>
+                        <outlet property="degreesPicker" destination="N1r-Ta-H25" id="9cS-P1-Yfh"/>
+                        <outlet property="doneButton" destination="Pm3-DQ-cUH" id="dXj-9D-hkv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FBe-tI-LRA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3348" y="40"/>
         </scene>
         <!--Master-->
         <scene sceneID="3yE-YS-2yq">
