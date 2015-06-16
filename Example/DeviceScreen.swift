@@ -54,7 +54,6 @@ class DeviceScreen: UIViewController {
         bindLabel(targetTemp) { $0.targetTemperature }
         bindLabel(currentTemp) { $0.currentTemperature }
         bindLabel(deviceStatus) { $0.status }
-        bindLabel(timerStatus) { $0.readTimer }
 
         connectAction.apply(nil).start()
     }

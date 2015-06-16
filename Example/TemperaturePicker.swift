@@ -54,10 +54,11 @@ public final class TemperaturePicker: UIViewController {
     }
 
     public func done() {
-        device!.setTemperatureDegrees(Float(degreesPicker.value))
-            |> start(next: { _ in
+        // TODO
+//        device!.setTemperatureDegrees(Float(degreesPicker.value))
+//            |> start(next: { _ in
                 self.close()
-            })
+//            })
     }
 
     public func close() {

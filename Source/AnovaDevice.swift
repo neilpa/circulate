@@ -78,88 +78,60 @@ public final class AnovaDevice {
             }
     }
 
-    public private(set) lazy var temperatureScale: SignalProducer<TemperatureScale, NSError> = {
-        return self.queueCommand("read unit") |> tryMap {
-            if let scale = TemperatureScale(scale: $0) {
-                return .success(scale)
-            }
-            return .failure(NSError())
-        }
-    }()
-
     public private(set) lazy var currentTemperature: SignalProducer<Temperature, NSError> = {
-        return self.readTemperature("read temp")
+        self.readTemperature("read temp")
     }()
 
     public private(set) lazy var targetTemperature: SignalProducer<Temperature, NSError> = {
-        return self.readTemperature("read set temp")
+        self.readTemperature("read set temp")
     }()
 
-    public func setTemperatureScale(scale: TemperatureScale) -> SignalProducer<String, NSError> {
-        return self.queueCommand("set unit \(scale.description.lowercaseString)")
-    }
-
-    public func setTemperatureDegrees(degrees: Float) -> SignalProducer<String, NSError> {
-        return self.queueCommand("set temp \(degrees)")
-    }
-
-    public func setTemperature(temperature: Temperature) -> SignalProducer<String, NSError> {
-        return setTemperatureScale(temperature.scale) |> concat(setTemperatureDegrees(temperature.degrees))
-    }
-
     public private(set) lazy var status: SignalProducer<AnovaStatus, NSError> = {
+        self.readStatus()
+    }()
+
+    // MARK: Private
+
+    private func startDevice() -> SignalProducer<String, NSError> {
+        return self.queueCommand("start")
+    }
+
+    private func stopDevice() -> SignalProducer<String, NSError> {
+        return self.queueCommand("stop")
+    }
+
+    private func readStatus() -> SignalProducer<AnovaStatus, NSError> {
         return self.queueCommand("status") |> tryMap {
             if let status = AnovaStatus(rawValue: $0) {
                 return .success(status)
             }
             return .failure(NSError())
         }
-    }()
-
-    public private(set) lazy var startStop: ActionProperty<Bool, String, NSError> = { _ in
-        ActionProperty(action: Action {
-            return $0 ? self.startDevice : self.stopDevice
-        })
-    }()
-
-    public private(set) lazy var start: Action<(), String, NSError> = Action {
-        return self.startDevice
-    }
-
-    public private(set) lazy var stop: Action<(), String, NSError> = Action {
-        return self.stopDevice
-    }
-
-    public private(set) lazy var startDevice: SignalProducer<String, NSError> = {
-        return self.queueCommand("start")
-    }()
-
-    public private(set) lazy var stopDevice: SignalProducer<String, NSError> = {
-        return self.queueCommand("stop")
-    }()
-
-    public private(set) lazy var readTimer: SignalProducer<String, NSError> = {
-        return self.queueCommand("read timer")
-    }()
-
-    public private(set) lazy var startTimer: SignalProducer<String, NSError> = {
-        return self.queueCommand("start time")
-    }()
-
-    public private(set) lazy var stopTimer: SignalProducer<String, NSError> = {
-        return self.queueCommand("stop time")
-    }()
-
-    public func setTimer(minutes: Int) -> SignalProducer<String, NSError> {
-        return self.queueCommand("set timer \(minutes)")
     }
 
     private func readTemperature(command: String) -> SignalProducer<Temperature, NSError> {
-        return zip(temperatureScale, rawTemperature(command))
+        return zip(readTemperatureScale(), readDegrees(command))
             |> map { return Temperature(scale: $0, degrees: $1) }
     }
 
-    private func rawTemperature(command: String) -> SignalProducer<Float, NSError> {
+    private func readTemperatureScale() -> SignalProducer<TemperatureScale, NSError> {
+        return queueCommand("read unit") |> tryMap {
+            if let status = TemperatureScale(scale: $0) {
+                return .success(status)
+            }
+            return .failure(NSError())
+        }
+    }
+
+    private func readTargetDegrees() -> SignalProducer<Float, NSError> {
+        return readDegrees("read set temp")
+    }
+
+    private func readCurrentDegrees() -> SignalProducer<Float, NSError> {
+        return readDegrees("read temp")
+    }
+
+    private func readDegrees(command: String) -> SignalProducer<Float, NSError> {
         // TODO Better number parsing
         return queueCommand(command) |> map { ($0 as NSString).floatValue }
     }
