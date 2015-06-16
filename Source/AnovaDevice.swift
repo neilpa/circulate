@@ -6,11 +6,8 @@
 //  Copyright (c) 2015 Neil Pankey. All rights reserved.
 //
 
-import Box
 import CoreBluetooth
 import ReactiveCocoa
-import Result
-import Rex
 
 public enum AnovaStatus: String {
     case Running = "running"
@@ -33,9 +30,7 @@ public enum TimerStatus: String {
 
 public final class AnovaDevice {
     private let peripheral: Peripheral
-    private let characteristic: CBCharacteristic
-
-    private let queue: Signal<(String, Signal<String, NSError>.Observer), NSError>.Observer
+    private let queue: CommandQueue
 
     public var name: String {
         return peripheral.name
@@ -47,19 +42,7 @@ public final class AnovaDevice {
 
     public init(peripheral: Peripheral, characteristic: CBCharacteristic) {
         self.peripheral = peripheral
-        self.characteristic = characteristic
-
-        // Commands are pushed to this producer to serialize writes to the underlying peripheral
-        let (sink, disposable) = serialize { (command: String) -> SignalProducer<String, NSError> in
-            return peripheral.execute("\(command)\r", characteristic: characteristic)
-                // strip the trailing \r
-                // TODO some responses span multiple lines
-                |> map {
-                    let res = $0.substringToIndex($0.endIndex.predecessor())
-                    return res
-            }
-        }
-        queue = sink
+        queue = CommandQueue(peripheral: peripheral, characteristic: characteristic)
     }
 
     public static func connect(central: CentralManager, peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NSError> {
@@ -79,76 +62,14 @@ public final class AnovaDevice {
     }
 
     public private(set) lazy var currentTemperature: SignalProducer<Temperature, NSError> = {
-        self.readTemperature("read temp")
+        self.queue.readCurrentTemperature()
     }()
 
     public private(set) lazy var targetTemperature: SignalProducer<Temperature, NSError> = {
-        self.readTemperature("read set temp")
+        self.queue.readTargetTemperature()
     }()
 
     public private(set) lazy var status: SignalProducer<AnovaStatus, NSError> = {
-        self.readStatus()
+        self.queue.readStatus()
     }()
-
-    // MARK: Private
-
-    private func startDevice() -> SignalProducer<String, NSError> {
-        return self.queueCommand("start")
-    }
-
-    private func stopDevice() -> SignalProducer<String, NSError> {
-        return self.queueCommand("stop")
-    }
-
-    private func readStatus() -> SignalProducer<AnovaStatus, NSError> {
-        return self.queueCommand("status") |> tryMap {
-            if let status = AnovaStatus(rawValue: $0) {
-                return .success(status)
-            }
-            return .failure(NSError())
-        }
-    }
-
-    private func readTemperature(command: String) -> SignalProducer<Temperature, NSError> {
-        return zip(readTemperatureScale(), readDegrees(command))
-            |> map { return Temperature(scale: $0, degrees: $1) }
-    }
-
-    private func readTemperatureScale() -> SignalProducer<TemperatureScale, NSError> {
-        return queueCommand("read unit") |> tryMap {
-            if let status = TemperatureScale(scale: $0) {
-                return .success(status)
-            }
-            return .failure(NSError())
-        }
-    }
-
-    private func readTargetDegrees() -> SignalProducer<Float, NSError> {
-        return readDegrees("read set temp")
-    }
-
-    private func readCurrentDegrees() -> SignalProducer<Float, NSError> {
-        return readDegrees("read temp")
-    }
-
-    private func readDegrees(command: String) -> SignalProducer<Float, NSError> {
-        // TODO Better number parsing
-        return queueCommand(command) |> map { ($0 as NSString).floatValue }
-    }
-
-    private func queueCommand(command: String) -> SignalProducer<String, NSError> {
-        return SignalProducer { observer, _ in
-            sendNext(self.queue, (command, observer))
-
-            // TODO deque commands on disposal
-        }
-        |> logEvents("COMMAND: \(command)")
-    }
-
-    private func parse<T>(parser: String -> T?)(string: String) -> Result<T, NSError> {
-        if let value = parser(string) {
-            return .success(value)
-        }
-        return .failure(NSError())
-    }
 }

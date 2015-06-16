@@ -42,6 +42,7 @@
 		D8980E051B30CB8500B467B6 /* EditableProperty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8980E041B30CB8500B467B6 /* EditableProperty.framework */; };
 		D8980E061B30CB8500B467B6 /* EditableProperty.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D8980E041B30CB8500B467B6 /* EditableProperty.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D8980E071B30CBD600B467B6 /* EditableProperty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8980E041B30CB8500B467B6 /* EditableProperty.framework */; };
+		D8980E0B1B30D91500B467B6 /* CommandQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8980E0A1B30D91500B467B6 /* CommandQueue.swift */; };
 		D8D608881B2F98BD0068D35B /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D608871B2F98BD0068D35B /* Property.swift */; };
 		D8D608951B2FB29E0068D35B /* TemperaturePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D608941B2FB29E0068D35B /* TemperaturePicker.swift */; };
 		D8F0972C1B17AB01002E15BA /* DeviceScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */; };
@@ -114,6 +115,7 @@
 		D8696D421B1A536C00AC1804 /* PeripheralDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralDelegate.swift; sourceTree = "<group>"; };
 		D88C44A01B1FCA0100A82E69 /* Temperature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
 		D8980E041B30CB8500B467B6 /* EditableProperty.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EditableProperty.framework; path = Carthage/Build/iOS/EditableProperty.framework; sourceTree = "<group>"; };
+		D8980E0A1B30D91500B467B6 /* CommandQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandQueue.swift; sourceTree = "<group>"; };
 		D8D608871B2F98BD0068D35B /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		D8D608941B2FB29E0068D35B /* TemperaturePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemperaturePicker.swift; sourceTree = "<group>"; };
 		D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceScreen.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				D82399541B1650A80096E95C /* CBCentralManagerState.swift */,
 				D80525781B193F18000BD258 /* CentralManager.swift */,
 				D8696D401B1A536100AC1804 /* CentralManagerDelegate.swift */,
+				D8980E0A1B30D91500B467B6 /* CommandQueue.swift */,
 				D80525761B193EBF000BD258 /* Peripheral.swift */,
 				D8696D421B1A536C00AC1804 /* PeripheralDelegate.swift */,
 				D8D608871B2F98BD0068D35B /* Property.swift */,
@@ -408,6 +411,7 @@
 				D8D608881B2F98BD0068D35B /* Property.swift in Sources */,
 				D8696D431B1A536C00AC1804 /* PeripheralDelegate.swift in Sources */,
 				D84A49D01B1D1CD2002C8206 /* SignalProducer.swift in Sources */,
+				D8980E0B1B30D91500B467B6 /* CommandQueue.swift in Sources */,
 				D88C44A11B1FCA0100A82E69 /* Temperature.swift in Sources */,
 				D80525771B193EBF000BD258 /* Peripheral.swift in Sources */,
 				D8696D411B1A536100AC1804 /* CentralManagerDelegate.swift in Sources */,
