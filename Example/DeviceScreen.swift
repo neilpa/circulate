@@ -51,23 +51,20 @@ class DeviceScreen: UIViewController {
 
         device <~ connectAction.values |> scan(nil) { $1 }
 
-        bindLabel(targetTemp) { $0.targetTemperature }
         bindLabel(currentTemp) { $0.currentTemperature }
         bindLabel(deviceStatus) { $0.status }
+        bindLabel(targetTemp) { $0.targetTemperature }
 
         connectAction.apply(nil).start()
     }
 
-    private func bindLabel<T>(label: UILabel, transform: AnovaDevice -> SignalProducer<T, NSError>) {
+    private func bindLabel<T>(label: UILabel, transform: AnovaDevice -> PropertyOf<T?>) {
         DynamicProperty(object: label, keyPath: "text") <~ device.producer
             |> flatMap(.Latest) {
                 if let device = $0 {
-                    return transform(device)
-                        |> ignoreError // TODO Handle failures
-                        // DynamicProperty requires AnyObject
-                        |> map {
-                            return toString($0) as AnyObject
-                        }
+                    return transform(device).producer
+                        |> ignoreNil
+                        |> map { return toString($0) as AnyObject }
                 } else {
                     return SignalProducer(value: "--")
                 }

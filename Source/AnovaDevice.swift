@@ -8,6 +8,7 @@
 
 import CoreBluetooth
 import ReactiveCocoa
+import Rex
 
 public enum AnovaStatus: String {
     case Running = "running"
@@ -61,15 +62,19 @@ public final class AnovaDevice {
             }
     }
 
-    public private(set) lazy var currentTemperature: SignalProducer<Temperature, NSError> = {
-        self.queue.readCurrentTemperature()
+    public private(set) lazy var currentTemperature: PropertyOf<Temperature?> = {
+        makeProperty(self.queue.readCurrentTemperature())
     }()
 
-    public private(set) lazy var targetTemperature: SignalProducer<Temperature, NSError> = {
-        self.queue.readTargetTemperature()
+    public private(set) lazy var targetTemperature: PropertyOf<Temperature?> = {
+        makeProperty(self.queue.readTargetTemperature())
     }()
 
-    public private(set) lazy var status: SignalProducer<AnovaStatus, NSError> = {
-        self.queue.readStatus()
+    public private(set) lazy var status: PropertyOf<AnovaStatus?> = {
+        makeProperty(self.queue.readStatus())
     }()
+}
+
+private func makeProperty<T>(producer: SignalProducer<T, NSError>) -> PropertyOf<T?> {
+    return PropertyOf(SignalProperty(nil, producer |> optionalize |> ignoreError))
 }
