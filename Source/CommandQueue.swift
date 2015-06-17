@@ -43,15 +43,15 @@ public final class CommandQueue {
     }
 
     public func startDevice() -> SignalProducer<String, NSError> {
-        return self.queueCommand("start")
+        return queueCommand("start")
     }
 
     public func stopDevice() -> SignalProducer<String, NSError> {
-        return self.queueCommand("stop")
+        return queueCommand("stop")
     }
 
     public func readStatus() -> SignalProducer<AnovaStatus, NSError> {
-        return self.queueCommand("status") |> tryMap {
+        return queueCommand("status") |> tryMap {
             if let status = AnovaStatus(rawValue: $0) {
                 return .success(status)
             }

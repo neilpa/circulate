@@ -20,7 +20,7 @@ public enum AnovaStatus: String {
 
 extension AnovaStatus: Printable {
     public var description: String {
-        return self.rawValue
+        return rawValue
     }
 }
 
