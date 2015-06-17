@@ -146,12 +146,6 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9y-rq-zxt">
-                                <rect key="frame" x="137" y="430" width="71" height="30"/>
-                                <state key="normal" title="Start/Stop">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b17-lF-Qh5">
                                 <rect key="frame" x="277" y="143" width="30" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -168,6 +162,18 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9y-rq-zxt">
+                                <rect key="frame" x="193" y="387" width="71" height="30"/>
+                                <state key="normal" title="Start">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfx-1t-Fx4">
+                                <rect key="frame" x="58" y="387" width="71" height="30"/>
+                                <state key="normal" title="Stop">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -176,7 +182,8 @@
                         <outlet property="connectingIndicator" destination="3cF-1d-u6r" id="M8j-QA-8gf"/>
                         <outlet property="currentTemp" destination="LVc-k4-RtB" id="KNs-XQ-S1Z"/>
                         <outlet property="deviceStatus" destination="ZRr-XB-8MG" id="WI0-Vu-S1k"/>
-                        <outlet property="startStop" destination="R9y-rq-zxt" id="gMZ-hq-cUs"/>
+                        <outlet property="startButton" destination="R9y-rq-zxt" id="yiL-9m-hgd"/>
+                        <outlet property="stopButton" destination="lfx-1t-Fx4" id="A7z-Wt-13R"/>
                         <outlet property="targetTemp" destination="euj-jW-gXK" id="enL-3n-gdl"/>
                         <outlet property="timerStatus" destination="o4H-5c-CCl" id="O29-1n-xuO"/>
                     </connections>

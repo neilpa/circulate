@@ -25,3 +25,9 @@ public func serialize<T, U, E>(transform: T -> SignalProducer<U, E>) -> (Signal<
         }
     return (sink, queue |> start())
 }
+
+public func liftSignal<T, E>(signal: Signal<T, E>) -> SignalProducer<T, E> {
+    return SignalProducer { observer, disposable in
+        disposable.addDisposable(signal.observe(observer))
+    }
+}

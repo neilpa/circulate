@@ -35,7 +35,8 @@ class DeviceScreen: UIViewController {
 
     @IBOutlet weak var deviceStatus: UILabel!
 
-    @IBOutlet weak var startStop: UIButton!
+    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
 
     lazy var connectAction: Action<Any?, AnovaDevice, NSError> = Action { _ in
         return AnovaDevice.connect(self.central, peripheral: self.peripheral)
@@ -48,6 +49,9 @@ class DeviceScreen: UIViewController {
         connectAction.executing.producer.start(next: {
             $0 ? self.connectingIndicator.startAnimating() : self.connectingIndicator.stopAnimating()
         })
+
+        startButton.addTarget(self, action: "start", forControlEvents: .TouchUpInside)
+        stopButton.addTarget(self, action: "stop", forControlEvents: .TouchUpInside)
 
         device <~ connectAction.values |> scan(nil) { $1 }
 
@@ -70,6 +74,14 @@ class DeviceScreen: UIViewController {
                 }
             }
             |> observeOn(UIScheduler())
+    }
+
+    func start() {
+        device.value?.startDevice.apply(()).start()
+    }
+
+    func stop() {
+        device.value?.stopDevice.apply(()).start()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

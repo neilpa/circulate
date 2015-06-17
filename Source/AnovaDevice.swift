@@ -62,6 +62,14 @@ public final class AnovaDevice {
             }
     }
 
+    public private(set) lazy var startDevice: Action<(), String, NSError> = {
+        return Action { self.queue.startDevice() }
+    }()
+
+    public private(set) lazy var stopDevice: Action<(), String, NSError> = {
+        return Action { self.queue.stopDevice() }
+    }()
+
     public private(set) lazy var currentTemperature: PropertyOf<Temperature?> = {
         makeProperty(self.queue.readCurrentTemperature())
     }()
