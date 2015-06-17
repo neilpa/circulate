@@ -11,17 +11,6 @@ import CoreBluetooth
 import ReactiveCocoa
 import Rex
 
-func loadViewController<T: UIViewController>(storyboardId: String, viewControllerId: String) -> T {
-    let storyboard = UIStoryboard(name: storyboardId, bundle: nil)
-    return storyboard.instantiateViewControllerWithIdentifier(viewControllerId) as! T
-}
-
-extension CocoaAction {
-    public convenience init<Output, Error>(_ action: Action<(), Output, Error>) {
-        self.init(action, { _ in })
-    }
-}
-
 class DeviceScreen: UIViewController {
     var central: CentralManager!
     var peripheral: CBPeripheral!
