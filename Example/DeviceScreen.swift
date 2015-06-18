@@ -40,28 +40,25 @@ class DeviceScreen: UIViewController {
             |> catch { _ in SignalProducer(value: nil) }
 
         DynamicProperty(object: targetTemp, keyPath: "text") <~ device.producer
-            |> ignoreNil // TODO Handle nil
-            |> flatMap(FlattenStrategy.Latest) {
+            |> flatMap(FlattenStrategy.Latest, ifNil: "--") {
                 $0.readTargetTemp.apply(())
-                    |> ignoreError
+                    |> ignoreError // TODO Handle errors
                     |> map { toString($0) as AnyObject }
             }
             |> observeOn(UIScheduler())
 
         DynamicProperty(object: currentTemp, keyPath: "text") <~ device.producer
-            |> ignoreNil // TODO Handle nil
-            |> flatMap(FlattenStrategy.Latest) {
+            |> flatMap(FlattenStrategy.Latest, ifNil: "--") {
                 $0.readCurrentTemp.apply(())
-                    |> ignoreError
+                    |> ignoreError // TODO Handle errors
                     |> map { toString($0) as AnyObject }
             }
             |> observeOn(UIScheduler())
 
         DynamicProperty(object: deviceStatus, keyPath: "text") <~ device.producer
-            |> ignoreNil // TODO Handle nil
-            |> flatMap(FlattenStrategy.Latest) {
+            |> flatMap(FlattenStrategy.Latest, ifNil: "--") {
                 $0.readStatus.apply(())
-                    |> ignoreError
+                    |> ignoreError // TODO Handle errors
                     |> map { toString($0) as AnyObject }
             }
             |> observeOn(UIScheduler())
