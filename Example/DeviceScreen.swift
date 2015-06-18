@@ -40,7 +40,7 @@ class DeviceScreen: UIViewController {
             |> catch { _ in SignalProducer(value: nil) }
 
         DynamicProperty(object: targetTemp, keyPath: "text") <~ device.producer
-            |> flatMap(FlattenStrategy.Latest, ifNil: "--") {
+            |> flatMap(FlattenStrategy.Latest, placeholder: "--") {
                 $0.readTargetTemp.apply(())
                     |> ignoreError // TODO Handle errors
                     |> map { toString($0) as AnyObject }
@@ -48,7 +48,7 @@ class DeviceScreen: UIViewController {
             |> observeOn(UIScheduler())
 
         DynamicProperty(object: currentTemp, keyPath: "text") <~ device.producer
-            |> flatMap(FlattenStrategy.Latest, ifNil: "--") {
+            |> flatMap(FlattenStrategy.Latest, placeholder: "--") {
                 $0.readCurrentTemp.apply(())
                     |> ignoreError // TODO Handle errors
                     |> map { toString($0) as AnyObject }
@@ -56,7 +56,7 @@ class DeviceScreen: UIViewController {
             |> observeOn(UIScheduler())
 
         DynamicProperty(object: deviceStatus, keyPath: "text") <~ device.producer
-            |> flatMap(FlattenStrategy.Latest, ifNil: "--") {
+            |> flatMap(FlattenStrategy.Latest, placeholder: "--") {
                 $0.readStatus.apply(())
                     |> ignoreError // TODO Handle errors
                     |> map { toString($0) as AnyObject }
