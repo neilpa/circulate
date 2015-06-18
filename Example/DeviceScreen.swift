@@ -39,26 +39,42 @@ class DeviceScreen: UIViewController {
             }
             |> catch { _ in SignalProducer(value: nil) }
 
-        DynamicProperty(object: targetTemp, keyPath: "text") <~ device.producer
-            |> flatMapUI(FlattenStrategy.Latest, placeholder: "--") {
-                $0.readTargetTemp.apply(())
-                    |> ignoreError // TODO Handle errors
-                    |> map { toString($0) as AnyObject }
+        (device.producer
+            |> ignoreNil
+            |> map { device in
+                // Fetch the new state whenever the device changes
+                return device.readCurrentTemp.apply(())
+                    |> then(device.readTargetTemp.apply(()))
+                    |> then(device.readStatus.apply(()))
+                    |> ignoreError
             }
+            |> flatten(.Latest))
+            // For some reason the compiler barfs when using |> start()
+            .start()
 
         DynamicProperty(object: currentTemp, keyPath: "text") <~ device.producer
             |> flatMapUI(FlattenStrategy.Latest, placeholder: "--") {
-                $0.readCurrentTemp.apply(())
-                    |> ignoreError // TODO Handle errors
-                    |> map { toString($0) as AnyObject }
+                $0.currentTemp.producer |> map {
+                    $0.map(toString) ?? "--" as AnyObject
+                }
+            }
+
+        DynamicProperty(object: targetTemp, keyPath: "text") <~ device.producer
+            |> flatMapUI(FlattenStrategy.Latest, placeholder: "--") {
+                $0.targetTemp.producer |> map {
+                    $0.map(toString) ?? "--" as AnyObject
+                }
             }
 
         DynamicProperty(object: deviceStatus, keyPath: "text") <~ device.producer
             |> flatMapUI(FlattenStrategy.Latest, placeholder: "--") {
-                $0.readStatus.apply(())
-                    |> ignoreError // TODO Handle errors
-                    |> map { toString($0) as AnyObject }
+                $0.status.producer |> map {
+                    $0.map(toString) ?? "--" as AnyObject
+                }
             }
+
+        startButton.addTarget(self, action: "start", forControlEvents: .TouchUpInside)
+        stopButton.addTarget(self, action: "stop", forControlEvents: .TouchUpInside)
     }
 
     func start() {
