@@ -35,11 +35,12 @@ public func merge<T, E> (signals: Signal<T, E>...) -> Signal<T, E> {
     }
 }
 
-public func flatMap<T, U, E>(strategy: FlattenStrategy, #placeholder: U, transform: T -> SignalProducer<U, E>) -> SignalProducer<T?, E> -> SignalProducer<U, E> {
+public func flatMapUI<T, U, E>(strategy: FlattenStrategy, #placeholder: U, transform: T -> SignalProducer<U, E>) -> SignalProducer<T?, E> -> SignalProducer<U, E> {
     return { producer in
         return producer |> flatMap(strategy) {
             $0.map(transform) ?? SignalProducer(value: placeholder)
         }
+        |> observeOn(UIScheduler())
     }
 }
 
