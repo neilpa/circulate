@@ -31,7 +31,18 @@ public enum TimerStatus: String {
 
 public final class AnovaDevice {
     private let peripheral: Peripheral
-    private let queue: CommandQueue
+
+    public let readCurrentTemp: Action<(), Temperature, NSError>
+    public let readTargetTemp: Action<(), Temperature, NSError>
+//    public let setTargetTemp: Action<Temperature, Temperature, NSError>
+
+    public let readStatus: Action<(), AnovaStatus, NSError>
+    public let startDevice: Action<(), AnovaStatus, NSError>
+    public let stopDevice: Action<(), AnovaStatus, NSError>
+
+    public let status: PropertyOf<AnovaStatus?>
+    public let currentTemp: PropertyOf<Temperature?>
+    public let targetTemp: PropertyOf<Temperature?>
 
     public var name: String {
         return peripheral.name
@@ -43,7 +54,20 @@ public final class AnovaDevice {
 
     public init(peripheral: Peripheral, characteristic: CBCharacteristic) {
         self.peripheral = peripheral
-        queue = CommandQueue(peripheral: peripheral, characteristic: characteristic)
+        let queue = CommandQueue(peripheral: peripheral, characteristic: characteristic)
+
+        readCurrentTemp = Action { queue.readCurrentTemperature() }
+        currentTemp = PropertyOf(SignalProperty(nil, readCurrentTemp.values |> optionalize))
+
+        readTargetTemp = Action { queue.readTargetTemperature() }
+        targetTemp = PropertyOf(SignalProperty(nil, readTargetTemp.values |> optionalize))
+
+        readStatus = Action { queue.readStatus() }
+        startDevice = Action { queue.startDevice() |> then(queue.readStatus()) }
+        stopDevice = Action { queue.stopDevice() |> then(queue.readStatus()) }
+
+        let statusSignal = merge(readStatus.values, startDevice.values, stopDevice.values)
+        status = PropertyOf(SignalProperty(nil, statusSignal |> optionalize))
     }
 
     public static func connect(central: CentralManager, peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NSError> {
@@ -51,7 +75,7 @@ public final class AnovaDevice {
             |> flatMap(.Merge) { (periph: Peripheral) in
                 return periph.discoverServices([CBUUID(string: "FFE0")])
                     |> flatMap(.Merge) {
-                        periph.discoverCharacteristics(nil, service: $0)
+                        periph.discoverCharacteristics([CBUUID(string: "FFE1")], service: $0)
                     }
                     |> flatMap(.Merge) {
                         periph.setNotifyValue(true, characteristic: $0)
@@ -61,28 +85,4 @@ public final class AnovaDevice {
                     }
             }
     }
-
-    public private(set) lazy var startDevice: Action<(), String, NSError> = {
-        return Action { self.queue.startDevice() }
-    }()
-
-    public private(set) lazy var stopDevice: Action<(), String, NSError> = {
-        return Action { self.queue.stopDevice() }
-    }()
-
-    public private(set) lazy var currentTemperature: PropertyOf<Temperature?> = {
-        makeProperty(self.queue.readCurrentTemperature())
-    }()
-
-    public private(set) lazy var targetTemperature: PropertyOf<Temperature?> = {
-        makeProperty(self.queue.readTargetTemperature())
-    }()
-
-    public private(set) lazy var status: PropertyOf<AnovaStatus?> = {
-        makeProperty(self.queue.readStatus())
-    }()
-}
-
-private func makeProperty<T>(producer: SignalProducer<T, NSError>) -> PropertyOf<T?> {
-    return PropertyOf(SignalProperty(nil, producer |> optionalize |> ignoreError))
 }

@@ -26,6 +26,30 @@ public func serialize<T, U, E>(transform: T -> SignalProducer<U, E>) -> (Signal<
     return (sink, queue |> start())
 }
 
+public func merge<T, E> (signals: Signal<T, E>...) -> Signal<T, E> {
+    return Signal { observer in
+        signals.reduce(CompositeDisposable()) { disposable, signal in
+            disposable += signal.observe(observer)
+            return disposable
+        }
+    }
+}
+
+public func flatMap<T, U, E>(strategy: FlattenStrategy, #ifNil: U, transform: T -> SignalProducer<U, E>) -> SignalProducer<T?, E> -> SignalProducer<U, E> {
+    return { producer in
+        return producer |> flatMap(strategy) {
+            $0.map(transform) ?? SignalProducer(value: ifNil)
+        }
+    }
+}
+
+public func ignoreError<T, E>(value: T) -> SignalProducer<T, E> -> SignalProducer<T, NoError> {
+    return { producer in
+        return producer |> catch { _ in SignalProducer(value: value) }
+    }
+}
+
+
 public func liftSignal<T, E>(signal: Signal<T, E>) -> SignalProducer<T, E> {
     return SignalProducer { observer, disposable in
         disposable.addDisposable(signal.observe(observer))

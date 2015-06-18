@@ -13,7 +13,8 @@ import Rex
 
 class DeviceScreen: UIViewController {
     var central: CentralManager!
-    var peripheral: CBPeripheral!
+    let peripheral: MutableProperty<CBPeripheral?> = MutableProperty(nil)
+    let device: MutableProperty<AnovaDevice?> = MutableProperty(nil)
 
     @IBOutlet weak var connectingIndicator: UIActivityIndicatorView!
 
@@ -27,40 +28,41 @@ class DeviceScreen: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
 
-    lazy var connectAction: Action<Any?, AnovaDevice, NSError> = Action { _ in
-        return AnovaDevice.connect(self.central, peripheral: self.peripheral)
-            |> observeOn(UIScheduler())
-    }
-
-    var device: MutableProperty<AnovaDevice?> = MutableProperty(nil)
-
     override func viewDidLoad() {
-        connectAction.executing.producer.start(next: {
-            $0 ? self.connectingIndicator.startAnimating() : self.connectingIndicator.stopAnimating()
-        })
-
-        startButton.addTarget(self, action: "start", forControlEvents: .TouchUpInside)
-        stopButton.addTarget(self, action: "stop", forControlEvents: .TouchUpInside)
-
-        device <~ connectAction.values |> scan(nil) { $1 }
-
-        bindLabel(currentTemp) { $0.currentTemperature }
-        bindLabel(deviceStatus) { $0.status }
-        bindLabel(targetTemp) { $0.targetTemperature }
-
-        connectAction.apply(nil).start()
-    }
-
-    private func bindLabel<T>(label: UILabel, transform: AnovaDevice -> PropertyOf<T?>) {
-        DynamicProperty(object: label, keyPath: "text") <~ device.producer
+        device <~ peripheral.producer
+            |> promoteErrors(NSError)
             |> flatMap(.Latest) {
                 if let device = $0 {
-                    return transform(device).producer
-                        |> ignoreNil
-                        |> map { return toString($0) as AnyObject }
-                } else {
-                    return SignalProducer(value: "--")
+                    return AnovaDevice.connect(self.central, peripheral: device) |> optionalize
                 }
+                return SignalProducer(error: NSError())
+            }
+            |> catch { _ in SignalProducer(value: nil) }
+
+        DynamicProperty(object: targetTemp, keyPath: "text") <~ device.producer
+            |> ignoreNil // TODO Handle nil
+            |> flatMap(FlattenStrategy.Latest) {
+                $0.readTargetTemp.apply(())
+                    |> ignoreError
+                    |> map { toString($0) as AnyObject }
+            }
+            |> observeOn(UIScheduler())
+
+        DynamicProperty(object: currentTemp, keyPath: "text") <~ device.producer
+            |> ignoreNil // TODO Handle nil
+            |> flatMap(FlattenStrategy.Latest) {
+                $0.readCurrentTemp.apply(())
+                    |> ignoreError
+                    |> map { toString($0) as AnyObject }
+            }
+            |> observeOn(UIScheduler())
+
+        DynamicProperty(object: deviceStatus, keyPath: "text") <~ device.producer
+            |> ignoreNil // TODO Handle nil
+            |> flatMap(FlattenStrategy.Latest) {
+                $0.readStatus.apply(())
+                    |> ignoreError
+                    |> map { toString($0) as AnyObject }
             }
             |> observeOn(UIScheduler())
     }

@@ -55,7 +55,7 @@ class DeviceList: UIViewController {
             if let cell = sender as? DeviceCell, let device = cell.device {
                 let navController = segue.destinationViewController as! UINavigationController
                 let deviceController = navController.topViewController as! DeviceScreen
-                deviceController.peripheral = device
+                deviceController.peripheral.value = device
                 deviceController.central = central
                 deviceController.navigationItem.title = device.name
             }
