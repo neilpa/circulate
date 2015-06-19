@@ -79,17 +79,19 @@ extension CocoaAction {
 extension UIButton {
     public var rac_pressed: MutableProperty<CocoaAction> {
         return associatedObject(self, &Keys.pressed, { _ in
-            self.addTarget(self, action: "execute", forControlEvents: .TouchUpInside)
+            let initial = CocoaAction.disabled
+            let property = MutableProperty(initial)
 
-            let property: MutableProperty<CocoaAction> = MutableProperty(.disabled)
+            property.producer
+                |> combinePrevious(initial)
+                |> start { previous, next in
+                    self.removeTarget(previous, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
+                    self.addTarget(next, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
+                }
+
             self.rac_enabled <~ property.producer |> flatMap(.Latest) { $0.enabledProducer }
             return property
         })
-    }
-
-    func execute() {
-        // TODO track the disposable and cancel it if we switch actions?
-        self.rac_pressed.value.execute(self)
     }
 }
 
