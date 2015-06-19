@@ -73,8 +73,15 @@ class DeviceScreen: UIViewController {
                 }
             }
 
-        startButton.addTarget(self, action: "start", forControlEvents: .TouchUpInside)
-        stopButton.addTarget(self, action: "stop", forControlEvents: .TouchUpInside)
+        startButton.rac_pressed <~ device.producer
+            |> ignoreNil // TODO Handle nil
+            |> map { CocoaAction($0.startDevice, input: ()) }
+            |> observeOn(UIScheduler())
+
+        stopButton.rac_pressed <~ device.producer
+            |> ignoreNil // TODO Handle nil
+            |> map { CocoaAction($0.stopDevice, input: ()) }
+            |> observeOn(UIScheduler())
     }
 
     func start() {
