@@ -52,22 +52,22 @@ class DeviceScreen: UIViewController {
             // For some reason the compiler barfs when using |> start()
             .start()
 
-        currentTemp.rac_text <~ device.producer
-            |> flatMapUI(FlattenStrategy.Latest, placeholder: "--") {
+        currentTemp.rex_text <~ device.producer
+            |> flatMapUI(.Latest, placeholder: "--") {
                 $0.currentTemp.producer |> map {
                     $0.map(toString) ?? "--"
                 }
             }
 
-        targetTemp.rac_text <~ device.producer
-            |> flatMapUI(FlattenStrategy.Latest, placeholder: "--") {
+        targetTemp.rex_text <~ device.producer
+            |> flatMapUI(.Latest, placeholder: "--") {
                 $0.targetTemp.producer |> map {
                     $0.map(toString) ?? "--"
                 }
             }
 
-        deviceStatus.rac_text <~ device.producer
-            |> flatMapUI(FlattenStrategy.Latest, placeholder: "--") {
+        deviceStatus.rex_text <~ device.producer
+            |> flatMapUI(.Latest, placeholder: "--") {
                 $0.status.producer |> map {
                     $0.map(toString) ?? "--"
                 }
