@@ -30,8 +30,6 @@ public enum TimerStatus: String {
 }
 
 public final class AnovaDevice {
-    private let peripheral: Peripheral
-
     public let readCurrentTemp: Action<(), Temperature, NSError>
     public let readTargetTemp: Action<(), Temperature, NSError>
 //    public let setTargetTemp: Action<Temperature, Temperature, NSError>
@@ -41,33 +39,27 @@ public final class AnovaDevice {
     public let stopDevice: Action<(), AnovaStatus, NSError>
 
     public let status: PropertyOf<AnovaStatus?>
+    public let running: PropertyOf<Bool>
+
     public let currentTemp: PropertyOf<Temperature?>
     public let targetTemp: PropertyOf<Temperature?>
 
-    public var name: String {
-        return peripheral.name
-    }
-
-    public var identifier: String {
-        return peripheral.identifier
-    }
-
     public init(peripheral: Peripheral, characteristic: CBCharacteristic) {
-        self.peripheral = peripheral
         let queue = CommandQueue(peripheral: peripheral, characteristic: characteristic)
 
         readCurrentTemp = Action { queue.readCurrentTemperature() }
-        currentTemp = PropertyOf(SignalProperty(nil, readCurrentTemp.values |> optionalize))
+        currentTemp = readCurrentTemp.values |> optionalize |> propertyOf(nil)
 
         readTargetTemp = Action { queue.readTargetTemperature() }
-        targetTemp = PropertyOf(SignalProperty(nil, readTargetTemp.values |> optionalize))
+        targetTemp = readTargetTemp.values |> optionalize |> propertyOf(nil)
 
         readStatus = Action { queue.readStatus() }
         startDevice = Action { queue.startDevice() |> then(queue.readStatus()) }
         stopDevice = Action { queue.stopDevice() |> then(queue.readStatus()) }
 
         let statusSignal = merge(readStatus.values, startDevice.values, stopDevice.values)
-        status = PropertyOf(SignalProperty(nil, statusSignal |> optionalize))
+        status = statusSignal |> optionalize |> propertyOf(nil)
+        running = statusSignal |> map { $0 == .Running } |> propertyOf(false)
     }
 
     public static func connect(central: CentralManager, peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NSError> {

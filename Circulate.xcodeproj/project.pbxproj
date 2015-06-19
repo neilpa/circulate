@@ -207,11 +207,11 @@
 		D812FF5E1B1545A8009D3016 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				D8D608941B2FB29E0068D35B /* TemperaturePicker.swift */,
 				D812FF611B1545A8009D3016 /* AppDelegate.swift */,
 				D812FF631B1545A8009D3016 /* DeviceList.swift */,
 				D8F0972B1B17AB01002E15BA /* DeviceScreen.swift */,
 				D8F0972F1B17AB3D002E15BA /* ProducerDataSource.swift */,
+				D8D608941B2FB29E0068D35B /* TemperaturePicker.swift */,
 				D812FF651B1545A8009D3016 /* Main.storyboard */,
 				D812FF681B1545A8009D3016 /* Images.xcassets */,
 				D812FF6A1B1545A8009D3016 /* LaunchScreen.xib */,
