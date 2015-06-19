@@ -52,24 +52,24 @@ class DeviceScreen: UIViewController {
             // For some reason the compiler barfs when using |> start()
             .start()
 
-        DynamicProperty(object: currentTemp, keyPath: "text") <~ device.producer
+        currentTemp.rac_text <~ device.producer
             |> flatMapUI(FlattenStrategy.Latest, placeholder: "--") {
                 $0.currentTemp.producer |> map {
-                    $0.map(toString) ?? "--" as AnyObject
+                    $0.map(toString) ?? "--"
                 }
             }
 
-        DynamicProperty(object: targetTemp, keyPath: "text") <~ device.producer
+        targetTemp.rac_text <~ device.producer
             |> flatMapUI(FlattenStrategy.Latest, placeholder: "--") {
                 $0.targetTemp.producer |> map {
-                    $0.map(toString) ?? "--" as AnyObject
+                    $0.map(toString) ?? "--"
                 }
             }
 
-        DynamicProperty(object: deviceStatus, keyPath: "text") <~ device.producer
+        deviceStatus.rac_text <~ device.producer
             |> flatMapUI(FlattenStrategy.Latest, placeholder: "--") {
                 $0.status.producer |> map {
-                    $0.map(toString) ?? "--" as AnyObject
+                    $0.map(toString) ?? "--"
                 }
             }
 

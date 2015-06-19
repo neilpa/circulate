@@ -37,6 +37,7 @@
 		D84A49D01B1D1CD2002C8206 /* SignalProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84A49CF1B1D1CD2002C8206 /* SignalProducer.swift */; };
 		D8696D411B1A536100AC1804 /* CentralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8696D401B1A536100AC1804 /* CentralManagerDelegate.swift */; };
 		D8696D431B1A536C00AC1804 /* PeripheralDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8696D421B1A536C00AC1804 /* PeripheralDelegate.swift */; };
+		D86FFBCF1B33A41E001A89B3 /* UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86FFBCD1B338B77001A89B3 /* UIKit.swift */; };
 		D88C44A11B1FCA0100A82E69 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88C44A01B1FCA0100A82E69 /* Temperature.swift */; };
 		D8980E051B30CB8500B467B6 /* EditableProperty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8980E041B30CB8500B467B6 /* EditableProperty.framework */; };
 		D8980E061B30CB8500B467B6 /* EditableProperty.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D8980E041B30CB8500B467B6 /* EditableProperty.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -111,6 +112,7 @@
 		D84A49CF1B1D1CD2002C8206 /* SignalProducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalProducer.swift; sourceTree = "<group>"; };
 		D8696D401B1A536100AC1804 /* CentralManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CentralManagerDelegate.swift; sourceTree = "<group>"; };
 		D8696D421B1A536C00AC1804 /* PeripheralDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralDelegate.swift; sourceTree = "<group>"; };
+		D86FFBCD1B338B77001A89B3 /* UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIKit.swift; sourceTree = "<group>"; };
 		D88C44A01B1FCA0100A82E69 /* Temperature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
 		D8980E041B30CB8500B467B6 /* EditableProperty.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EditableProperty.framework; path = Carthage/Build/iOS/EditableProperty.framework; sourceTree = "<group>"; };
 		D8980E0A1B30D91500B467B6 /* CommandQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandQueue.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 		D812FF5E1B1545A8009D3016 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				D86FFBCD1B338B77001A89B3 /* UIKit.swift */,
 				D8D608941B2FB29E0068D35B /* TemperaturePicker.swift */,
 				D812FF611B1545A8009D3016 /* AppDelegate.swift */,
 				D812FF631B1545A8009D3016 /* DeviceList.swift */,
@@ -433,6 +436,7 @@
 				D8F0972C1B17AB01002E15BA /* DeviceScreen.swift in Sources */,
 				D812FF641B1545A8009D3016 /* DeviceList.swift in Sources */,
 				D8F097301B17AB3D002E15BA /* ProducerDataSource.swift in Sources */,
+				D86FFBCF1B33A41E001A89B3 /* UIKit.swift in Sources */,
 				D8D608951B2FB29E0068D35B /* TemperaturePicker.swift in Sources */,
 				D812FF621B1545A8009D3016 /* AppDelegate.swift in Sources */,
 			);
