@@ -1,5 +1,5 @@
 github "robrix/Box" == 1.2.2
 github "antitypical/Result" == 0.4.4
 github "ReactiveCocoa/ReactiveCocoa" ~> 3.0
-github "ReactiveCocoa/EditableProperty" "submodules"
-github "neilpa/Rex" "master"
+github "ReactiveCocoa/EditableProperty"
+github "neilpa/Rex" ~> 0.2
