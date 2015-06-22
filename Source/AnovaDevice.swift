@@ -62,6 +62,7 @@ public final class AnovaDevice {
         running = statusSignal |> map { $0 == .Running } |> propertyOf(false)
     }
 
+    // TODO Turn this into a per-instance action
     public static func connect(central: CentralManager, peripheral: CBPeripheral) -> SignalProducer<AnovaDevice, NSError> {
         return central.connect(peripheral)
             |> flatMap(.Merge) { (periph: Peripheral) in

@@ -103,10 +103,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3cF-1d-u6r">
-                                <rect key="frame" x="142" y="90" width="37" height="37"/>
-                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Timer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o4H-5c-CCl">
                                 <rect key="frame" x="0.0" y="238" width="320" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -157,20 +153,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TEMP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVc-k4-RtB">
-                                <rect key="frame" x="16" y="79" width="291" height="56"/>
+                                <rect key="frame" x="6" y="77" width="163" height="56"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9y-rq-zxt">
-                                <rect key="frame" x="193" y="387" width="71" height="30"/>
-                                <state key="normal" title="Start">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfx-1t-Fx4">
-                                <rect key="frame" x="58" y="387" width="71" height="30"/>
-                                <state key="normal" title="Stop">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2K-Gc-aH7">
+                                <rect key="frame" x="193" y="90" width="111" height="30"/>
+                                <state key="normal" title="--">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -179,11 +169,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="8Zz-KW-CkU"/>
                     <connections>
-                        <outlet property="connectingIndicator" destination="3cF-1d-u6r" id="M8j-QA-8gf"/>
                         <outlet property="currentTemp" destination="LVc-k4-RtB" id="KNs-XQ-S1Z"/>
                         <outlet property="deviceStatus" destination="ZRr-XB-8MG" id="WI0-Vu-S1k"/>
-                        <outlet property="startButton" destination="R9y-rq-zxt" id="yiL-9m-hgd"/>
-                        <outlet property="stopButton" destination="lfx-1t-Fx4" id="A7z-Wt-13R"/>
+                        <outlet property="startStop" destination="y2K-Gc-aH7" id="gtM-h8-odO"/>
                         <outlet property="targetTemp" destination="euj-jW-gXK" id="enL-3n-gdl"/>
                         <outlet property="timerStatus" destination="o4H-5c-CCl" id="O29-1n-xuO"/>
                     </connections>
@@ -204,7 +192,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N1r-Ta-H25" customClass="IntPicker" customModule="Example" customModuleProvider="target">
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N1r-Ta-H25" customClass="IntPicker" customModule="Example" customModuleProvider="target">
                                 <rect key="frame" x="123" y="112" width="72" height="176"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="min">
