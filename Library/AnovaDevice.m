@@ -130,6 +130,12 @@
     [self sendCommand:[NSString stringWithFormat:@"set date %i %i %i %i %i", year, month, day, hour, minute]];
 }
 
+- (void) setColor:(int)red green:(int)green blue:(int)blue
+{
+    [self sendCommand:[NSString stringWithFormat:@"set led %i %i %i", red, green, blue]];
+}
+
+
 #pragma mark Raw command
 
 - (void) sendCommand:(NSString*)command
